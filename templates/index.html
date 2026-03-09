@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>AI Travel Recommender</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<style>
+
+body{
+font-family: Arial;
+margin:40px;
+background:#f4f6f9;
+}
+
+.container{
+display:flex;
+gap:20px;
+}
+
+.left{
+flex:1;
+}
+
+.right{
+flex:1;
+}
+
+.section{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 8px rgba(0,0,0,0.05);
+}
+
+input,select{
+padding:8px;
+width:250px;
+margin-top:10px;
+}
+
+button{
+padding:8px 12px;
+margin-left:10px;
+cursor:pointer;
+}
+
+.card{
+padding:10px;
+margin:8px 0;
+background:#e8f0fe;
+border-radius:6px;
+cursor:pointer;
+}
+
+#map{
+height:600px;
+border-radius:10px;
+}
+
+/* Reduce routing panel size */
+.leaflet-routing-container{
+width:220px !important;
+max-height:200px !important;
+font-size:12px;
+overflow-y:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>AI Travel Recommender</h1>
+
+<div class="container">
+
+<div class="left">
+
+<div class="section">
+
+<h2>📍 Discover Places Near You</h2>
+
+<button onclick="getLocation()">Use My Current Location</button>
+
+<p id="location"></p>
+
+<br><br>
+
+<b>OR search a location manually:</b><br>
+
+<input id="searchLocation" placeholder="Example: Jaipur">
+
+<button onclick="searchLocation()">Locate</button>
+
+<br><br>
+
+<select id="category">
+<option value="">All Categories</option>
+<option value="Heritage">Heritage</option>
+<option value="Food">Food</option>
+<option value="Bazaar">Bazaar</option>
+<option value="Nature">Nature</option>
+<option value="Other">Other</option>
+</select>
+
+<button onclick="findPlaces()">Find Recommendations</button>
+
+<br><br>
+
+<div id="results"></div>
+
+</div>
+
+</div>
+
+<div class="right">
+<div id="map"></div>
+</div>
+
+</div>
+
+<script>
+
+let userLat = null
+let userLon = null
+
+let userMarker = null
+let markers = []
+let routeControl = null
+
+let map = L.map('map').setView([20.5937,78.9629],5)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:18
+}).addTo(map)
+
+
+// -------- CURRENT LOCATION --------
+
+function getLocation(){
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+userLat = position.coords.latitude
+userLon = position.coords.longitude
+
+document.getElementById("location").innerText =
+"📍 Location detected: " + userLat.toFixed(4) + ", " + userLon.toFixed(4)
+
+map.setView([userLat,userLon],13)
+
+if(userMarker){
+map.removeLayer(userMarker)
+}
+
+userMarker = L.marker([userLat,userLon])
+.addTo(map)
+.bindPopup("You are here")
+.openPopup()
+
+})
+
+}
+
+
+// -------- SEARCH LOCATION --------
+
+async function searchLocation(){
+
+let location = document.getElementById("searchLocation").value
+
+if(location === ""){
+alert("Enter a city name")
+return
+}
+
+let url = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`
+
+let res = await fetch(url)
+
+let data = await res.json()
+
+if(data.length === 0){
+alert("Location not found")
+return
+}
+
+userLat = parseFloat(data[0].lat)
+userLon = parseFloat(data[0].lon)
+
+document.getElementById("location").innerText =
+"📍 Location set to: " + location +
+" (" + userLat.toFixed(4) + ", " + userLon.toFixed(4) + ")"
+
+map.setView([userLat,userLon],13)
+
+if(userMarker){
+map.removeLayer(userMarker)
+}
+
+userMarker = L.marker([userLat,userLon])
+.addTo(map)
+.bindPopup(location)
+.openPopup()
+
+}
+
+
+// -------- FIND RECOMMENDATIONS --------
+
+async function findPlaces(){
+
+if(userLat === null){
+alert("Please set location first")
+return
+}
+
+let category = document.getElementById("category").value
+
+let container = document.getElementById("results")
+
+container.innerHTML = "Searching nearby places..."
+
+let res = await fetch(`/recommend_nearby?lat=${userLat}&lon=${userLon}&category=${category}`)
+
+let data = await res.json()
+
+container.innerHTML=""
+
+markers.forEach(m=>map.removeLayer(m))
+markers=[]
+
+if(data.length === 0){
+container.innerHTML = "No places found nearby."
+return
+}
+
+let bounds = []
+
+data.forEach(place=>{
+
+let lat = parseFloat(place.lat)
+let lon = parseFloat(place.lon)
+
+container.innerHTML +=
+`<div class="card" onclick="showRoute(${lat},${lon})">
+<b>${place.place}</b><br>
+City: ${place.city}<br>
+Category: ${place.category_clean}<br>
+Distance: ${place.distance.toFixed(2)} km
+</div>`
+
+let marker=L.marker([lat,lon])
+.addTo(map)
+.bindPopup(place.place)
+
+markers.push(marker)
+
+bounds.push([lat,lon])
+
+})
+
+if(bounds.length>0){
+map.fitBounds(bounds,{padding:[50,50]})
+}
+
+}
+
+
+// -------- SHOW ROUTE --------
+
+function showRoute(lat,lon){
+
+if(routeControl){
+map.removeControl(routeControl)
+}
+
+routeControl = L.Routing.control({
+
+waypoints:[
+L.latLng(userLat,userLon),
+L.latLng(lat,lon)
+],
+
+routeWhileDragging:false
+
+}).addTo(map)
+
+}
+
+</script>
+
+</body>
+</html>
