@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Travel Recommender Prototype
 
 ## Run demo
@@ -21,3 +22,7 @@
    python -m http.server 8000
    ```
    Then open http://localhost:8000/index.html
+=======
+# ai-travel-recommendation-system
+AI-powered travel recommendation system that suggests nearby attractions using geolocation, hybrid machine learning, and an interactive OpenStreetMap-based interface.
+>>>>>>> 31b9183fc110bc6f9587e117e95d7de61bcf7254
