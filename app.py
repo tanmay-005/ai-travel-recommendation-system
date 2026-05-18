@@ -1,227 +1,782 @@
-# app.py
-from flask import Flask, request, jsonify, render_template
+# ─────────────────────────────────────────────────────────────────
+#  app.py  —  Yatra AI Travel Recommendation System
+#
+#  FIXES IN THIS VERSION:
+#  1. MemoryError (31.9 GB crash) — cosine_sim matrix removed entirely.
+#     Now computed on-demand per query: 0.5 MB instead of 31 GB.
+#  2. All categories (Heritage/Museum/Temple/Nature/Viewpoint/Beach)
+#     now also use live Overpass when CSV has no results nearby.
+#     Strategy: try CSV first → if fewer than 3 results → top up with live.
+#  3. Login / Register / User database added (SQLite, no extra install).
+#     Stores: users, their searches, ratings, saved places, trip history.
+# ─────────────────────────────────────────────────────────────────
+
+from flask import (Flask, request, jsonify, render_template,
+                   session, Response, redirect, url_for)
 import pandas as pd
-from pathlib import Path
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-import math
+from pathlib import Path
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import math, json, os, re, sqlite3, hashlib, secrets
+import requests as http_requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import wraps
+from datetime import datetime, timezone
+
+def now_iso():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
-# --------------------------------
-# Load datasets
-# --------------------------------
+BASE        = Path(__file__).parent
+PLACES_CSV  = BASE / "india_places_dataset.csv"
+RATINGS_CSV = BASE / "ratings.csv"
+DB_PATH     = BASE / "yatra.db"
 
-DATA_DIR = Path(__file__).parent
-PLACES_CSV = DATA_DIR / "india_places_dataset.csv"
-RATINGS_CSV = DATA_DIR / "ratings.csv"
+# ═══════════════════════════════════════════════════════════════
+# 1.  DATABASE SETUP (SQLite — no extra install needed)
+# ═══════════════════════════════════════════════════════════════
 
-places_df = pd.read_csv(PLACES_CSV)
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
 
-# Remove bad rows
-places_df = places_df.dropna(subset=["place", "lat", "lon"])
+def init_db():
+    conn = get_db()
+    conn.executescript("""
+    CREATE TABLE IF NOT EXISTS users (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        username    TEXT    UNIQUE NOT NULL,
+        email       TEXT    UNIQUE NOT NULL,
+        password    TEXT    NOT NULL,
+        created_at  TEXT,
+        last_login  TEXT
+    );
 
-places_df["lat"] = places_df["lat"].astype(float)
-places_df["lon"] = places_df["lon"].astype(float)
+    CREATE TABLE IF NOT EXISTS saved_places (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id     INTEGER NOT NULL,
+        place       TEXT    NOT NULL,
+        city        TEXT,
+        category    TEXT,
+        lat         REAL,
+        lon         REAL,
+        icon        TEXT,
+        saved_at    TEXT,
+        UNIQUE(user_id, place)
+    );
 
-# Load ratings (if exists)
+    CREATE TABLE IF NOT EXISTS user_ratings (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id     INTEGER NOT NULL,
+        place       TEXT    NOT NULL,
+        city        TEXT,
+        rating      REAL    NOT NULL,
+        rated_at    TEXT,
+        UNIQUE(user_id, place)
+    );
+
+    CREATE TABLE IF NOT EXISTS search_history (
+        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id       INTEGER,
+        query_type    TEXT,
+        query_value   TEXT,
+        lat           REAL,
+        lon           REAL,
+        category      TEXT,
+        results_count INTEGER,
+        searched_at   TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS trip_plans (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id     INTEGER NOT NULL,
+        name        TEXT    NOT NULL,
+        description TEXT,
+        created_at  TEXT,
+        updated_at  TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS trip_places (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        trip_id     INTEGER NOT NULL,
+        place       TEXT    NOT NULL,
+        city        TEXT,
+        category    TEXT,
+        lat         REAL,
+        lon         REAL,
+        icon        TEXT,
+        visit_order INTEGER,
+        notes       TEXT
+    );
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# ── Auth helpers ─────────────────────────────────────────────────
+
+def hash_pw(pw: str) -> str:
+    return hashlib.sha256(pw.encode()).hexdigest()
+
+def login_required(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if "user_id" not in session:
+            return jsonify({"error": "Login required"}), 401
+        return f(*args, **kwargs)
+    return wrapper
+
+def current_user_id():
+    return session.get("user_id")
+
+# ═══════════════════════════════════════════════════════════════
+# 2.  LOAD & CLEAN CSV
+# ═══════════════════════════════════════════════════════════════
+
+df = pd.read_csv(PLACES_CSV)
+df = df.dropna(subset=["place", "lat", "lon", "city"])
+df["lat"] = pd.to_numeric(df["lat"], errors="coerce")
+df["lon"] = pd.to_numeric(df["lon"], errors="coerce")
+df = df.dropna(subset=["lat", "lon"])
+df = df[df["place"].str.match(r'^[\x20-\x7E\u0900-\u097F]{3,}', na=False)]
+df["important"] = pd.to_numeric(df.get("important", 0), errors="coerce").fillna(0).astype(int)
+
+RAW_MAP = {
+    "tourism:attraction":"Heritage", "historic:monument":"Heritage",
+    "historic:fort":"Heritage",      "tourism:museum":"Museum",
+    "historic:temple":"Temple",      "amenity:place_of_worship":"Temple",
+    "tourism:viewpoint":"Viewpoint", "natural:peak":"Nature",
+    "natural:beach":"Beach",         "natural:waterfall":"Nature",
+    "leisure:nature_reserve":"Nature","amenity:restaurant":"Food",
+    "amenity:cafe":"Cafe",           "amenity:fast_food":"Food",
+    "leisure:park":"Nature",         "leisure:garden":"Nature",
+    "shop:mall":"Shopping",          "shop:clothes":"Shopping",
+}
+if "category_clean" not in df.columns:
+    df["category_clean"] = df["category"].copy()
+if df["category_clean"].str.contains(":", na=False).any():
+    df["category_clean"] = df["category_clean"].map(RAW_MAP).fillna(df["category_clean"])
+df = df.reset_index(drop=True)
+
+# ═══════════════════════════════════════════════════════════════
+# 3.  CATEGORY CONFIG
+# ═══════════════════════════════════════════════════════════════
+
+ICONS = {
+    "Heritage":"🏛️","Museum":"🏺","Temple":"🛕","Viewpoint":"🌅",
+    "Beach":"🏖️","Food":"🍽️","Cafe":"☕","Shopping":"🛍️",
+    "Nature":"🌿","Other":"📍",
+}
+
+# OSM tags for every category (used in live fallback)
+ALL_OSM_TAGS = {
+    "Heritage" : [("tourism","attraction"),("historic","monument"),("historic","fort")],
+    "Museum"   : [("tourism","museum")],
+    "Temple"   : [("historic","temple"),("amenity","place_of_worship")],
+    "Viewpoint": [("tourism","viewpoint")],
+    "Beach"    : [("natural","beach")],
+    "Nature"   : [("leisure","park"),("leisure","garden"),("natural","waterfall"),("natural","peak")],
+    "Cafe"     : [("amenity","cafe"),("amenity","coffee_shop")],
+    "Food"     : [("amenity","restaurant"),("amenity","fast_food"),("amenity","food_court")],
+    "Shopping" : [("shop","mall"),("shop","supermarket"),("amenity","marketplace")],
+}
+
+# Categories that PRIMARILY come from live OSM (CSV coverage is poor)
+LIVE_PRIMARY = {"Cafe", "Food", "Shopping"}
+# Categories that use CSV first, live as fallback if CSV < 3 results
+LIVE_FALLBACK = {"Heritage","Museum","Temple","Viewpoint","Beach","Nature"}
+
+OVERPASS_MIRRORS = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+]
+OSM_HEADERS = {"User-Agent": "yatra-travel-app/4.0"}
+
+# ═══════════════════════════════════════════════════════════════
+# 4.  RATINGS
+# ═══════════════════════════════════════════════════════════════
+
 try:
-    ratings_df = pd.read_csv(RATINGS_CSV)
-except:
-    ratings_df = pd.DataFrame(columns=["user", "place", "rating"])
+    rdf = pd.read_csv(RATINGS_CSV)
+    if len(rdf) > 200_000:
+        rdf = rdf.sample(200_000, random_state=42)
+except Exception:
+    rdf = pd.DataFrame(columns=["user","place","rating"])
 
-# --------------------------------
-# Category Mapping
-# --------------------------------
+place_avg   = rdf.groupby("place")["rating"].mean()  if not rdf.empty else pd.Series(dtype=float)
+place_count = rdf.groupby("place")["rating"].count() if not rdf.empty else pd.Series(dtype=int)
 
-def map_category(cat):
+def get_rating(n): return round(float(place_avg.get(n, 2.5)), 1)
+def get_count(n):  return int(place_count.get(n, 0))
 
-    cat = str(cat).lower()
+# ═══════════════════════════════════════════════════════════════
+# 5.  TF-IDF  — FIX: store sparse matrix only, NO full cosine matrix
+#
+#  OLD (crashed): cos_sim = cosine_similarity(matrix, matrix)
+#  → 65462 × 65462 × 8 bytes = 31.9 GB  ← MemoryError
+#
+#  NEW: keep only tfidf_matrix (sparse, ~50 MB)
+#  Compute similarity ON DEMAND per query for ONE row only:
+#  cosine_similarity(tfidf_matrix[idx], tfidf_matrix)
+#  → 1 × 65462 × 8 bytes = 0.5 MB  ← fine
+# ═══════════════════════════════════════════════════════════════
 
-    if "tourism" in cat or "historic" in cat or "attraction" in cat:
-        return "Heritage"
-
-    if "restaurant" in cat or "cafe" in cat or "food" in cat:
-        return "Food"
-
-    if "shop" in cat or "mall" in cat or "market" in cat:
-        return "Bazaar"
-
-    if "park" in cat or "garden" in cat or "nature" in cat:
-        return "Nature"
-
-    return "Other"
-
-
-places_df["category_clean"] = places_df["category"].apply(map_category)
-
-# --------------------------------
-# Content-Based Model
-# --------------------------------
-
-places_df["content"] = (
-    places_df["category_clean"].astype(str) + " " +
-    places_df["city"].astype(str)
+df["content"] = (
+    df["category_clean"] + " " + df["city"] + " " +
+    df["place"].str.replace(r'[^a-zA-Z0-9 ]', ' ', regex=True) + " " +
+    df["place"].where(df["important"]==1, "").str.replace(r'[^a-zA-Z0-9 ]', ' ', regex=True)
 )
+tfidf        = TfidfVectorizer(stop_words="english", ngram_range=(1,2), max_features=10000)
+tfidf_matrix = tfidf.fit_transform(df["content"])
+# ↑ Sparse matrix kept in memory (~50 MB). No cos_sim computed here.
 
-tfidf = TfidfVectorizer(stop_words="english")
+# ═══════════════════════════════════════════════════════════════
+# 6.  HAVERSINE
+# ═══════════════════════════════════════════════════════════════
 
-tfidf_matrix = tfidf.fit_transform(places_df["content"])
-
-cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
-place_indices = pd.Series(
-    places_df.index,
-    index=places_df["place"]
-).drop_duplicates()
-
-# --------------------------------
-# Haversine Distance (Vectorized)
-# --------------------------------
-
-def haversine_vectorized(lat1, lon1, lat2, lon2):
-
+def haversine(lat1, lon1, lat2, lon2):
     R = 6371
+    rl1, rl2   = math.radians(lat1), np.radians(lat2)
+    rlo1, rlo2 = math.radians(lon1), np.radians(lon2)
+    dlat = rl2 - rl1; dlon = rlo2 - rlo1
+    a = np.sin(dlat/2)**2 + math.cos(rl1)*np.cos(rl2)*np.sin(dlon/2)**2
+    return R * 2 * np.arctan2(np.sqrt(a), np.sqrt(1-a))
 
-    lat1 = np.radians(lat1)
-    lon1 = np.radians(lon1)
+# ═══════════════════════════════════════════════════════════════
+# 7.  LIVE OVERPASS (all categories now supported)
+# ═══════════════════════════════════════════════════════════════
 
-    lat2 = np.radians(lat2)
-    lon2 = np.radians(lon2)
+def _valid_name(name):
+    if not name or len(name.strip()) < 2: return False
+    foreign = re.sub(r'[\x20-\x7E\u0900-\u097F\d\s\-\'\.(),&/]', '', name)
+    return len(foreign) / max(len(name), 1) < 0.4
 
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
+def _overpass_fetch(lat, lon, tags, radius_m):
+    union = [f'  {t}["{k}"="{v}"](around:{radius_m},{lat},{lon});\n'
+             for k, v in tags for t in ["node","way"]]
+    query = f"[out:json][timeout:15];\n(\n{''.join(union)});\nout center tags;"
+    for mirror in OVERPASS_MIRRORS:
+        try:
+            r = http_requests.post(mirror, data={"data": query},
+                                   headers=OSM_HEADERS, timeout=18)
+            if r.status_code in (429, 502, 503, 504): continue
+            r.raise_for_status()
+            return r.json().get("elements", [])
+        except Exception:
+            continue
+    return []
 
-    a = np.sin(dlat/2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon/2)**2
+def live_fetch(lat, lon, category, radius_m=3000, top_n=15):
+    tags = ALL_OSM_TAGS.get(category, [])
+    if not tags: return []
+    elements = _overpass_fetch(lat, lon, tags, radius_m)
+    results  = []
+    for e in elements:
+        t    = e.get("tags", {})
+        name = t.get("name:en") or t.get("name") or t.get("brand")
+        if not _valid_name(name): continue
+        elat = e.get("lat") or e.get("center",{}).get("lat")
+        elon = e.get("lon") or e.get("center",{}).get("lon")
+        if not elat or not elon: continue
+        dist = float(haversine(lat, lon, np.array([elat]), np.array([elon]))[0])
+        results.append({
+            "place": name.strip(), "city": t.get("addr:city","—"),
+            "lat": round(float(elat),6), "lon": round(float(elon),6),
+            "category": category, "icon": ICONS.get(category,"📍"),
+            "avg_rating": 2.5, "rating_count": 0, "important": 0,
+            "distance": round(dist,2),
+            "score": round(max(0, 1 - dist/(radius_m/1000)), 3),
+            "source": "live",
+            "opening_hours": t.get("opening_hours",""),
+            "cuisine":  t.get("cuisine",""),
+            "phone":    t.get("phone","") or t.get("contact:phone",""),
+            "website":  t.get("website","") or t.get("contact:website",""),
+            "address":  (t.get("addr:street","") + " " + t.get("addr:housenumber","")).strip(),
+        })
+    results.sort(key=lambda x: x["distance"])
+    return results[:top_n]
 
-    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1-a))
+# ═══════════════════════════════════════════════════════════════
+# 8.  CSV HYBRID SCORE
+# ═══════════════════════════════════════════════════════════════
 
-    return R * c
+def csv_nearby(lat, lon, category=None, radius_km=50, top_n=15):
+    work = df.copy()
+    if category:
+        work = work[work["category_clean"] == category]
+    if work.empty: return work
+    work["distance"] = haversine(lat, lon, work["lat"].values, work["lon"].values)
+    work = work[work["distance"] <= radius_km]
+    if work.empty: return work
+    max_d = work["distance"].max() or 1
+    work["score_dist"] = 1 - work["distance"] / max_d
+    work["avg_rating"] = work["place"].map(place_avg).fillna(2.5)
+    work["score_rate"] = work["avg_rating"] / 5.0
+    work["score_imp"]  = work["important"].astype(float)
+    work["score"]      = 0.50*work["score_dist"] + 0.35*work["score_rate"] + 0.15*work["score_imp"]
+    work["rating_count"] = work["place"].map(place_count).fillna(0).astype(int)
+    return work.sort_values("score", ascending=False).head(top_n)
 
+# ═══════════════════════════════════════════════════════════════
+# 9.  SERIALISER
+# ═══════════════════════════════════════════════════════════════
 
-# --------------------------------
-# Routes
-# --------------------------------
+def row_to_dict(row, extra=None):
+    d = {
+        "place":row["place"],"city":row["city"],
+        "lat":round(float(row["lat"]),6),"lon":round(float(row["lon"]),6),
+        "category":row["category_clean"],"icon":ICONS.get(row["category_clean"],"📍"),
+        "avg_rating":get_rating(row["place"]),"rating_count":get_count(row["place"]),
+        "important":int(row.get("important",0)),"source":"csv",
+        "opening_hours":"","cuisine":"","phone":"","website":"","address":"",
+    }
+    if extra: d.update(extra)
+    return d
+
+# ═══════════════════════════════════════════════════════════════
+# 10. FLASK ROUTES — AUTH
+# ═══════════════════════════════════════════════════════════════
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
+@app.route("/api/auth/register", methods=["POST"])
+def register():
+    data = request.get_json(silent=True) or {}
+    username = data.get("username","").strip()
+    email    = data.get("email","").strip().lower()
+    password = data.get("password","")
+    if not username or not email or not password:
+        return jsonify({"error":"username, email and password required"}), 400
+    if len(password) < 6:
+        return jsonify({"error":"Password must be at least 6 characters"}), 400
+    conn = get_db()
+    try:
+        conn.execute(
+            "INSERT INTO users (username, email, password) VALUES (?,?,?)",
+            (username, email, hash_pw(password))
+        )
+        conn.commit()
+        row = conn.execute("SELECT id,username,email FROM users WHERE email=?", (email,)).fetchone()
+        session["user_id"]  = row["id"]
+        session["username"] = row["username"]
+        return jsonify({"message":"Registered successfully","user":{"id":row["id"],"username":row["username"],"email":row["email"]}})
+    except sqlite3.IntegrityError as e:
+        msg = "Username already taken" if "username" in str(e) else "Email already registered"
+        return jsonify({"error": msg}), 409
+    finally:
+        conn.close()
 
-# --------------------------------
-# Recommend Similar Places
-# --------------------------------
+@app.route("/api/auth/login", methods=["POST"])
+def login():
+    data  = request.get_json(silent=True) or {}
+    email = data.get("email","").strip().lower()
+    pw    = data.get("password","")
+    conn  = get_db()
+    row   = conn.execute(
+        "SELECT * FROM users WHERE email=? AND password=?",
+        (email, hash_pw(pw))
+    ).fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error":"Invalid email or password"}), 401
+    conn.execute("UPDATE users SET last_login=? WHERE id=?", (now_iso(), row["id"]))
+    conn.commit(); conn.close()
+    session["user_id"]  = row["id"]
+    session["username"] = row["username"]
+    return jsonify({"message":"Logged in","user":{"id":row["id"],"username":row["username"],"email":row["email"]}})
 
-@app.route("/recommend_by_place")
-def recommend_by_place():
+@app.route("/api/auth/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return jsonify({"message":"Logged out"})
 
-    place_name = request.args.get("place")
+@app.route("/api/auth/me")
+def me():
+    uid = current_user_id()
+    if not uid: return jsonify({"user":None})
+    conn = get_db()
+    row  = conn.execute("SELECT id,username,email,created_at,last_login FROM users WHERE id=?", (uid,)).fetchone()
+    conn.close()
+    if not row: return jsonify({"user":None})
+    return jsonify({"user":dict(row)})
 
-    if not place_name:
-        return jsonify({"error": "Place name required"})
+# ═══════════════════════════════════════════════════════════════
+# 11. FLASK ROUTES — META
+# ═══════════════════════════════════════════════════════════════
 
-    matches = places_df[
-        places_df["place"].str.lower().str.contains(place_name.lower())
-    ]
-
-    if matches.empty:
-        return jsonify({"error": f"{place_name} not found"})
-
-    idx = matches.index[0]
-
-    sim_scores = list(enumerate(cosine_sim[idx]))
-
-    sim_scores = sorted(sim_scores,
-                        key=lambda x: x[1],
-                        reverse=True)
-
-    top_indices = [i for i, _ in sim_scores[1:6]]
-
-    results = places_df.iloc[top_indices]["place"].tolist()
-
+@app.route("/api/stats")
+def api_stats():
     return jsonify({
-        "input": place_name,
-        "recommendations": results
+        "total_places":int(len(df)),"total_cities":int(df["city"].nunique()),
+        "total_users":int(rdf["user"].nunique()) if not rdf.empty else 0,
+        "total_landmarks":int(df["important"].sum()),
+        "categories":df["category_clean"].value_counts().to_dict(),
     })
 
+@app.route("/api/categories")
+def api_categories():
+    cats = sorted(df["category_clean"].unique().tolist())
+    for c in ALL_OSM_TAGS:
+        if c not in cats: cats.append(c)
+    cats = sorted(set(cats))
+    return jsonify({"categories":cats,"icons":{c:ICONS.get(c,"📍") for c in cats},
+                    "live_categories":sorted(LIVE_PRIMARY | LIVE_FALLBACK)})
 
-# --------------------------------
-# Collaborative Recommendation
-# --------------------------------
+@app.route("/api/cities")
+def api_cities():
+    return jsonify(sorted(df["city"].unique().tolist()))
 
-@app.route("/recommend_for_user")
-def recommend_for_user():
+# ═══════════════════════════════════════════════════════════════
+# 12. FLASK ROUTES — RECOMMENDATIONS
+# ═══════════════════════════════════════════════════════════════
 
-    user_id = request.args.get("user")
-
-    if user_id not in ratings_df["user"].unique():
-        return jsonify({"error": "User not found"})
-
-    user_rated = ratings_df[
-        ratings_df["user"] == user_id]["place"].tolist()
-
-    top_places = ratings_df[
-        ~ratings_df["place"].isin(user_rated)
-    ]
-
-    top_places = top_places.groupby("place")["rating"] \
-        .mean().sort_values(ascending=False)
-
-    recommendations = top_places.head(5).index.tolist()
-
-    return jsonify({
-        "input": user_id,
-        "recommendations": recommendations
-    })
-
-
-# --------------------------------
-# Location-Based Recommendation
-# --------------------------------
-
-@app.route("/recommend_nearby")
-def recommend_nearby():
-
-    lat = request.args.get("lat")
-    lon = request.args.get("lon")
-    category = request.args.get("category")
+@app.route("/api/nearby")
+def api_nearby():
+    lat      = request.args.get("lat",      type=float)
+    lon      = request.args.get("lon",      type=float)
+    category = request.args.get("category","").strip() or None
+    radius   = request.args.get("radius",   50,  type=float)
+    top_n    = request.args.get("top_n",    12,  type=int)
 
     if lat is None or lon is None:
-        return jsonify({"error": "Location required"})
+        return jsonify({"error":"lat and lon required"}), 400
 
-    lat = float(lat)
-    lon = float(lon)
+    # Log search (if logged in)
+    uid = current_user_id()
+    if uid:
+        try:
+            conn = get_db()
+            conn.execute(
+                "INSERT INTO search_history (user_id,query_type,lat,lon,category) VALUES (?,?,?,?,?)",
+                (uid,"nearby",lat,lon,category or "All")
+            )
+            conn.commit(); conn.close()
+        except Exception: pass
 
-    df = places_df.copy()
+    csv_results, live_results = [], []
 
-    # Filter category
-    if category and category != "":
-        df = df[df["category_clean"] == category]
+    # ── CSV source ──────────────────────────────────────────────
+    csv_cat = category if (category and category not in LIVE_PRIMARY) else None
+    res = csv_nearby(lat, lon, csv_cat, radius, top_n)
+    if not res.empty:
+        for _, row in res.iterrows():
+            csv_results.append(row_to_dict(row,{
+                "distance":round(float(row["distance"]),2),
+                "score":round(float(row["score"]),3),
+            }))
 
-    # Compute distances (FAST vectorized)
-    df["distance"] = haversine_vectorized(
-        lat,
-        lon,
-        df["lat"].values,
-        df["lon"].values
+    # ── Live Overpass source ─────────────────────────────────────
+    # Determine which cats need live data
+    live_radius_m = min(int(radius * 80), 6000)
+
+    if category in LIVE_PRIMARY:
+        # Directly live
+        live_results = live_fetch(lat, lon, category, live_radius_m, top_n)
+    elif category in LIVE_FALLBACK:
+        # Live fallback: use if CSV returned fewer than 3 results
+        if len(csv_results) < 3:
+            live_results = live_fetch(lat, lon, category, live_radius_m, top_n)
+    elif category is None:
+        # "All" — fetch all live categories in parallel
+        all_live_cats = list(LIVE_PRIMARY) + [c for c in LIVE_FALLBACK if
+                            len([r for r in csv_results if r["category"]==c]) < 2]
+        with ThreadPoolExecutor(max_workers=4) as ex:
+            futures = {ex.submit(live_fetch, lat, lon, c, live_radius_m, top_n//3): c
+                       for c in all_live_cats}
+            for fut in as_completed(futures):
+                try: live_results.extend(fut.result())
+                except Exception: pass
+
+    # ── Merge & deduplicate ─────────────────────────────────────
+    seen, merged = set(), []
+    for p in csv_results + live_results:
+        key = p["place"].lower().strip()
+        if key not in seen:
+            seen.add(key); merged.append(p)
+
+    merged.sort(key=lambda x: (-x.get("important",0), -x.get("score",0)))
+    return jsonify(merged[:top_n])
+
+
+@app.route("/api/similar")
+def api_similar():
+    name  = request.args.get("place","").strip()
+    top_n = request.args.get("top_n", 6, type=int)
+    if not name:
+        return jsonify({"error":"place required"}), 400
+    matches = df[df["place"].str.lower().str.contains(name.lower(), na=False)]
+    if matches.empty:
+        return jsonify({"error":f"No match for '{name}'"}), 404
+    idx = matches.index[0]
+
+    # ── MEMORY FIX: compute similarity for ONE row only ──────────
+    # OLD: scores = sorted(enumerate(cos_sim[idx]))  ← used 31.9 GB global matrix
+    # NEW: compute on-demand for this single query → 0.5 MB
+    row_vec  = tfidf_matrix[idx]                              # shape (1, features) sparse
+    sim_row  = cosine_similarity(row_vec, tfidf_matrix).flatten()  # shape (n,) — 0.5 MB
+    scores   = sorted(enumerate(sim_row), key=lambda x: x[1], reverse=True)[1:top_n+1]
+    rows     = df.iloc[[i for i, _ in scores]]
+    return jsonify({"query":df.loc[idx,"place"],
+                    "results":[row_to_dict(r) for _,r in rows.iterrows()]})
+
+
+@app.route("/api/for_user")
+def api_for_user():
+    uid   = request.args.get("user","").strip()
+    top_n = request.args.get("top_n", 8, type=int)
+    if rdf.empty: return jsonify({"error":"Ratings data unavailable"}), 503
+    known = rdf["user"].unique()
+    if uid not in known:
+        return jsonify({"error":f"User '{uid}' not found (U1–U{len(known)})"}), 404
+    visited    = set(rdf[rdf["user"]==uid]["place"])
+    candidates = rdf[~rdf["place"].isin(visited)]
+    top        = candidates.groupby("place")["rating"].mean().sort_values(ascending=False).head(top_n)
+    results    = []
+    for pname, avg_r in top.items():
+        row = df[df["place"]==pname]
+        if not row.empty:
+            results.append(row_to_dict(row.iloc[0], {"avg_rating":round(avg_r,1)}))
+    return jsonify({"user":uid,"results":results})
+
+
+@app.route("/api/search")
+def api_search():
+    q     = request.args.get("q","").strip().lower()
+    top_n = request.args.get("top_n", 12, type=int)
+    if not q: return jsonify([])
+    mask = (df["place"].str.lower().str.contains(q,na=False) |
+            df["city"].str.lower().str.contains(q,na=False))
+    res = df[mask].sort_values("important",ascending=False).head(top_n)
+    return jsonify([row_to_dict(r) for _,r in res.iterrows()])
+
+
+@app.route("/api/city_places")
+def api_city_places():
+    city     = request.args.get("city","").strip()
+    category = request.args.get("category","").strip() or None
+    top_n    = request.args.get("top_n", 15, type=int)
+    if not city: return jsonify({"error":"city required"}), 400
+    mask = df["city"].str.lower() == city.lower()
+    if category: mask &= df["category_clean"] == category
+    res = df[mask].copy()
+    res["avg_rating"] = res["place"].map(place_avg).fillna(2.5)
+    res = res.sort_values(["important","avg_rating"],ascending=[False,False]).head(top_n)
+    return jsonify([row_to_dict(r) for _,r in res.iterrows()])
+
+# ═══════════════════════════════════════════════════════════════
+# 13. FLASK ROUTES — SAVED PLACES (DB-backed, login required)
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/api/favourites", methods=["GET"])
+def get_favs():
+    uid = current_user_id()
+    if not uid:
+        # Guests: use session
+        return jsonify(session.get("favs",[]))
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT place,city,category,lat,lon,icon FROM saved_places WHERE user_id=? ORDER BY saved_at DESC",
+        (uid,)
+    ).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
+
+@app.route("/api/favourites", methods=["POST"])
+def add_fav():
+    data  = request.get_json(silent=True) or {}
+    place = data.get("place","").strip()
+    if not place: return jsonify({"error":"place required"}), 400
+    uid = current_user_id()
+    if uid:
+        conn = get_db()
+        try:
+            conn.execute(
+                "INSERT OR IGNORE INTO saved_places (user_id,place,city,category,lat,lon,icon) VALUES (?,?,?,?,?,?,?)",
+                (uid, place, data.get("city"), data.get("category"),
+                 data.get("lat"), data.get("lon"), data.get("icon"))
+            )
+            conn.commit()
+        finally: conn.close()
+        return get_favs()
+    # Guest fallback
+    favs = session.get("favs",[])
+    if place not in [f["place"] for f in favs]:
+        favs.append(data); session["favs"]=favs
+    return jsonify(favs)
+
+@app.route("/api/favourites", methods=["DELETE"])
+def del_fav():
+    data  = request.get_json(silent=True) or {}
+    place = data.get("place","")
+    uid   = current_user_id()
+    if uid:
+        conn = get_db()
+        conn.execute("DELETE FROM saved_places WHERE user_id=? AND place=?", (uid,place))
+        conn.commit(); conn.close()
+        return get_favs()
+    favs = [f for f in session.get("favs",[]) if f.get("place")!=place]
+    session["favs"]=favs; return jsonify(favs)
+
+# ═══════════════════════════════════════════════════════════════
+# 14. FLASK ROUTES — RATINGS (DB-backed)
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/api/rate", methods=["POST"])
+@login_required
+def rate_place():
+    data   = request.get_json(silent=True) or {}
+    place  = data.get("place","").strip()
+    rating = data.get("rating")
+    city   = data.get("city","")
+    if not place or rating is None:
+        return jsonify({"error":"place and rating required"}), 400
+    try:
+        rating = float(rating)
+        assert 0.5 <= rating <= 5.0
+    except Exception:
+        return jsonify({"error":"rating must be 0.5–5.0"}), 400
+    uid  = current_user_id()
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO user_ratings (user_id,place,city,rating) VALUES (?,?,?,?) "
+        "ON CONFLICT(user_id,place) DO UPDATE SET rating=excluded.rating, rated_at=?",
+        (uid, place, city, rating, now_iso())
     )
+    conn.commit(); conn.close()
+    return jsonify({"message":"Rating saved","place":place,"rating":rating})
 
-    df = df.sort_values("distance")
+@app.route("/api/my_ratings")
+@login_required
+def my_ratings():
+    uid  = current_user_id()
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT place,city,rating,rated_at FROM user_ratings WHERE user_id=? ORDER BY rated_at DESC",
+        (uid,)
+    ).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
 
-    results = df.head(5)[[
-        "place",
-        "city",
-        "lat",
-        "lon",
-        "category_clean",
-        "distance"
-    ]]
+# ═══════════════════════════════════════════════════════════════
+# 15. FLASK ROUTES — TRIP PLANS
+# ═══════════════════════════════════════════════════════════════
 
-    return jsonify(results.to_dict(orient="records"))
+@app.route("/api/trips", methods=["GET"])
+@login_required
+def get_trips():
+    uid  = current_user_id()
+    conn = get_db()
+    trips = conn.execute(
+        "SELECT id,name,description,created_at,updated_at FROM trip_plans WHERE user_id=? ORDER BY updated_at DESC",
+        (uid,)
+    ).fetchall()
+    result = []
+    for t in trips:
+        places = conn.execute(
+            "SELECT place,city,category,lat,lon,icon,visit_order,notes FROM trip_places WHERE trip_id=? ORDER BY visit_order",
+            (t["id"],)
+        ).fetchall()
+        result.append({**dict(t), "places": [dict(p) for p in places]})
+    conn.close()
+    return jsonify(result)
 
+@app.route("/api/trips", methods=["POST"])
+@login_required
+def create_trip():
+    data = request.get_json(silent=True) or {}
+    name = data.get("name","").strip()
+    if not name: return jsonify({"error":"Trip name required"}), 400
+    uid  = current_user_id()
+    conn = get_db()
+    cur  = conn.execute(
+        "INSERT INTO trip_plans (user_id,name,description) VALUES (?,?,?)",
+        (uid, name, data.get("description",""))
+    )
+    conn.commit()
+    trip_id = cur.lastrowid
+    conn.close()
+    return jsonify({"message":"Trip created","id":trip_id,"name":name})
 
-# --------------------------------
+@app.route("/api/trips/<int:trip_id>/places", methods=["POST"])
+@login_required
+def add_to_trip(trip_id):
+    data  = request.get_json(silent=True) or {}
+    place = data.get("place","").strip()
+    if not place: return jsonify({"error":"place required"}), 400
+    uid  = current_user_id()
+    conn = get_db()
+    # Verify trip belongs to this user
+    t = conn.execute("SELECT id FROM trip_plans WHERE id=? AND user_id=?", (trip_id,uid)).fetchone()
+    if not t: conn.close(); return jsonify({"error":"Trip not found"}), 404
+    order = conn.execute("SELECT COUNT(*) FROM trip_places WHERE trip_id=?", (trip_id,)).fetchone()[0]
+    conn.execute(
+        "INSERT INTO trip_places (trip_id,place,city,category,lat,lon,icon,visit_order,notes) VALUES (?,?,?,?,?,?,?,?,?)",
+        (trip_id, place, data.get("city"), data.get("category"),
+         data.get("lat"), data.get("lon"), data.get("icon"), order, data.get("notes",""))
+    )
+    conn.execute("UPDATE trip_plans SET updated_at=? WHERE id=?", (now_iso(), trip_id))
+    conn.commit(); conn.close()
+    return jsonify({"message":"Place added to trip"})
 
+@app.route("/api/trips/<int:trip_id>", methods=["DELETE"])
+@login_required
+def delete_trip(trip_id):
+    uid  = current_user_id()
+    conn = get_db()
+    conn.execute("DELETE FROM trip_plans WHERE id=? AND user_id=?", (trip_id,uid))
+    conn.commit(); conn.close()
+    return jsonify({"message":"Trip deleted"})
+
+# ═══════════════════════════════════════════════════════════════
+# 16. FLASK ROUTES — SEARCH HISTORY & EXPORT
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/api/history")
+@login_required
+def search_history():
+    uid  = current_user_id()
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT query_type,query_value,category,searched_at FROM search_history "
+        "WHERE user_id=? ORDER BY searched_at DESC LIMIT 50", (uid,)
+    ).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
+
+@app.route("/api/favourites/export")
+def export_favs():
+    uid = current_user_id()
+    if uid:
+        conn = get_db()
+        rows = conn.execute(
+            "SELECT place,city,category,lat,lon FROM saved_places WHERE user_id=?", (uid,)
+        ).fetchall()
+        conn.close()
+        records = [dict(r) for r in rows]
+    else:
+        records = session.get("favs",[])
+    if not records: return "No saved places", 400
+    csv = pd.DataFrame(records).to_csv(index=False)
+    return Response(csv, mimetype="text/csv",
+                    headers={"Content-Disposition":"attachment;filename=yatra_saved.csv"})
+
+@app.route("/api/export")
+def api_export():
+    try:    records = json.loads(request.args.get("data","[]"))
+    except: records = []
+    if not records: return "No data", 400
+    csv = pd.DataFrame(records).to_csv(index=False)
+    return Response(csv, mimetype="text/csv",
+                    headers={"Content-Disposition":"attachment;filename=yatra_places.csv"})
+
+# ─────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
