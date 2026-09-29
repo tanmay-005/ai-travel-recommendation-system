@@ -651,7 +651,6 @@ function renderCards(places,mode,subtitle=''){
     const isFav=favs.some(f=>f.place===p.place)
     const isLandmark=p.important===1
     const isLive=p.source==='live'
-    const stars='★'.repeat(Math.round(p.avg_rating||2.5))+'☆'.repeat(5-Math.round(p.avg_rating||2.5))
     const catCls=`cat-${(p.category||'Other').replace(/\s/g,'')}`
     const scoreBadge=mode==='nearby'?`<span class="score-badge">${((p.score||0)*100).toFixed(0)}%</span>`:''
     const distChip=p.distance!=null?`<span class="meta-chip">📏 ${p.distance} km</span>`:''
@@ -675,7 +674,6 @@ function renderCards(places,mode,subtitle=''){
       <div class="card-meta">
         <span class="meta-chip">🏙 ${esc(p.city||'—')}</span>
         ${distChip}
-        <span class="meta-chip"><span class="stars">${stars}</span> ${p.avg_rating||2.5}</span>
         ${scoreBadge}
       </div>
       ${extraChips?`<div class="card-meta" style="margin-top:4px">${extraChips}</div>`:''}
@@ -690,7 +688,6 @@ function plotMarkers(places){
   places.forEach(p=>{
     const lat=parseFloat(p.lat),lon=parseFloat(p.lon)
     const icon=makeIcon(p.icon||'📍',p.category||'Other',p.important===1,p.source==='live')
-    const stars='★'.repeat(Math.round(p.avg_rating||2.5))
     const srcLabel=p.source==='live'?'<span style="color:#00B4A6;font-size:.65rem">⚡ Live</span>':'<span style="color:#7C3AED;font-size:.65rem">📦 DB</span>'
     const extras=[]
     if(p.opening_hours) extras.push(`🕐 ${p.opening_hours.split(';')[0]}`)
@@ -702,7 +699,6 @@ function plotMarkers(places){
         ${p.important?'<div style="font-size:.62rem;background:#F5C518;color:#5a3e00;padding:1px 6px;border-radius:8px;font-weight:700;margin-bottom:4px;display:inline-block">⭐ Iconic</div>':''}
         <b style="font-size:.88rem">${p.place}</b> ${srcLabel}<br>
         <span style="font-size:.72rem;color:#6B5E50">${p.city||'—'} · ${p.category}</span><br>
-        <span style="color:#F5C518">${stars}</span><span style="font-size:.72rem;color:#6B5E50"> ${p.avg_rating||2.5}</span>
         ${extraHtml}</div>`)
     m.on('click',()=>showRoute(lat,lon,p.place))
     placeMarkers.push(m);bounds.push([lat,lon])

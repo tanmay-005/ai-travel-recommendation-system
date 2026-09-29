@@ -32,7 +32,6 @@ app.secret_key = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
 BASE        = Path(__file__).parent
 PLACES_CSV  = BASE / "india_places_dataset.csv"
-RATINGS_CSV = BASE / "ratings.csv"
 DB_PATH     = BASE / "yatra.db"
 
 # ═══════════════════════════════════════════════════════════════
@@ -198,22 +197,6 @@ OVERPASS_MIRRORS = [
 ]
 OSM_HEADERS = {"User-Agent": "yatra-travel-app/4.0"}
 
-# ═══════════════════════════════════════════════════════════════
-# 4.  RATINGS
-# ═══════════════════════════════════════════════════════════════
-
-try:
-    rdf = pd.read_csv(RATINGS_CSV)
-    if len(rdf) > 200_000:
-        rdf = rdf.sample(200_000, random_state=42)
-except Exception:
-    rdf = pd.DataFrame(columns=["user","place","rating"])
-
-place_avg   = rdf.groupby("place")["rating"].mean()  if not rdf.empty else pd.Series(dtype=float)
-place_count = rdf.groupby("place")["rating"].count() if not rdf.empty else pd.Series(dtype=int)
-
-def get_rating(n): return round(float(place_avg.get(n, 2.5)), 1)
-def get_count(n):  return int(place_count.get(n, 0))
 
 # ═══════════════════════════════════════════════════════════════
 # 5.  TF-IDF  — FIX: store sparse matrix only, NO full cosine matrix
@@ -289,7 +272,7 @@ def live_fetch(lat, lon, category, radius_m=3000, top_n=15):
             "place": name.strip(), "city": t.get("addr:city","—"),
             "lat": round(float(elat),6), "lon": round(float(elon),6),
             "category": category, "icon": ICONS.get(category,"📍"),
-            "avg_rating": 2.5, "rating_count": 0, "important": 0,
+            "important": 0,
             "distance": round(dist,2),
             "score": round(max(0, 1 - dist/(radius_m/1000)), 3),
             "source": "live",
@@ -316,11 +299,8 @@ def csv_nearby(lat, lon, category=None, radius_km=50, top_n=15):
     if work.empty: return work
     max_d = work["distance"].max() or 1
     work["score_dist"] = 1 - work["distance"] / max_d
-    work["avg_rating"] = work["place"].map(place_avg).fillna(2.5)
-    work["score_rate"] = work["avg_rating"] / 5.0
     work["score_imp"]  = work["important"].astype(float)
-    work["score"]      = 0.50*work["score_dist"] + 0.35*work["score_rate"] + 0.15*work["score_imp"]
-    work["rating_count"] = work["place"].map(place_count).fillna(0).astype(int)
+    work["score"]      = 0.7*work["score_dist"] + 0.3*work["score_imp"]   # temporary; phase 5 replaces it
     return work.sort_values("score", ascending=False).head(top_n)
 
 # ═══════════════════════════════════════════════════════════════
@@ -332,7 +312,6 @@ def row_to_dict(row, extra=None):
         "place":row["place"],"city":row["city"],
         "lat":round(float(row["lat"]),6),"lon":round(float(row["lon"]),6),
         "category":row["category_clean"],"icon":ICONS.get(row["category_clean"],"📍"),
-        "avg_rating":get_rating(row["place"]),"rating_count":get_count(row["place"]),
         "important":int(row.get("important",0)),"source":"csv",
         "opening_hours":"","cuisine":"","phone":"","website":"","address":"",
     }
@@ -416,7 +395,6 @@ def me():
 def api_stats():
     return jsonify({
         "total_places":int(len(df)),"total_cities":int(df["city"].nunique()),
-        "total_users":int(rdf["user"].nunique()) if not rdf.empty else 0,
         "total_landmarks":int(df["important"].sum()),
         "categories":df["category_clean"].value_counts().to_dict(),
     })
@@ -567,8 +545,7 @@ def api_city_places():
     mask = df["city"].str.lower() == city.lower()
     if category: mask &= df["category_clean"] == category
     res = df[mask].copy()
-    res["avg_rating"] = res["place"].map(place_avg).fillna(2.5)
-    res = res.sort_values(["important","avg_rating"],ascending=[False,False]).head(top_n)
+    res = res.sort_values("important", ascending=False).head(top_n)
     return jsonify([row_to_dict(r) for _,r in res.iterrows()])
 
 # ═══════════════════════════════════════════════════════════════
