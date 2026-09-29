@@ -65,50 +65,6 @@ def init_db():
         saved_at    TEXT,
         UNIQUE(user_id, place)
     );
-
-    CREATE TABLE IF NOT EXISTS user_ratings (
-        id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id     INTEGER NOT NULL,
-        place       TEXT    NOT NULL,
-        city        TEXT,
-        rating      REAL    NOT NULL,
-        rated_at    TEXT,
-        UNIQUE(user_id, place)
-    );
-
-    CREATE TABLE IF NOT EXISTS search_history (
-        id            INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id       INTEGER,
-        query_type    TEXT,
-        query_value   TEXT,
-        lat           REAL,
-        lon           REAL,
-        category      TEXT,
-        results_count INTEGER,
-        searched_at   TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS trip_plans (
-        id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id     INTEGER NOT NULL,
-        name        TEXT    NOT NULL,
-        description TEXT,
-        created_at  TEXT,
-        updated_at  TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS trip_places (
-        id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        trip_id     INTEGER NOT NULL,
-        place       TEXT    NOT NULL,
-        city        TEXT,
-        category    TEXT,
-        lat         REAL,
-        lon         REAL,
-        icon        TEXT,
-        visit_order INTEGER,
-        notes       TEXT
-    );
     """)
     conn.commit()
     conn.close()
@@ -404,18 +360,6 @@ def api_nearby():
     if lat is None or lon is None:
         return jsonify({"error":"lat and lon required"}), 400
 
-    # Log search (if logged in)
-    uid = current_user_id()
-    if uid:
-        try:
-            conn = get_db()
-            conn.execute(
-                "INSERT INTO search_history (user_id,query_type,lat,lon,category) VALUES (?,?,?,?,?)",
-                (uid,"nearby",lat,lon,category or "All")
-            )
-            conn.commit(); conn.close()
-        except Exception: pass
-
     csv_results, live_results = [], []
 
     # ── CSV source ──────────────────────────────────────────────
@@ -538,131 +482,11 @@ def del_fav():
     favs = [f for f in session.get("favs",[]) if f.get("place")!=place]
     session["favs"]=favs; return jsonify(favs)
 
-# ═══════════════════════════════════════════════════════════════
-# 14. FLASK ROUTES — RATINGS (DB-backed)
-# ═══════════════════════════════════════════════════════════════
-
-@app.route("/api/rate", methods=["POST"])
-@login_required
-def rate_place():
-    data   = request.get_json(silent=True) or {}
-    place  = data.get("place","").strip()
-    rating = data.get("rating")
-    city   = data.get("city","")
-    if not place or rating is None:
-        return jsonify({"error":"place and rating required"}), 400
-    try:
-        rating = float(rating)
-        assert 0.5 <= rating <= 5.0
-    except Exception:
-        return jsonify({"error":"rating must be 0.5–5.0"}), 400
-    uid  = current_user_id()
-    conn = get_db()
-    conn.execute(
-        "INSERT INTO user_ratings (user_id,place,city,rating) VALUES (?,?,?,?) "
-        "ON CONFLICT(user_id,place) DO UPDATE SET rating=excluded.rating, rated_at=?",
-        (uid, place, city, rating, now_iso())
-    )
-    conn.commit(); conn.close()
-    return jsonify({"message":"Rating saved","place":place,"rating":rating})
-
-@app.route("/api/my_ratings")
-@login_required
-def my_ratings():
-    uid  = current_user_id()
-    conn = get_db()
-    rows = conn.execute(
-        "SELECT place,city,rating,rated_at FROM user_ratings WHERE user_id=? ORDER BY rated_at DESC",
-        (uid,)
-    ).fetchall()
-    conn.close()
-    return jsonify([dict(r) for r in rows])
-
-# ═══════════════════════════════════════════════════════════════
-# 15. FLASK ROUTES — TRIP PLANS
-# ═══════════════════════════════════════════════════════════════
-
-@app.route("/api/trips", methods=["GET"])
-@login_required
-def get_trips():
-    uid  = current_user_id()
-    conn = get_db()
-    trips = conn.execute(
-        "SELECT id,name,description,created_at,updated_at FROM trip_plans WHERE user_id=? ORDER BY updated_at DESC",
-        (uid,)
-    ).fetchall()
-    result = []
-    for t in trips:
-        places = conn.execute(
-            "SELECT place,city,category,lat,lon,icon,visit_order,notes FROM trip_places WHERE trip_id=? ORDER BY visit_order",
-            (t["id"],)
-        ).fetchall()
-        result.append({**dict(t), "places": [dict(p) for p in places]})
-    conn.close()
-    return jsonify(result)
-
-@app.route("/api/trips", methods=["POST"])
-@login_required
-def create_trip():
-    data = request.get_json(silent=True) or {}
-    name = data.get("name","").strip()
-    if not name: return jsonify({"error":"Trip name required"}), 400
-    uid  = current_user_id()
-    conn = get_db()
-    cur  = conn.execute(
-        "INSERT INTO trip_plans (user_id,name,description) VALUES (?,?,?)",
-        (uid, name, data.get("description",""))
-    )
-    conn.commit()
-    trip_id = cur.lastrowid
-    conn.close()
-    return jsonify({"message":"Trip created","id":trip_id,"name":name})
-
-@app.route("/api/trips/<int:trip_id>/places", methods=["POST"])
-@login_required
-def add_to_trip(trip_id):
-    data  = request.get_json(silent=True) or {}
-    place = data.get("place","").strip()
-    if not place: return jsonify({"error":"place required"}), 400
-    uid  = current_user_id()
-    conn = get_db()
-    # Verify trip belongs to this user
-    t = conn.execute("SELECT id FROM trip_plans WHERE id=? AND user_id=?", (trip_id,uid)).fetchone()
-    if not t: conn.close(); return jsonify({"error":"Trip not found"}), 404
-    order = conn.execute("SELECT COUNT(*) FROM trip_places WHERE trip_id=?", (trip_id,)).fetchone()[0]
-    conn.execute(
-        "INSERT INTO trip_places (trip_id,place,city,category,lat,lon,icon,visit_order,notes) VALUES (?,?,?,?,?,?,?,?,?)",
-        (trip_id, place, data.get("city"), data.get("category"),
-         data.get("lat"), data.get("lon"), data.get("icon"), order, data.get("notes",""))
-    )
-    conn.execute("UPDATE trip_plans SET updated_at=? WHERE id=?", (now_iso(), trip_id))
-    conn.commit(); conn.close()
-    return jsonify({"message":"Place added to trip"})
-
-@app.route("/api/trips/<int:trip_id>", methods=["DELETE"])
-@login_required
-def delete_trip(trip_id):
-    uid  = current_user_id()
-    conn = get_db()
-    conn.execute("DELETE FROM trip_plans WHERE id=? AND user_id=?", (trip_id,uid))
-    conn.commit(); conn.close()
-    return jsonify({"message":"Trip deleted"})
 
 # ═══════════════════════════════════════════════════════════════
 # 16. FLASK ROUTES — SEARCH HISTORY & EXPORT
 # ═══════════════════════════════════════════════════════════════
 
-@app.route("/api/history")
-@login_required
-def search_history():
-    uid  = current_user_id()
-    conn = get_db()
-    rows = conn.execute(
-        "SELECT query_type,query_value,category,searched_at FROM search_history "
-        "WHERE user_id=? ORDER BY searched_at DESC LIMIT 50", (uid,)
-    ).fetchall()
-    conn.close()
-    return jsonify([dict(r) for r in rows])
 
 @app.route("/api/favourites/export")
 def export_favs():
