@@ -16,8 +16,6 @@ from flask import (Flask, request, jsonify, render_template,
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 import math, json, os, re, sqlite3, hashlib, secrets
 import requests as http_requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -197,27 +195,6 @@ OVERPASS_MIRRORS = [
 ]
 OSM_HEADERS = {"User-Agent": "yatra-travel-app/4.0"}
 
-
-# ═══════════════════════════════════════════════════════════════
-# 5.  TF-IDF  — FIX: store sparse matrix only, NO full cosine matrix
-#
-#  OLD (crashed): cos_sim = cosine_similarity(matrix, matrix)
-#  → 65462 × 65462 × 8 bytes = 31.9 GB  ← MemoryError
-#
-#  NEW: keep only tfidf_matrix (sparse, ~50 MB)
-#  Compute similarity ON DEMAND per query for ONE row only:
-#  cosine_similarity(tfidf_matrix[idx], tfidf_matrix)
-#  → 1 × 65462 × 8 bytes = 0.5 MB  ← fine
-# ═══════════════════════════════════════════════════════════════
-
-df["content"] = (
-    df["category_clean"] + " " + df["city"] + " " +
-    df["place"].str.replace(r'[^a-zA-Z0-9 ]', ' ', regex=True) + " " +
-    df["place"].where(df["important"]==1, "").str.replace(r'[^a-zA-Z0-9 ]', ' ', regex=True)
-)
-tfidf        = TfidfVectorizer(stop_words="english", ngram_range=(1,2), max_features=10000)
-tfidf_matrix = tfidf.fit_transform(df["content"])
-# ↑ Sparse matrix kept in memory (~50 MB). No cos_sim computed here.
 
 # ═══════════════════════════════════════════════════════════════
 # 6.  HAVERSINE
@@ -482,47 +459,6 @@ def api_nearby():
 
     merged.sort(key=lambda x: (-x.get("important",0), -x.get("score",0)))
     return jsonify(merged[:top_n])
-
-
-@app.route("/api/similar")
-def api_similar():
-    name  = request.args.get("place","").strip()
-    top_n = request.args.get("top_n", 6, type=int)
-    if not name:
-        return jsonify({"error":"place required"}), 400
-    matches = df[df["place"].str.lower().str.contains(name.lower(), na=False)]
-    if matches.empty:
-        return jsonify({"error":f"No match for '{name}'"}), 404
-    idx = matches.index[0]
-
-    # ── MEMORY FIX: compute similarity for ONE row only ──────────
-    # OLD: scores = sorted(enumerate(cos_sim[idx]))  ← used 31.9 GB global matrix
-    # NEW: compute on-demand for this single query → 0.5 MB
-    row_vec  = tfidf_matrix[idx]                              # shape (1, features) sparse
-    sim_row  = cosine_similarity(row_vec, tfidf_matrix).flatten()  # shape (n,) — 0.5 MB
-    scores   = sorted(enumerate(sim_row), key=lambda x: x[1], reverse=True)[1:top_n+1]
-    rows     = df.iloc[[i for i, _ in scores]]
-    return jsonify({"query":df.loc[idx,"place"],
-                    "results":[row_to_dict(r) for _,r in rows.iterrows()]})
-
-
-@app.route("/api/for_user")
-def api_for_user():
-    uid   = request.args.get("user","").strip()
-    top_n = request.args.get("top_n", 8, type=int)
-    if rdf.empty: return jsonify({"error":"Ratings data unavailable"}), 503
-    known = rdf["user"].unique()
-    if uid not in known:
-        return jsonify({"error":f"User '{uid}' not found (U1–U{len(known)})"}), 404
-    visited    = set(rdf[rdf["user"]==uid]["place"])
-    candidates = rdf[~rdf["place"].isin(visited)]
-    top        = candidates.groupby("place")["rating"].mean().sort_values(ascending=False).head(top_n)
-    results    = []
-    for pname, avg_r in top.items():
-        row = df[df["place"]==pname]
-        if not row.empty:
-            results.append(row_to_dict(row.iloc[0], {"avg_rating":round(avg_r,1)}))
-    return jsonify({"user":uid,"results":results})
 
 
 @app.route("/api/search")

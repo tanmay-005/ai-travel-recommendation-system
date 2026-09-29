@@ -284,9 +284,7 @@ input[type=range]{width:100%;accent-color:var(--saffron);cursor:pointer;height:4
 <aside id="sidebar">
   <div id="modeTabs">
     <div class="mtab on"  onclick="setMode('nearby',this)">📍 Nearby</div>
-    <div class="mtab"     onclick="setMode('similar',this)">🔗 Similar</div>
     <div class="mtab"     onclick="setMode('city',this)">🏙 City</div>
-    <div class="mtab"     onclick="setMode('user',this)">👤 For Me</div>
   </div>
 
   <div id="sidebarScroll">
@@ -331,18 +329,6 @@ input[type=range]{width:100%;accent-color:var(--saffron);cursor:pointer;height:4
       <button class="sbtn sbtn-go" onclick="doNearby()">🔍 Find Recommendations</button>
     </div>
 
-    <!-- SIMILAR -->
-    <div class="mpanel" id="p-similar">
-      <span class="flabel">Place Name</span>
-      <div class="frow">
-        <input class="finput" id="similarInput" type="text" placeholder="e.g. Amber Fort, Taj Mahal…">
-        <button class="fbtn fbtn-primary" onclick="doSimilar()">Find</button>
-      </div>
-      <div style="font-size:.76rem;color:var(--muted);margin-top:2px;line-height:1.5">
-        Finds places with similar category &amp; character across India using TF-IDF similarity.
-      </div>
-    </div>
-
     <!-- CITY -->
     <div class="mpanel" id="p-city">
       <span class="flabel">City</span>
@@ -355,19 +341,6 @@ input[type=range]{width:100%;accent-color:var(--saffron);cursor:pointer;height:4
         <button class="fbtn fbtn-primary" onclick="doCity()">Go</button>
       </div>
     </div>
-
-    <!-- FOR ME -->
-    <div class="mpanel" id="p-user">
-      <span class="flabel">User ID</span>
-      <div class="frow">
-        <input class="finput" id="userInput" type="text" placeholder="e.g. U42">
-        <button class="fbtn fbtn-primary" onclick="doUser()">Get Picks</button>
-      </div>
-      <div style="font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.5">
-        Personalised picks based on community rating patterns (U1–U100).
-      </div>
-    </div>
-  </div>
 
   <!-- RESULTS -->
   <div id="resultsWrap">
@@ -548,20 +521,6 @@ async function doNearby(){
   }catch(e){toast('Request failed');hideLoader()}
 }
 
-async function doSimilar(){
-  const name=document.getElementById('similarInput').value.trim()
-  if(!name){toast('Enter a place name');return}
-  showLoader()
-  try{
-    const r=await fetch(`/api/similar?place=${encodeURIComponent(name)}`)
-    const d=await r.json()
-    if(d.error){toast(d.error);hideLoader();return}
-    lastResults=d.results
-    renderCards(d.results,'similar',`Similar to: ${d.query}`)
-    plotMarkers(d.results)
-  }catch(e){toast('Request failed');hideLoader()}
-}
-
 async function doCity(){
   const city=document.getElementById('citySelect').value
   const cat=document.getElementById('cityCatSelect').value
@@ -575,20 +534,6 @@ async function doCity(){
     renderCards(d,'city',`Top places in ${city}`)
     plotMarkers(d)
     if(d.length)map.setView([d[0].lat,d[0].lon],12)
-  }catch(e){toast('Request failed');hideLoader()}
-}
-
-async function doUser(){
-  const uid=document.getElementById('userInput').value.trim()
-  if(!uid){toast('Enter a user ID');return}
-  showLoader()
-  try{
-    const r=await fetch(`/api/for_user?user=${encodeURIComponent(uid)}`)
-    const d=await r.json()
-    if(d.error){toast(d.error);hideLoader();return}
-    lastResults=d.results
-    renderCards(d.results,'user',`Picks for ${d.user}`)
-    plotMarkers(d.results)
   }catch(e){toast('Request failed');hideLoader()}
 }
 
@@ -792,8 +737,6 @@ function toast(msg,d=2700){const e=document.getElementById('toast');e.innerText=
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
 
 document.getElementById('citySearch').addEventListener('keydown',e=>e.key==='Enter'&&locateCity())
-document.getElementById('similarInput').addEventListener('keydown',e=>e.key==='Enter'&&doSimilar())
-document.getElementById('userInput').addEventListener('keydown',e=>e.key==='Enter'&&doUser())
 document.getElementById('globalSearch').addEventListener('keydown',e=>e.key==='Enter'&&doGlobalSearch())
 </script>
 </body>
