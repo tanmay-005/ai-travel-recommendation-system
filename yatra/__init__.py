@@ -14,7 +14,10 @@ def create_app(config=None) -> Flask:
     if config:
         app.config.update(config)
 
-    # step 2.2: init the database here
+    from yatra.db import init_db
+    with app.app_context():
+        init_db()
+        
     # step 2.3: register blueprints here
 
     return app
