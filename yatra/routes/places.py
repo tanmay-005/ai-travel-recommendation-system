@@ -3,7 +3,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
-from flask import Blueprint, Response, app, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 
 from yatra.data import ICONS, csv_nearby, df, row_to_dict
 from yatra.osm import ALL_OSM_TAGS, LIVE_FALLBACK, LIVE_PRIMARY, live_fetch

@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime, timezone
 from functools import wraps
 
-from flask import Blueprint, app, jsonify, request, session
+from flask import Blueprint, jsonify, request, session
 
 from yatra.db import get_db
 
