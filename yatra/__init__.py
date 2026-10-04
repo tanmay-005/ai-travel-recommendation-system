@@ -18,6 +18,10 @@ def create_app(config=None) -> Flask:
     with app.app_context():
         init_db()
         
-    # step 2.3: register blueprints here
+    from yatra.routes import auth, pages, places, saved
+    app.register_blueprint(pages.bp)
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(places.bp)
+    app.register_blueprint(saved.bp)
 
     return app
