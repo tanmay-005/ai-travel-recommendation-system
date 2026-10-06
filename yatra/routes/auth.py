@@ -1,11 +1,10 @@
 """Sign up, log in, log out, and who is logged in."""
-import hashlib
 import sqlite3
 from datetime import datetime, timezone
 from functools import wraps
 
 from flask import Blueprint, jsonify, request, session
-
+from werkzeug.security import check_password_hash, generate_password_hash
 from yatra.db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/api/auth")
@@ -13,9 +12,6 @@ bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
 def now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-
-def hash_pw(pw: str) -> str:
-    return hashlib.sha256(pw.encode()).hexdigest()
 
 def login_required(f):
     @wraps(f)
@@ -43,7 +39,7 @@ def register():
     try:
         conn.execute(
             "INSERT INTO users (username, email, password) VALUES (?,?,?)",
-            (username, email, hash_pw(password))
+                        (username, email, generate_password_hash(password))
         )
         conn.commit()
         row = conn.execute("SELECT id,username,email FROM users WHERE email=?", (email,)).fetchone()
@@ -64,10 +60,9 @@ def login():
     pw    = data.get("password","")
     conn  = get_db()
     row   = conn.execute(
-        "SELECT * FROM users WHERE email=? AND password=?",
-        (email, hash_pw(pw))
+        "SELECT * FROM users WHERE email=?", (email,)
     ).fetchone()
-    if not row:
+    if not row or not check_password_hash(row["password"], pw):
         conn.close()
         return jsonify({"error":"Invalid email or password"}), 401
     conn.execute("UPDATE users SET last_login=? WHERE id=?", (now_iso(), row["id"]))
