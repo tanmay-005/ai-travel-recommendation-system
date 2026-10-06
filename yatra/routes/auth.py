@@ -1,4 +1,5 @@
 """Sign up, log in, log out, and who is logged in."""
+import re
 import sqlite3
 from datetime import datetime, timezone
 from functools import wraps
@@ -8,7 +9,21 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from yatra.db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/api/auth")
+EMAIL_RE    = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+USERNAME_RE = re.compile(r"^[A-Za-z0-9_]{3,20}$")
+MIN_PASSWORD = 8
 
+
+def validate_registration(username, email, password):
+    """Return a dict of {field: problem}. Empty dict means everything is fine."""
+    errors = {}
+    if not USERNAME_RE.match(username):
+        errors["username"] = "Username must be 3-20 characters: letters, numbers or underscores."
+    if not EMAIL_RE.match(email):
+        errors["email"] = "Enter a valid email address, like name@example.com."
+    if len(password) < MIN_PASSWORD:
+        errors["password"] = f"Password must be at least {MIN_PASSWORD} characters."
+    return errors
 
 def now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
@@ -37,18 +52,19 @@ def current_user_id():
 @bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json(silent=True) or {}
-    username = data.get("username","").strip()
-    email    = data.get("email","").strip().lower()
-    password = data.get("password","")
-    if not username or not email or not password:
-        return jsonify({"error":"username, email and password required"}), 400
-    if len(password) < 6:
-        return jsonify({"error":"Password must be at least 6 characters"}), 400
+    username = str(data.get("username") or "").strip()
+    email    = str(data.get("email") or "").strip().lower()
+    password = str(data.get("password") or "")
+
+    errors = validate_registration(username, email, password)
+    if errors:
+        first = next(iter(errors.values()))
+        return jsonify({"error": first, "errors": errors}), 400
     conn = get_db()
     try:
         conn.execute(
-            "INSERT INTO users (username, email, password) VALUES (?,?,?)",
-                        (username, email, generate_password_hash(password))
+            "INSERT INTO users (username, email, password, created_at) VALUES (?,?,?,?)",
+            (username, email, generate_password_hash(password), now_iso())
         )
         conn.commit()
         row = conn.execute("SELECT id,username,email FROM users WHERE email=?", (email,)).fetchone()
@@ -65,8 +81,10 @@ def register():
 @bp.route("/login", methods=["POST"])
 def login():
     data  = request.get_json(silent=True) or {}
-    email = data.get("email","").strip().lower()
-    pw    = data.get("password","")
+    email = str(data.get("email") or "").strip().lower()
+    pw    = str(data.get("password") or "")
+    if not email or not pw:
+        return jsonify({"error":"Email and password are required"}), 400
     conn  = get_db()
     row   = conn.execute(
         "SELECT * FROM users WHERE email=?", (email,)
