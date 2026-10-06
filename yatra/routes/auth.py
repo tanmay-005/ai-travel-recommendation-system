@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime, timezone
 from functools import wraps
 
-from flask import Blueprint, jsonify, request, session
+from flask import Blueprint, jsonify, redirect, request, session, url_for  
 from werkzeug.security import check_password_hash, generate_password_hash
 from yatra.db import get_db
 
@@ -20,6 +20,15 @@ def login_required(f):
             return jsonify({"error": "Login required"}), 401
         return f(*args, **kwargs)
     return wrapper
+def page_login_required(view):                                          # ← NEW
+    """For HTML pages: send logged-out visitors to the login page, then back here."""
+    @wraps(view)
+    def wrapper(*args, **kwargs):
+        if "user_id" not in session:
+            here = request.full_path if request.query_string else request.path
+            return redirect(url_for("pages.login_page", next=here))
+        return view(*args, **kwargs)
+    return wrapper  
 
 def current_user_id():
     return session.get("user_id")
