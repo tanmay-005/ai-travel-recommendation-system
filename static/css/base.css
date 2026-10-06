@@ -1,0 +1,13 @@
+:root{
+  --saffron:#FF6B2B;--saffron2:#FF9A4A;--teal:#00B4A6;--teal2:#00D4C4;
+  --purple:#7C3AED;--rose:#E8425A;--gold:#F5C518;
+  --bg:#F7F3EE;--white:#FFFFFF;--ink:#1A1208;--ink2:#3D2E1E;
+  --smoke:#EDE8E1;--mist:#D6CFC4;--muted:#8A7F72;
+  --live:#00B4A6;--csv:#7C3AED;
+  --r:14px;--r2:8px;--sh:0 4px 20px rgba(26,18,8,.10);--sh2:0 12px 40px rgba(26,18,8,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+button,input,select{font-family:inherit}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--mist);border-radius:4px}
