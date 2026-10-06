@@ -35,7 +35,8 @@ def login_required(f):
             return jsonify({"error": "Login required"}), 401
         return f(*args, **kwargs)
     return wrapper
-def page_login_required(view):                                          # ← NEW
+
+def page_login_required(view):                                          
     """For HTML pages: send logged-out visitors to the login page, then back here."""
     @wraps(view)
     def wrapper(*args, **kwargs):
