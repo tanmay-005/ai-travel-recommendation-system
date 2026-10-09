@@ -8,12 +8,21 @@ bp = Blueprint("pages", __name__)
 
 @bp.route("/")
 def home():
+    return render_template("landing.html")
+
+
+@bp.route("/explore")
+def explore():
     return render_template("explore.html")
 
 
 @bp.route("/login")
 def login_page():
     return "Login page - coming in Phase 8"
+
+@bp.route("/signup")
+def signup_page():
+    return "Sign up page - coming in Phase 8"
 
 
 @bp.route("/bag")

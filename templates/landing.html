@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Yatra-Go: find what's worth seeing anywhere in India{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+<nav class="nav">
+  <a class="brand" href="{{ url_for('pages.home') }}">Yatra-Go</a>
+  <div class="nav-links">
+    <a href="{{ url_for('pages.login_page') }}">Log in</a>
+    <a class="nav-signup" href="{{ url_for('pages.signup_page') }}">Sign up</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <h1>Pack your bag.<br>We'll show you the rest.</h1>
+    <p class="lead">Name a place in India. We'll find the famous sights, the quiet spots most guides skip, and things to do nearby.</p>
+
+    <form id="heroSearch" class="search" autocomplete="off">
+      <label for="heroInput" class="visually-hidden">Destination</label>
+      <input id="heroInput" type="text" placeholder="Where are you headed?" required minlength="2" maxlength="100">
+      <button type="submit" class="btn-go">Explore</button>
+      <button type="button" id="nearMe" class="btn-near">Near me</button>
+    </form>
+    <p id="heroMsg" class="hero-msg" role="status"></p>
+
+    <div class="boards">
+      <span class="boards-label">Not sure yet? Try one of these:</span>
+      <button type="button" class="board" data-place="Hampi">Hampi</button>
+      <button type="button" class="board" data-place="Rishikesh">Rishikesh</button>
+      <button type="button" class="board" data-place="Gokarna">Gokarna</button>
+      <button type="button" class="board" data-place="Kaza, Spiti">Spiti</button>
+      <button type="button" class="board" data-place="Ziro">Ziro</button>
+    </div>
+  </section>
+
+  <section class="features" aria-label="What you'll find">
+    <div class="feature f-top">
+      <h2><span aria-hidden="true">★</span> Top Spots</h2>
+      <p>The sights everyone talks about, ranked by how well known they are.</p>
+    </div>
+    <div class="feature f-gem">
+      <h2><span aria-hidden="true">◆</span> Hidden Gems</h2>
+      <p>Well-mapped places without a Wikipedia page. The ones guidebooks skip.</p>
+    </div>
+    <div class="feature f-act">
+      <h2><span aria-hidden="true">▲</span> Things to Do</h2>
+      <p>Treks, camps, rafting and other activities, closest first.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  Place data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>
+</footer>
+{% endblock %}
