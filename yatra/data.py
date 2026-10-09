@@ -5,37 +5,18 @@ from yatra.config import Config
 from yatra.geo import haversine
 
 
-# LOAD & CLEAN CSV
+# LOAD THE CSV (already cleaned by scripts/build_places.py)
 df = pd.read_csv(Config.PLACES_CSV)
 df = df.dropna(subset=["place", "lat", "lon", "city"])
-df["lat"] = pd.to_numeric(df["lat"], errors="coerce")
-df["lon"] = pd.to_numeric(df["lon"], errors="coerce")
-df = df.dropna(subset=["lat", "lon"])
-df = df[df["place"].str.match(r'^[\x20-\x7E\u0900-\u097F]{3,}', na=False)]
-df["important"] = pd.to_numeric(df.get("important", 0), errors="coerce").fillna(0).astype(int)
-
-RAW_MAP = {
-    "tourism:attraction":"Heritage", "historic:monument":"Heritage",
-    "historic:fort":"Heritage",      "tourism:museum":"Museum",
-    "historic:temple":"Temple",      "amenity:place_of_worship":"Temple",
-    "tourism:viewpoint":"Viewpoint", "natural:peak":"Nature",
-    "natural:beach":"Beach",         "natural:waterfall":"Nature",
-    "leisure:nature_reserve":"Nature","amenity:restaurant":"Food",
-    "amenity:cafe":"Cafe",           "amenity:fast_food":"Food",
-    "leisure:park":"Nature",         "leisure:garden":"Nature",
-    "shop:mall":"Shopping",          "shop:clothes":"Shopping",
-}
-if "category_clean" not in df.columns:
-    df["category_clean"] = df["category"].copy()
-if df["category_clean"].str.contains(":", na=False).any():
-    df["category_clean"] = df["category_clean"].map(RAW_MAP).fillna(df["category_clean"])
-df = df.reset_index(drop=True)
+TEXT_COLS = ["description", "opening_hours", "fee"]
+df[TEXT_COLS] = df[TEXT_COLS].fillna("")
+df["category_clean"] = df["category"]
 
 
 ICONS = {
     "Heritage":"🏛️","Museum":"🏺","Temple":"🛕","Viewpoint":"🌅",
     "Beach":"🏖️","Food":"🍽️","Cafe":"☕","Shopping":"🛍️",
-    "Nature":"🌿","Other":"📍",
+    "Nature":"🌿","Activity":"🧗","Other":"📍",
 }
 
 def csv_nearby(lat, lon, category=None, radius_km=50, top_n=15):

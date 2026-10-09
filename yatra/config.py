@@ -22,4 +22,4 @@ def _secret_key():
 class Config:
     SECRET_KEY = _secret_key()
     DB_PATH = BASE_DIR / "yatra.db"
-    PLACES_CSV = BASE_DIR / "india_places_dataset.csv"
+    PLACES_CSV = BASE_DIR / "data" / "places.csv"

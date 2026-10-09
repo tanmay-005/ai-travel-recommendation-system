@@ -44,9 +44,9 @@ def api_nearby():
 
     csv_results, live_results = [], []
 
-    csv_cat = category if (category and category not in LIVE_PRIMARY) else None
-    res = csv_nearby(lat, lon, csv_cat, radius, top_n)
-    if not res.empty:
+    # Food, Cafe and Shopping aren't in the CSV at all - they come only from live OSM below.
+    res = csv_nearby(lat, lon, category, radius, top_n) if category not in LIVE_PRIMARY else None
+    if res is not None and not res.empty:
         for _, row in res.iterrows():
             csv_results.append(row_to_dict(row,{
                 "distance":round(float(row["distance"]),2),

@@ -208,3 +208,4 @@ __marimo__/
 
 # Yatra local database
 *.db
+data/.cache/
