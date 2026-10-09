@@ -104,7 +104,7 @@ function setLocation(lat,lon,label){
   map.setView([lat,lon],14)
   if(uMarker)map.removeLayer(uMarker)
   uMarker=L.marker([lat,lon],{icon:gpsIcon}).addTo(map)
-    .bindPopup(`<b style="color:#00B4A6">📍 ${label}</b>`).openPopup()
+    .bindPopup(`<b style="color:#00B4A6">📍 ${esc(label)}</b>`).openPopup()
   document.getElementById('locText').innerText=`${label} (${lat.toFixed(3)}, ${lon.toFixed(3)})`
   document.getElementById('locBadge').classList.add('show')
   hideLoader()
@@ -345,3 +345,11 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 document.getElementById('citySearch').addEventListener('keydown',e=>e.key==='Enter'&&locateCity())
 document.getElementById('globalSearch').addEventListener('keydown',e=>e.key==='Enter'&&doGlobalSearch())
 
+
+// Opened from the landing page? e.g. /explore?lat=15.33&lon=76.46&name=Hampi
+const start=new URLSearchParams(location.search)
+const startLat=parseFloat(start.get('lat')),startLon=parseFloat(start.get('lon'))
+if(!isNaN(startLat)&&!isNaN(startLon)){
+  setLocation(startLat,startLon,start.get('name')||'Selected place')
+  doNearby()
+}
