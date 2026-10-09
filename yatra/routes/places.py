@@ -7,6 +7,8 @@ from flask import Blueprint, Response, jsonify, request
 
 from yatra.data import ICONS, csv_nearby, df, row_to_dict
 from yatra.osm import ALL_OSM_TAGS, LIVE_FALLBACK, LIVE_PRIMARY, live_fetch
+from yatra.discover import discover
+from yatra.geo import haversine
 
 bp = Blueprint("places", __name__, url_prefix="/api")
 
@@ -79,6 +81,48 @@ def api_nearby():
 
     merged.sort(key=lambda x: (-x.get("important",0), -x.get("score",0)))
     return jsonify(merged[:top_n])
+
+def to_cards(rows):
+    """Turn ranked rows into JSON-ready dicts for the frontend."""
+    return [row_to_dict(r, {
+        "osm_id":        r["osm_id"],
+        "kind":          r["kind"],
+        "subtype":       r["subtype"],
+        "has_wiki":      int(r["has_wiki"]),
+        "description":   r["description"],
+        "opening_hours": r["opening_hours"],
+        "fee":           r["fee"],
+        "distance":      round(float(r["distance"]), 2),
+        "score":         round(float(r["score"]), 3),
+    }) for _, r in rows.iterrows()]
+
+
+@bp.route("/discover")
+def api_discover():
+    """Everything worth knowing around one point, in three ranked lists."""
+    lat    = request.args.get("lat", type=float)
+    lon    = request.args.get("lon", type=float)
+    radius = request.args.get("radius", 25, type=float)
+    limit  = request.args.get("limit", 10, type=int)
+
+    if lat is None or lon is None or not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        return jsonify({"error": "valid lat and lon required"}), 400
+    radius = min(max(radius, 1), 100)    # keep requests sensible: 1-100 km
+    limit  = min(max(limit, 1), 30)
+
+    # Distance is computed once for every place, then shared by all three lists.
+    dist = haversine(lat, lon, df["lat"].values, df["lon"].values)
+    near = df[dist <= radius].copy()
+    near["distance"] = dist[dist <= radius]
+
+    top, gems, acts = discover(near, radius, limit)
+    return jsonify({
+        "center":      {"lat": lat, "lon": lon},
+        "radius_km":   radius,
+        "top_spots":   to_cards(top),
+        "hidden_gems": to_cards(gems),
+        "activities":  to_cards(acts),
+    })
 
 @bp.route("/search")
 def api_search():
