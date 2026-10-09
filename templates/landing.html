@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-
+{% block html_class %}dark-ready{% endblock %}
 {% block title %}Yatra-Go: find what's worth seeing anywhere in India{% endblock %}
 
 {% block head %}
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
 {% endblock %}
 

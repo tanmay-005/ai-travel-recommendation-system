@@ -1,13 +1,56 @@
+/* ── Yatra-Go design tokens ─────────────────────────────────────────
+   Every colour, font and gap on the site comes from here.
+   Change a value once and every page follows. */
 :root{
-  --saffron:#FF6B2B;--saffron2:#FF9A4A;--teal:#00B4A6;--teal2:#00D4C4;
-  --purple:#7C3AED;--rose:#E8425A;--gold:#F5C518;
-  --bg:#F7F3EE;--white:#FFFFFF;--ink:#1A1208;--ink2:#3D2E1E;
-  --smoke:#EDE8E1;--mist:#D6CFC4;--muted:#8A7F72;
-  --live:#00B4A6;--csv:#7C3AED;
-  --r:14px;--r2:8px;--sh:0 4px 20px rgba(26,18,8,.10);--sh2:0 12px 40px rgba(26,18,8,.18);
+  /* 5 core colours */
+  --ink:#1A1208;       /* text */
+  --sand:#F7F3EE;      /* page background */
+  --saffron:#FF6B2B;   /* brand, main buttons, Top Spots */
+  --teal:#00B4A6;      /* Hidden Gems, "you are here" */
+  --gold:#F5C518;      /* station boards, highlights */
+
+  /* shades built around them */
+  --paper:#FFFFFF;     /* cards, inputs: a surface on top of the background */
+  --ink2:#3D2E1E;      /* softer text */
+  --muted:#8A7F72;     /* hints, captions */
+  --smoke:#EDE8E1;     /* hover fills, dividers */
+  --mist:#D6CFC4;      /* borders */
+  --rose:#E8425A;      /* errors */
+  --saffron-dark:#E05520;
+  --on-saffron:#FFFFFF;  /* text on a saffron button, in both themes */
+  --on-gold:#1A1208;     /* text on a yellow board, in both themes */
+
+  /* 2 fonts */
+  --font-head:'Syne',sans-serif;
+  --font-body:'Nunito',sans-serif;
+
+  /* spacing scale: every gap is one of these */
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
+  --space-5:24px;--space-6:32px;--space-7:48px;--space-8:72px;
+
+  /* shape */
+  --r:14px;--r2:8px;--r-pill:999px;
+  --sh:0 4px 20px rgba(26,18,8,.10);--sh2:0 12px 40px rgba(26,18,8,.18);
+
+  /* older names the map page still uses (tidied up in Phase 7) */
+  --bg:var(--sand);--white:var(--paper);
+  --saffron2:#FF9A4A;--teal2:#00D4C4;--purple:#7C3AED;
+  --live:var(--teal);--csv:var(--purple);
+}
+
+/* Dark mode: same names, darker values. Only pages that opt in
+   with <html class="dark-ready"> switch (the map page joins in Phase 7). */
+@media (prefers-color-scheme: dark){
+  :root.dark-ready{
+    --ink:#F2ECE4;--sand:#15120E;
+    --saffron:#FF7A3D;--teal:#2CC9BA;
+    --paper:#221D17;--ink2:#D2C8BB;--muted:#A0958A;
+    --smoke:#2E2720;--mist:#4A4036;--rose:#FF6B80;--saffron-dark:#FF9A4A;
+    --sh:0 4px 20px rgba(0,0,0,.4);--sh2:0 12px 40px rgba(0,0,0,.5);
+  }
 }
 *{box-sizing:border-box;margin:0;padding:0}
 
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
 button,input,select{font-family:inherit}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--mist);border-radius:4px}

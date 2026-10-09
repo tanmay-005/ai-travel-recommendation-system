@@ -1,4 +1,4 @@
-/* Landing page. Colours and fonts come from the variables in base.css. */
+/* Landing page. Every colour, font and gap comes from the tokens in base.css. */
 body{font-size:16px}
 a{color:inherit}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -6,61 +6,61 @@ a{color:inherit}
 
 /* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;
-  max-width:1080px;margin:0 auto;padding:20px 24px}
-.brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;
+  max-width:1080px;margin:0 auto;padding:var(--space-5)}
+.brand{font-family:var(--font-head);font-weight:800;font-size:1.5rem;
   color:var(--saffron);text-decoration:none;letter-spacing:-.02em}
-.nav-links{display:flex;gap:8px;align-items:center}
-.nav-links a{text-decoration:none;font-weight:600;padding:8px 14px;border-radius:999px}
+.nav-links{display:flex;gap:var(--space-2);align-items:center}
+.nav-links a{text-decoration:none;font-weight:600;padding:var(--space-2) var(--space-4);border-radius:var(--r-pill)}
 .nav-links a:hover{background:var(--smoke)}
-.nav-links .nav-signup{background:var(--ink);color:var(--white)}
+.nav-links .nav-signup{background:var(--ink);color:var(--paper)}
 .nav-links .nav-signup:hover{background:var(--ink2)}
 
 /* HERO */
-main{max-width:1080px;margin:0 auto;padding:0 24px}
-.hero{padding:72px 0 56px}
-.hero h1{font-family:'Syne',sans-serif;font-weight:800;line-height:1.02;letter-spacing:-.035em;
+main{max-width:1080px;margin:0 auto;padding:0 var(--space-5)}
+.hero{padding:var(--space-8) 0 var(--space-7)}
+.hero h1{font-family:var(--font-head);font-weight:800;line-height:1.02;letter-spacing:-.035em;
   font-size:clamp(2.6rem,7vw,5.2rem);max-width:14ch}
-.lead{margin-top:20px;font-size:1.15rem;color:var(--ink2);max-width:52ch}
+.lead{margin-top:var(--space-5);font-size:1.15rem;color:var(--ink2);max-width:52ch}
 
-.search{display:flex;gap:8px;margin-top:32px;max-width:640px}
-.search input{flex:1;min-width:0;padding:15px 22px;font-size:1rem;color:var(--ink);
-  border:2px solid var(--mist);border-radius:999px;background:var(--white);outline:none}
+.search{display:flex;gap:var(--space-2);margin-top:var(--space-6);max-width:640px}
+.search input{flex:1;min-width:0;padding:var(--space-4) var(--space-5);font-size:1rem;color:var(--ink);
+  border:2px solid var(--mist);border-radius:var(--r-pill);background:var(--paper);outline:none}
 .search input:focus{border-color:var(--saffron)}
-.search button{border:none;border-radius:999px;padding:0 22px;font-size:1rem;font-weight:700;cursor:pointer}
-.btn-go{background:var(--saffron);color:var(--white)}
-.btn-go:hover{background:#e05520}
-.btn-near{background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.search button{border:none;border-radius:var(--r-pill);padding:0 var(--space-5);font-size:1rem;font-weight:700;cursor:pointer}
+.btn-go{background:var(--saffron);color:var(--on-saffron)}
+.btn-go:hover{background:var(--saffron-dark)}
+.btn-near{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 .btn-near:hover{background:var(--smoke)}
 .search button:disabled{opacity:.6;cursor:wait}
-.hero-msg{min-height:1.5em;margin-top:10px;padding-left:22px;color:var(--rose);font-weight:600}
+.hero-msg{min-height:1.5em;margin-top:var(--space-3);padding-left:var(--space-5);color:var(--rose);font-weight:600}
 .hero-msg.busy{color:var(--muted)}
 
 /* Destination chips, styled like Indian Railways station boards */
-.boards{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px}
-.boards-label{color:var(--muted);margin-right:4px}
-.board{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--ink);
-  background:var(--gold);border:none;border-radius:4px;padding:9px 18px;cursor:pointer;
-  box-shadow:inset 0 0 0 3px var(--gold),inset 0 0 0 5px var(--ink);transition:transform .15s}
+.boards{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin-top:var(--space-5)}
+.boards-label{color:var(--muted);margin-right:var(--space-1)}
+.board{font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--on-gold);
+  background:var(--gold);border:none;border-radius:4px;padding:var(--space-2) var(--space-4);cursor:pointer;
+  box-shadow:inset 0 0 0 3px var(--gold),inset 0 0 0 5px var(--on-gold);transition:transform .15s}
 .board:hover{transform:translateY(-2px)}
 
 /* FEATURES */
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
-  padding:40px 0 72px;border-top:2px solid var(--smoke)}
-.feature{border-top:4px solid;padding-top:16px}
-.feature h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);
+  padding:var(--space-7) 0 var(--space-8);border-top:2px solid var(--smoke)}
+.feature{border-top:4px solid;padding-top:var(--space-4)}
+.feature h2{font-family:var(--font-head);font-size:1.3rem;font-weight:700;margin-bottom:var(--space-2)}
 .feature p{color:var(--ink2);max-width:34ch}
 .f-top{border-color:var(--saffron)} .f-top span{color:var(--saffron)}
 .f-gem{border-color:var(--teal)}    .f-gem span{color:var(--teal)}
 .f-act{border-color:var(--ink)}     .f-act span{color:var(--ink)}
 
-.foot{max-width:1080px;margin:0 auto;padding:24px;color:var(--muted);font-size:.85rem}
+.foot{max-width:1080px;margin:0 auto;padding:var(--space-5);color:var(--muted);font-size:.85rem}
 
 /* PHONES */
 @media (max-width:720px){
-  .hero{padding:40px 0 40px}
+  .hero{padding:var(--space-7) 0}
   .search{flex-wrap:wrap}
   .search input{flex-basis:100%}
-  .search button{flex:1;padding:13px}
-  .features{grid-template-columns:1fr;gap:24px}
+  .search button{flex:1;padding:var(--space-3)}
+  .features{grid-template-columns:1fr;gap:var(--space-5)}
 }
 @media (prefers-reduced-motion:reduce){.board{transition:none}.board:hover{transform:none}}
