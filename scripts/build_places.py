@@ -258,7 +258,7 @@ def build(cities):
 
 def drop_near_duplicates(df, within_km=1.0):
     """Merge rows that are really one place. Best-documented copy wins (Wikipedia link, then most tags)."""
-    df = df.sort_values(["has_wiki", "tag_count"], ascending=False)
+    df = df.sort_values(["has_wiki", "tag_count", "osm_id"], ascending=[False, False, True], kind="stable")
 
     # Treks: a long route is often mapped as several pieces with one name -> one row per trek name.
     treks = df[df["subtype"] == "hiking_route"]

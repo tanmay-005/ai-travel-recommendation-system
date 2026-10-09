@@ -88,7 +88,7 @@ w986297013,Shela Lake,Ahmedabad,23.01085,72.442861,nature,lake,Nature,0,0,3,,,,0
 w1052743149,Shiholi Lake,Ahmedabad,23.243928,72.731359,nature,lake,Nature,0,0,4,,,,0
 w172152761,St Poet Narsinh Mehta Lake,Ahmedabad,23.038502,72.528905,nature,park,Nature,1,0,6,,,,1
 w420550103,Suryajyot Lake,Ahmedabad,23.199901,72.649406,nature,lake,Nature,0,0,3,,,,0
-w174746375,Thaltej Lake,Ahmedabad,23.051204,72.512073,nature,lake,Nature,0,0,3,,,,0
+w174746368,Thaltej Lake,Ahmedabad,23.051257,72.508908,nature,lake,Nature,0,0,3,,,,0
 w577908733,Thol Lake,Ahmedabad,23.132648,72.380096,nature,lake,Nature,0,0,3,,,,0
 w1368330303,Tragad Lake,Ahmedabad,23.129094,72.553604,nature,lake,Nature,0,0,4,,,,0
 n9620968438,Vaghvat Waterfall,Ahmedabad,23.028849,72.958682,nature,waterfall,Nature,0,0,5,,,,0
@@ -156,7 +156,6 @@ n4485384993,Sola,Ahmedabad,23.057541,72.543509,sight,attraction,Heritage,0,0,3,,
 w1218446324,Swaminarayan Museum,Ahmedabad,23.05538,72.550718,sight,museum,Museum,1,0,6,,,,1
 n4674327794,Swastic Center,Ahmedabad,22.971858,72.588564,sight,attraction,Heritage,0,0,4,,,,0
 n5065508094,Talavadi Circle,Ahmedabad,23.081591,72.616364,sight,attraction,Heritage,0,0,4,,,,0
-n4585303199,Temple,Ahmedabad,23.096968,72.470328,sight,attraction,Heritage,0,0,3,,,,0
 n5653514221,The Mill Owner's Building of Le Corbusier,Ahmedabad,23.032623,72.570989,sight,attraction,Heritage,0,0,3,,Mo-Fr 10:30-15:00; Sa 10:30-11:30,,0
 w460817473,Tomb of Ahmad Shah,Ahmedabad,23.023794,72.587925,sight,attraction,Heritage,1,0,7,,,,1
 n631780433,Vechaar: Utensils Museum,Ahmedabad,22.994438,72.535732,sight,museum,Museum,0,0,4,,Tu-Su 08:00-15:00; Sa 08:00-12:00,yes,0
@@ -170,7 +169,7 @@ n9074701720,Badshah building,Ajmer,26.461394,74.631204,sight,monument,Heritage,0
 w319619324,Dargah-e-Khawaja Garib Nawaz Hazrat Moinuddin Chishti (RAH) - Ajmer Sharif,Ajmer,26.456293,74.627847,sight,place_of_worship,Temple,1,0,11,,,,1
 n4306153989,Taragarh Fort,Ajmer,26.441927,74.617863,sight,attraction,Heritage,1,0,5,,,,1
 n8849057188,Galilii Aquarium,Alleppey,9.59618,76.509729,activity,aquarium,Activity,0,0,2,,,,0
-w965661846,Kumarakom Bird Sanctury,Alleppey,9.630033,76.423624,activity,nature_reserve,Activity,0,0,2,,,,0
+n1668600636,Kumarakom Bird Sanctury,Alleppey,9.631155,76.422627,activity,nature_reserve,Activity,0,0,2,,,,0
 w18757723,Pathiramanal,Alleppey,9.618149,76.384787,activity,nature_reserve,Activity,1,0,8,,,,1
 w798527097,Police Parade Ground,Alleppey,9.591129,76.533807,activity,camp_site,Activity,0,0,8,,,,0
 n7479597339,Ponnus fish farm,Alleppey,9.552473,76.579962,activity,aquarium,Activity,0,0,2,,,,0
@@ -190,8 +189,6 @@ w1412643014,Cheriyapozhi Beach,Alleppey,9.554133,76.306087,nature,beach,Beach,0,
 n12041819841,Chethy beach,Alleppey,9.623056,76.295221,nature,beach,Beach,0,0,2,,,,0
 n7339645215,Kanjirathanam Cave,Alleppey,9.745643,76.53033,nature,cave_entrance,Nature,0,0,4,,,no,0
 n12041691145,Kattady Beach Chethy,Alleppey,9.619294,76.295768,nature,beach,Beach,0,0,3,,,,0
-w1092518450,Kattoor Beach,Alleppey,9.567036,76.303636,nature,beach,Beach,0,0,4,,,,0
-w622418623,Marari Beach,Alleppey,9.603532,76.297947,nature,beach,Beach,1,0,6,,,,1
 n7305639711,Mathrumala,Alleppey,9.596341,76.640924,nature,peak,Nature,0,0,3,,,,0
 n7290786625,Parathodu Meenmuttypara Falls,Alleppey,9.42504,76.68498,nature,waterfall,Nature,0,0,5,,,,0
 n10012654526,Perumpally,Alleppey,9.166844,76.449369,nature,beach,Beach,0,0,2,,,,0
@@ -207,8 +204,8 @@ r17066401,Vattakkaayal,Alleppey,9.491041,76.377071,nature,lake,Nature,0,0,4,,,,0
 n7461738270,kattoor beach,Alleppey,9.55822,76.305469,nature,beach,Beach,0,0,2,,,,0
 w857749402,kavalipuzha mini beach,Alleppey,9.682172,76.624582,nature,beach,Beach,0,0,2,,,,0
 w743547068,kavilpuzha mini beach,Alleppey,9.684354,76.615497,nature,beach,Beach,0,0,3,,,,0
-n13621219501,Alappuzha Boat Club,Alleppey,9.5,76.35,sight,attraction,Heritage,0,0,8,Alappuzha Boat Club in Alappuzha is a popular boating attraction.,8:00 AM - 6:00 PM,yes,0
-n13621220001,Alleppey Backwaters,Alleppey,9.4981,76.3388,sight,attraction,Heritage,0,0,7,,8:00 AM - 6:00 PM,yes,0
+n13591854301,Alappuzha Boat Club,Alleppey,9.5,76.35,sight,attraction,Heritage,0,0,8,Alappuzha Boat Club in Alappuzha is a popular boating attraction.,8:00 AM - 6:00 PM,yes,0
+n13591852404,Alleppey Backwaters,Alleppey,9.4981,76.3388,sight,attraction,Heritage,0,0,7,,8:00 AM - 6:00 PM,yes,0
 w252115107,"Alleppey Lighthouse & Museum, Alappuzha",Alleppey,9.493913,76.320959,sight,museum,Museum,0,0,3,,"Tu-Su 9:00-11:45, 14:00-17:30",,0
 r17618014,Amabalappuzha Sree Krishna Temple,Alleppey,9.383287,76.369518,sight,place_of_worship,Temple,1,0,11,,,,1
 n5037185722,AmazeWorld,Alleppey,9.496411,76.317634,sight,attraction,Heritage,0,0,3,,,,0
@@ -224,11 +221,13 @@ n7473576373,International coir museum,Alleppey,9.56307,76.328373,sight,museum,Mu
 n12041691144,Kadal Paalam,Alleppey,9.62229,76.29367,sight,attraction,Heritage,0,0,2,,,,0
 w1188041790,Kalarcode Mahadeva Temple,Alleppey,9.466505,76.343817,sight,place_of_worship,Temple,1,0,6,,,,1
 w795912209,Kanichukulangara Devi Temple,Alleppey,9.629241,76.313681,sight,place_of_worship,Temple,1,0,7,,,,1
+w1092518450,Kattoor Beach,Alleppey,9.567036,76.303636,sight,attraction,Heritage,0,0,4,,,,0
 r8596730,Kavunkal temple,Alleppey,9.588205,76.352288,sight,place_of_worship,Temple,1,0,6,,,,1
 w619937054,Kochanakulangara Temple,Alleppey,9.627662,76.363398,sight,place_of_worship,Temple,1,0,5,,,,1
 w644470012,Krishnapuram Temple,Alleppey,9.468421,76.46544,sight,place_of_worship,Temple,1,0,6,,,,1
 w619665260,Lutheran Church,Alleppey,9.607409,76.346295,sight,place_of_worship,Temple,1,0,6,,,,1
 n5656944493,Marankulangara Devi Temple,Alleppey,9.569422,76.320595,sight,place_of_worship,Temple,1,0,4,,,,1
+w622418623,Marari Beach,Alleppey,9.603532,76.297947,sight,attraction,Heritage,1,0,6,,,,1
 w798631766,Maria Goretti Church Chettikad,Alleppey,9.530885,76.315454,sight,place_of_worship,Temple,1,0,5,,,,1
 w623900361,Maruthachikkal Temple,Alleppey,9.439621,76.351117,sight,place_of_worship,Temple,1,0,5,,,,1
 w623149973,Mekkad Bhagavathi Temple,Alleppey,9.47883,76.386974,sight,place_of_worship,Temple,1,0,8,,,,1
@@ -273,6 +272,7 @@ n2592595804,The Martyr's Gallery,Amritsar,31.621165,74.880471,sight,attraction,H
 n6069938985,Town Hall,Amritsar,31.625512,74.87883,sight,monument,Heritage,0,0,3,,,,0
 r15551559,Devagiri Fort,Aurangabad,19.943497,75.216682,activity,hiking_route,Activity,0,0,4,,,,0
 w323874972,H2O Waterpark,Aurangabad,19.955367,75.221988,activity,water_park,Activity,0,0,3,,,,0
+n1350351865,Aurangabad Caves,Aurangabad,19.917221,75.311995,nature,cave_entrance,Nature,0,0,7,,,,0
 n2525048886,Cave 1,Aurangabad,20.020028,75.179438,nature,cave_entrance,Nature,0,0,4,,,,0
 n2525049421,Cave 11,Aurangabad,20.021334,75.179637,nature,cave_entrance,Nature,0,0,3,,,,0
 n2525049417,Cave 12,Aurangabad,20.021823,75.179589,nature,cave_entrance,Nature,0,0,4,,,,0
@@ -310,7 +310,6 @@ n2525046176,Ravan Ki Khai,Aurangabad,20.022367,75.179256,nature,cave_entrance,Na
 w317146450,Salim Ali Lake,Aurangabad,19.899025,75.341198,nature,lake,Nature,0,0,3,,,,0
 n2525039394,Telika Ghana,Aurangabad,20.026563,75.177477,nature,cave_entrance,Nature,0,0,4,,,,0
 n2525048889,Vishvakarma,Aurangabad,20.021006,75.179659,nature,cave_entrance,Nature,0,0,5,,,,0
-n1350351865,Aurangabad Caves,Aurangabad,19.917221,75.311995,sight,attraction,Heritage,0,0,7,,,,0
 n4488818530,Aurangabad caves (1-5),Aurangabad,19.917221,75.31144,sight,archaeological_site,Heritage,0,0,3,,,,0
 n4488821215,Aurangabad caves (6-9),Aurangabad,19.921644,75.318447,sight,attraction,Heritage,0,0,5,,,,0
 w317146372,Bhadkal Gate,Aurangabad,19.888705,75.321615,sight,monument,Heritage,0,0,4,,,,0
@@ -326,7 +325,6 @@ n647459607,Panchakki,Aurangabad,19.889804,75.315549,sight,attraction,Heritage,1,
 n4435987899,Roshan Gate,Aurangabad,19.887892,75.345161,sight,monument,Heritage,0,0,2,,,,0
 w519831844,Soneri Mahal,Aurangabad,19.906672,75.309323,sight,monument,Heritage,0,0,2,,,,0
 n1350351866,Sunehari Mahal,Aurangabad,19.906702,75.309966,sight,museum,Museum,0,0,2,,,,0
-n2633537764,Tomb,Aurangabad,19.896647,75.306223,sight,attraction,Heritage,0,0,2,,,,0
 n12636311495,Aqua Lounge,Bangalore,12.863825,77.553352,activity,aquarium,Activity,0,0,2,,,,0
 n13031535410,Aquarium Paradise,Bangalore,13.006213,77.592127,activity,aquarium,Activity,0,0,6,,,,0
 n12006306501,Aquatic Kingdom,Bangalore,12.97737,77.569636,activity,aquarium,Activity,0,0,5,,,yes,0
@@ -395,10 +393,10 @@ r19470051,Bidare Agrahara Lake,Bangalore,13.033164,77.746809,nature,lake,Nature,
 w147025870,Big Banyan Tree,Bangalore,12.90946,77.395651,nature,park,Nature,1,0,8,,,,1
 w1173737831,Biijaji Lake,Bangalore,13.132073,77.46673,nature,lake,Nature,0,0,3,,,,0
 n682012190,Biligudda,Bangalore,12.916451,77.288663,nature,peak,Nature,0,0,3,,,,0
-w412929449,Bingipura Lake,Bangalore,12.83267,77.631005,nature,lake,Nature,0,0,5,lake restored near electronic city. Flora and fauna found. Nearly 28 Acres of lake water.,,,0
+w1110950020,Bingipura Lake,Bangalore,12.830507,77.631393,nature,lake,Nature,0,0,5,lake restored near electronic city. Flora and fauna found. Nearly 28 Acres of lake water.,,,0
 w555922194,Block 4 Lake,Bangalore,12.86167,77.439025,nature,lake,Nature,0,0,3,,,,0
 w299877333,Bugle Rock Park,Bangalore,12.942143,77.569254,nature,park,Nature,1,0,7,,,,1
-w1308260487,Byalakere Lake,Bangalore,13.11086,77.53301,nature,lake,Nature,0,0,4,,,,0
+w1308260482,Byalakere Lake,Bangalore,13.114666,77.526698,nature,lake,Nature,0,0,4,,,,0
 w1254929807,Bylakere Lake,Bangalore,13.103491,77.52581,nature,lake,Nature,0,0,4,,,,0
 w28126428,Byrasandra Lake,Bangalore,12.930352,77.595662,nature,lake,Nature,0,0,4,,,,0
 w27993527,Carmelaram Lake,Bangalore,12.917872,77.710427,nature,lake,Nature,0,0,3,,,,0
@@ -440,7 +438,7 @@ w41667650,Gantiganahalli Lake,Bangalore,13.137971,77.577964,nature,lake,Nature,0
 w95639129,Garudacharpalya Lake,Bangalore,12.99093,77.695701,nature,lake,Nature,0,0,4,,,,0
 w125758396,Gattahalli Lake,Bangalore,12.875644,77.691285,nature,lake,Nature,0,0,5,,,,0
 w555922211,Goose Lake,Bangalore,12.86154,77.441318,nature,lake,Nature,0,0,3,,,,0
-w148213771,Gudahatti Lake,Bangalore,12.799141,77.740274,nature,lake,Nature,0,0,3,,,,0
+w1092941879,Gudahatti Lake,Bangalore,12.799022,77.744987,nature,lake,Nature,0,0,3,,,,0
 w41667619,Gummanahalli Lake,Bangalore,13.139693,77.688898,nature,lake,Nature,0,0,4,,,,0
 w148216683,Gunjuru Lake,Bangalore,12.916832,77.74069,nature,lake,Nature,0,0,5,,,,0
 w1088209009,Gunjuru Palya Lake,Bangalore,12.918801,77.721609,nature,lake,Nature,0,0,4,,,,0
@@ -508,6 +506,7 @@ w469279276,Kuppareddi Kere,Bangalore,12.84506,77.523634,nature,lake,Nature,0,0,4
 w1094215989,Kyalasanahalli Lake,Bangalore,12.804679,77.655305,nature,lake,Nature,0,0,3,,,,0
 w1254929805,Lakshmipura Lake,Bangalore,13.085376,77.530371,nature,lake,Nature,0,0,4,,,,0
 r8250847,Lal Bahadur Shastri Nagar Lake,Bangalore,12.967896,77.678203,nature,lake,Nature,1,0,7,,,,1
+w15802464,Lalbagh Botanical Gardens,Bangalore,12.948893,77.586669,nature,park,Nature,1,0,8,,,,1
 w1344973950,Lingadeeranahalli Lake,Bangalore,12.871874,77.514039,nature,lake,Nature,0,0,4,,,,0
 w1353178339,Linganahalli Lake,Bangalore,13.327481,77.6344,nature,lake,Nature,0,0,3,,,,0
 w232780058,Lumbini Gardens,Bangalore,13.043293,77.609796,nature,park,Nature,1,0,7,,,,1
@@ -562,11 +561,11 @@ n10763170459,Savanadurga,Bangalore,12.919419,77.292089,nature,peak,Nature,0,0,7,
 r18077307,Seetharampalya Lake,Bangalore,12.982361,77.713348,nature,lake,Nature,0,0,5,,,,0
 w146767843,Sheegehalli Lake,Bangalore,12.977178,77.449821,nature,lake,Nature,0,0,3,,,,0
 w45860708,Sheelavathana Kere,Bangalore,12.964416,77.743701,nature,lake,Nature,0,0,6,,,,0
-w1110949290,Shikaripalya Lake,Bangalore,12.834918,77.651468,nature,lake,Nature,0,0,4,,,,0
+w1110948089,Shikaripalya Lake,Bangalore,12.833769,77.651693,nature,lake,Nature,0,0,4,,,,0
 w1066603079,Shingena Agrahara Lake,Bangalore,12.845905,77.717803,nature,lake,Nature,0,0,3,,,,0
 w750685724,Shivapura Old Lake,Bangalore,13.026797,77.504767,nature,lake,Nature,0,0,3,,,,0
 w1144246453,Singanayakanahalli Lake,Bangalore,13.140078,77.567993,nature,lake,Nature,0,0,3,,,,0
-w41667653,Singapura Kere,Bangalore,13.081872,77.535283,nature,lake,Nature,0,0,5,,,,0
+w413529791,Singapura Kere,Bangalore,13.085525,77.538631,nature,lake,Nature,0,0,5,,,,0
 w1283528233,Sompura Lake,Bangalore,12.869843,77.769483,nature,lake,Nature,0,0,5,,,,0
 w1390079362,Srigandakaval Lake,Bangalore,12.984066,77.500642,nature,lake,Nature,0,0,3,,,,0
 w994901676,Subedharana Lake,Bangalore,12.859792,77.616755,nature,lake,Nature,0,0,3,,,,0
@@ -638,13 +637,12 @@ w52032467,Karnataka Government Museum,Bangalore,12.974819,77.595819,sight,museum
 n665062640,Kempe Gowda Tower,Bangalore,12.967776,77.588931,sight,monument,Heritage,0,0,6,,,,0
 n9984551450,Kempegowda Museum,Bangalore,12.974161,77.610737,sight,museum,Museum,0,0,3,,,,0
 n5250142957,Kempegowda Tower,Bangalore,12.947947,77.563401,sight,monument,Heritage,0,0,4,,,,0
-n5250122790,Kempegowda Tower,Bangalore,12.979787,77.621112,sight,monument,Heritage,0,0,3,,,,0
 n2910306405,Kempegowda Tower,Bangalore,13.012427,77.582456,sight,monument,Heritage,0,0,3,,,,0
+n5250122790,Kempegowda Tower,Bangalore,12.979787,77.621112,sight,monument,Heritage,0,0,3,,,,0
 n5237321921,Kota Venkataramana Swamy Temple,Bangalore,12.952049,77.577424,sight,attraction,Heritage,0,0,3,,,,0
 n442437989,Krishnarajapuram Hanging Bridge,Bangalore,13.001038,77.677863,sight,attraction,Heritage,0,0,2,,,,0
 w582562267,Kundalahalli Gate,Bangalore,12.970255,77.712487,sight,monument,Heritage,0,0,3,,,,0
 w347446474,Lakshmi Venkateshwara Temple,Bangalore,12.959582,77.574121,sight,place_of_worship,Temple,1,1,15,,,,1
-w15802464,Lalbagh Botanical Gardens,Bangalore,12.948893,77.586679,sight,attraction,Heritage,1,0,8,,,,1
 n347241683,Lalbagh Glasshouse,Bangalore,12.9498,77.586561,sight,attraction,Heritage,0,0,3,,,,0
 n12000106440,Monument Inside Lalbagh,Bangalore,12.949765,77.584014,sight,monument,Heritage,0,0,2,,,,0
 n3980403402,Muscle Power Exhibit,Bangalore,12.984307,77.59138,sight,attraction,Heritage,0,0,2,,,,0
@@ -690,7 +688,6 @@ w346209154,St. John's Church,Bangalore,12.99176,77.612995,sight,place_of_worship
 n3948562480,St. Mary's Orthodox Valiapalli,Bangalore,13.057139,77.548177,sight,place_of_worship,Temple,1,0,8,,,,1
 w1303003799,St. Paul's Church,Bangalore,12.981874,77.605112,sight,place_of_worship,Temple,1,0,6,,,,1
 n1473972559,Swami Vivekananda Statue,Bangalore,12.947878,77.567911,sight,monument,Heritage,0,0,3,,,,0
-n10129602779,Tank,Bangalore,12.987766,77.622285,sight,attraction,Heritage,0,0,3,,,,0
 n9930197200,Tank Model,Bangalore,12.963805,77.610724,sight,attraction,Heritage,0,0,2,,,,0
 w546261158,The Arena,Bangalore,13.050589,77.622107,sight,viewpoint,Viewpoint,0,0,6,This is a well manicured green area where you can come to take a break along with your colleagues,,,0
 w133881869,The Holy Trinity Church,Bangalore,12.972058,77.620535,sight,place_of_worship,Temple,1,1,12,,,,1
@@ -814,7 +811,7 @@ n8188087617,Khopcha waterfall,Bir,32.070069,76.740137,nature,waterfall,Nature,0,
 n4857183291,Langa,Bir,32.2011,76.707722,nature,peak,Nature,0,0,3,,,,0
 w1154657119,Menthoo,Bir,32.124609,76.756782,nature,lake,Nature,0,0,3,,,,0
 w706891823,Muttu Lake,Bir,32.227417,76.776097,nature,lake,Nature,0,0,6,,,,0
-n9795338218,Shirar ra Tibba,Bir,32.062256,76.936057,nature,peak,Nature,0,0,2,,,,0
+n11515839683,Shirar ra Tibba,Bir,32.068433,76.942367,nature,peak,Nature,0,0,2,,,,0
 n13274945440,Small cave,Bir,32.06494,76.76926,nature,cave_entrance,Nature,0,0,4,,,,0
 n4548745340,Tatwani,Bir,32.12184,76.718115,nature,hot_spring,Nature,0,0,7,,,no,0
 n2382919931,Thamsar,Bir,32.209578,76.76241,nature,peak,Nature,0,0,2,,,,0
@@ -828,7 +825,6 @@ n11112181099,Flag Garden,Bir,32.035158,76.711005,sight,attraction,Heritage,0,0,2
 n811008785,Sobha Singh Art Gallery,Bir,32.038905,76.570265,sight,museum,Museum,0,0,2,,,,0
 n13752228962,amuzium illusion museum,Bir,32.039593,76.711843,sight,museum,Museum,0,0,3,,,,0
 n5197490621,square,Bir,31.989219,76.79041,sight,attraction,Heritage,0,0,2,,,,0
-n5197601121,temple,Bir,32.003106,76.79626,sight,attraction,Heritage,0,0,2,,,,0
 n5392766315,Atlantis watersport,Calangute,15.545212,73.761212,activity,scuba_diving,Activity,0,0,2,,,,0
 n535919700,Blue Whale Waterpark,Calangute,15.568887,73.75334,activity,theme_park,Activity,0,0,2,,,,0
 n12119968134,Equilibrium,Calangute,15.578541,73.758364,activity,climbing,Activity,0,0,3,,,,0
@@ -843,7 +839,10 @@ n10965960654,Anjuna Hilltop,Calangute,15.587759,73.73781,nature,peak,Nature,0,0,
 w199370623,Arambol Beach,Calangute,15.679315,73.705762,nature,beach,Beach,1,0,5,,,,1
 w524851198,Aravali beach,Calangute,15.775395,73.658632,nature,beach,Beach,0,0,2,,,,0
 w1329002773,Ashvem Beach,Calangute,15.646529,73.716902,nature,beach,Beach,0,0,2,,,,0
+r6423947,Baga Beach,Calangute,15.557506,73.75049,nature,beach,Beach,1,0,6,,,,1
 w90307703,Big Vagator Beach,Calangute,15.602267,73.733477,nature,beach,Beach,0,0,3,,,,0
+r6423948,Calangute Beach,Calangute,15.542382,73.755522,nature,beach,Beach,0,0,5,,,,0
+w397051478,Candolim Beach,Calangute,15.517881,73.7629,nature,beach,Beach,0,0,5,,,,0
 n10965960653,Chapora Fort Hill,Calangute,15.605951,73.736356,nature,peak,Nature,0,0,2,,,,0
 w128565257,Chapora beach,Calangute,15.606798,73.7395,nature,beach,Beach,1,0,4,,,,1
 n13259806876,Dongarpal,Calangute,15.779965,73.896679,nature,waterfall,Nature,0,0,2,,,,0
@@ -874,12 +873,9 @@ w1315967338,Anjuna Seafront Plaza,Calangute,15.584456,73.737272,sight,attraction
 n12364201417,Anjuna Valley Viewpoint,Calangute,15.593475,73.747333,sight,viewpoint,Viewpoint,0,0,2,,,,0
 w1155293983,Arpora Saturday Night Market,Calangute,15.567122,73.76611,sight,attraction,Heritage,0,0,3,,,,0
 n10957795217,Badem Sunset Viewpoint,Calangute,15.607897,73.751261,sight,viewpoint,Viewpoint,0,0,2,,,,0
-r6423947,Baga Beach,Calangute,15.557506,73.75049,sight,attraction,Heritage,1,0,6,,,,1
 n4314268007,Banyan,Calangute,15.656666,73.721857,sight,attraction,Heritage,0,0,4,,,,0
 n12260786055,Benz Wax Museum,Calangute,15.560875,73.763433,sight,museum,Museum,0,0,2,,,,0
 n13887228089,Bodgeshwar View,Calangute,15.598398,73.804939,sight,viewpoint,Viewpoint,0,0,2,,,,0
-r6423948,Calangute Beach,Calangute,15.542382,73.755522,sight,attraction,Heritage,0,0,5,,,,0
-w397051478,Candolim Beach,Calangute,15.517881,73.7629,sight,attraction,Heritage,0,0,5,,,,0
 r15959326,Chapora Fort,Calangute,15.605926,73.736056,sight,castle,Heritage,1,0,9,,Mo-Su 09:00-17:00,,1
 n11449050872,Chapora River Viewpoint,Calangute,15.651016,73.789662,sight,viewpoint,Viewpoint,0,0,2,,,,0
 w1222668698,Colvale Fort,Calangute,15.634973,73.85055,sight,ruins,Heritage,0,0,2,,,,0
@@ -926,12 +922,9 @@ w360443301,Garden of Silence,Chandigarh,30.738336,76.829751,nature,park,Nature,1
 r17591395,Japanese garden,Chandigarh,30.703221,76.781163,nature,park,Nature,1,0,5,,,,1
 n9524039239,Karoh Peak,Chandigarh,30.74379,77.077629,nature,peak,Nature,1,0,4,,,,1
 n9441531459,Kasauli Peak,Chandigarh,30.886806,76.972232,nature,peak,Nature,0,0,4,"Highest point - monkey point in Kasauli,",,,0
+w225022775,Rock Garden,Chandigarh,30.753159,76.806153,nature,garden,Nature,1,0,13,,Mo-Su 09:00-20:00,yes,1
 r8421510,Sukhna Lake,Chandigarh,30.742013,76.821465,nature,lake,Nature,1,0,8,,,,1
 w644457750,Tikkar Taal,Chandigarh,30.656646,77.080349,nature,lake,Nature,0,0,3,,,,0
-w138959019,Yadavindra Gardens,Chandigarh,30.792552,76.912116,nature,park,Nature,1,0,9,,Mo-Su 07:00-22:00,,1
-n4456365893,2620,Chandigarh,30.729234,76.768807,sight,attraction,Heritage,0,0,3,,,,0
-n4456540889,2624,Chandigarh,30.729209,76.76911,sight,attraction,Heritage,0,0,3,,,,0
-n4456526091,3131,Chandigarh,30.732354,76.765154,sight,attraction,Heritage,0,0,3,,,,0
 n3649893943,Buddha statue,Chandigarh,30.738414,76.830137,sight,attraction,Heritage,0,0,4,,,,0
 n2488917468,Burail Fort,Chandigarh,30.707465,76.761234,sight,castle,Heritage,0,0,3,,,,0
 w1179702894,Chandi Mata Temple,Chandigarh,30.744328,76.9006,sight,place_of_worship,Temple,1,0,8,,,,1
@@ -956,13 +949,10 @@ w696661513,Nada Sahib,Chandigarh,30.694197,76.880897,sight,place_of_worship,Temp
 w129784716,Natural History Museum,Chandigarh,30.748085,76.785923,sight,museum,Museum,0,0,10,,"Tu-Su 10:00-16:30, PH off",,0
 n1431104888,Open Hand Monument,Chandigarh,30.759093,76.807404,sight,attraction,Heritage,1,0,10,,,,1
 w469362962,Panjab University Market,Chandigarh,30.755926,76.767653,sight,attraction,Heritage,0,0,2,,,,0
-n4456535589,Park,Chandigarh,30.729633,76.767776,sight,attraction,Heritage,0,0,3,,,,0
-n4952624322,Park,Chandigarh,30.717885,76.772468,sight,attraction,Heritage,0,0,3,,,,0
 w129779710,Punjab & Haryana Vidhan Sabha,Chandigarh,30.761021,76.803198,sight,attraction,Heritage,1,0,11,,,,1
 w129779703,Punjab and Haryana High Court,Chandigarh,30.757273,76.806609,sight,attraction,Heritage,1,0,7,,,,1
 n11905918056,Puppet Museum,Chandigarh,30.752769,76.808368,sight,museum,Museum,0,0,2,,,,0
 w784590328,Radha Soami Satsang Ghar,Chandigarh,30.673052,76.882978,sight,place_of_worship,Temple,1,0,11,,,,1
-w225022775,Rock Garden,Chandigarh,30.753159,76.806153,sight,attraction,Heritage,1,0,13,,Mo-Su 09:00-20:00,yes,1
 w129720601,Rose Garden,Chandigarh,30.746107,76.781557,sight,attraction,Heritage,0,0,6,,Mo-Sa 06:00-22:00; Su 09:00-22:00; PH off,no,0
 n4461165609,SCO-21,Chandigarh,30.713496,76.768851,sight,attraction,Heritage,0,0,3,,,,0
 n4461165703,SCO-22,Chandigarh,30.713456,76.768752,sight,attraction,Heritage,0,0,3,,,,0
@@ -973,6 +963,7 @@ w803763294,Tank Monument,Chandigarh,30.749542,76.786725,sight,monument,Heritage,
 w225024308,The Le Corbusier Centre,Chandigarh,30.729779,76.79951,sight,museum,Museum,1,0,10,,Tu-Su 10:00-17:00,,1
 r2051982,The Museum of Fine Arts,Chandigarh,30.762381,76.772207,sight,museum,Museum,0,0,4,,,,0
 n5790192353,Tower of Shadows,Chandigarh,30.759611,76.804094,sight,monument,Heritage,0,0,2,,,,0
+w138959019,Yadavindra Gardens,Chandigarh,30.792552,76.912116,sight,attraction,Heritage,1,0,9,,Mo-Su 07:00-22:00,,1
 w28206920,Arignar Anna Zoo Park,Chennai,12.882732,80.091966,activity,zoo,Activity,1,0,8,,,,1
 n3902496341,Beasant Camping Ground,Chennai,13.006745,80.270653,activity,camp_site,Activity,0,0,2,,,,0
 w390177142,Camp Tonekela,Chennai,13.10824,80.127646,activity,camp_site,Activity,0,0,2,,,,0
@@ -980,7 +971,6 @@ w344477101,Chennai Snake Park,Chennai,13.003341,80.238274,activity,zoo,Activity,
 w28404811,"Children's Park, Guindy",Chennai,13.004385,80.236864,activity,zoo,Activity,1,0,7,,We-Mo 10:00-17:00,,1
 w371688527,Chokkidhani,Chennai,13.010454,80.007228,activity,theme_park,Activity,0,0,3,,,,0
 w102577583,EVP World Amusement Park,Chennai,13.03427,80.046949,activity,theme_park,Activity,0,0,2,,,,0
-w25006292,Guindy National Park,Chennai,12.99922,80.228029,activity,national_park,Activity,1,0,11,,,,1
 w25016890,Kishkinta,Chennai,12.937175,80.078661,activity,theme_park,Activity,0,0,2,,,,0
 n1428698664,Madha Gebi,Chennai,12.903524,80.085455,activity,camp_site,Activity,0,0,4,,,,0
 w84077220,Otter,Chennai,12.882432,80.088854,activity,zoo,Activity,0,0,2,,,,0
@@ -1027,7 +1017,6 @@ w25474612,Korattur Lake,Chennai,13.123526,80.181403,nature,lake,Nature,1,0,5,,,,
 w131961850,Kottivakkam Beach,Chennai,12.96976,80.265711,nature,beach,Beach,0,0,3,,,,0
 w369625994,Kovalan Nagar Lake,Chennai,12.932234,80.206156,nature,lake,Nature,0,0,3,,,,0
 r6201190,Kovilambakkam Lake,Chennai,12.944355,80.189288,nature,lake,Nature,0,0,5,,,,0
-w177370838,Lake,Chennai,12.925736,80.157882,nature,lake,Nature,0,0,3,,,,0
 w443225463,Madhavaram Botanical Garden,Chennai,13.148718,80.242341,nature,park,Nature,1,0,6,,,,1
 w25725027,Madipakkam Lake,Chennai,12.961367,80.190922,nature,lake,Nature,0,0,5,,,,0
 w31253726,Manavalanagar Lake,Chennai,13.102824,79.921863,nature,lake,Nature,0,0,3,,,,0
@@ -1126,6 +1115,7 @@ w1178009706,Fort St. George,Chennai,13.079676,80.284939,sight,castle,Heritage,1,
 w1089790865,Fort St. George Museum,Chennai,13.080727,80.287612,sight,museum,Museum,0,0,7,,Mo-Su 09:00 - 17:00; Fr off,,0
 n11491610136,Fourbeck Bridge (Marmalong Brook Bridge) Monument,Chennai,13.025886,80.230401,sight,monument,Heritage,0,0,2,,,,0
 n4623137089,Gandhi Statue,Chennai,13.112271,80.237827,sight,monument,Heritage,0,0,3,,,,0
+w25006292,Guindy National Park,Chennai,12.99922,80.228029,sight,attraction,Heritage,1,0,11,,,,1
 n13592766101,Heritage Centre,Chennai,12.990783,80.232921,sight,museum,Museum,0,0,2,,,,0
 n4411851895,Home Finders Estate,Chennai,13.025453,80.183303,sight,attraction,Heritage,0,0,2,,,,0
 n10538425194,India Post Philatelic Bureau,Chennai,13.067225,80.269668,sight,museum,Museum,0,0,4,,,,0
@@ -1186,13 +1176,13 @@ w214698560,Zion Church,Chennai,13.075217,80.271957,sight,place_of_worship,Temple
 n4326960393,arun anna room,Chennai,13.058593,80.207577,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4326966491,idea showroom,Chennai,13.048233,80.211969,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4368012389,sriram.s,Chennai,13.022911,80.185013,sight,attraction,Heritage,0,0,8,,,,0
-n4172691989,Bouldering spot,Coimbatore,10.974998,76.716983,activity,camp_site,Activity,0,0,2,,,,0
 n4172665490,Bouldering spot,Coimbatore,10.982148,76.704309,activity,camp_site,Activity,0,0,2,,,,0
+n4172691989,Bouldering spot,Coimbatore,10.974998,76.716983,activity,camp_site,Activity,0,0,2,,,,0
 w66102296,Coimbatore Zoo,Coimbatore,11.007826,76.970698,activity,zoo,Activity,0,0,8,,,,0
 w1305508634,Maharaja Theme Park,Coimbatore,11.059001,77.094374,activity,theme_park,Activity,0,0,2,,,,0
 r16850460,Velliangiri Climb,Coimbatore,10.979777,76.705591,activity,hiking_route,Activity,0,0,5,,,,0
 w1163338210,Aachan kulam,Coimbatore,11.044021,77.095423,nature,lake,Nature,0,0,3,,,,0
-w374149848,Ahalia Lake,Coimbatore,10.790442,76.82108,nature,lake,Nature,0,0,3,,,,0
+w1050527770,Ahalia Lake,Coimbatore,10.789218,76.822024,nature,lake,Nature,0,0,3,,,,0
 w134668974,Belladhi Lake,Coimbatore,11.252636,76.970146,nature,lake,Nature,0,0,4,,,,0
 w201742376,Chinna Vedampatti Lake,Coimbatore,11.071588,76.97506,nature,lake,Nature,0,0,4,,,,0
 n3302171889,Elephant Hill,Coimbatore,10.912313,76.879306,nature,peak,Nature,0,0,6,,,,0
@@ -1222,7 +1212,7 @@ n12997950997,Vattappara Waterfalls,Coimbatore,10.976968,76.592731,nature,waterfa
 w1531591075,Vellalore Lake,Coimbatore,10.975489,77.007433,nature,lake,Nature,0,0,3,,,,0
 n6856690515,Velliangiri,Coimbatore,10.989591,76.686165,nature,peak,Nature,0,0,5,,,,0
 n3302175911,Abandoned House,Coimbatore,10.936951,76.935892,sight,ruins,Heritage,0,0,2,,,,0
-n3302183143,Abandoned House,Coimbatore,10.93712,76.921669,sight,ruins,Heritage,0,0,2,,,,0
+n3302181954,Abandoned House,Coimbatore,10.936604,76.921058,sight,ruins,Heritage,0,0,2,,,,0
 n3302241361,Abandoned House,Coimbatore,10.921159,76.920483,sight,ruins,Heritage,0,0,2,,,,0
 w128976277,Arulmigu Subramaniyaswami Thirukovil,Coimbatore,11.046545,76.851739,sight,place_of_worship,Temple,1,0,16,,05:30-19:30,,1
 w598058539,Ashok Pillar,Coimbatore,11.00012,76.967912,sight,monument,Heritage,0,0,2,,,,0
@@ -1258,13 +1248,13 @@ r12754478,Kharora to Tikkar,Dalhousie,32.431651,76.100541,activity,hiking_route,
 n9348740217,Mud House,Dalhousie,32.524342,75.986995,activity,camp_site,Activity,0,0,5,,,,0
 w1529269652,NHPC Eco Park,Dalhousie,32.543541,75.941689,activity,theme_park,Activity,0,0,7,,,,0
 w1038152412,Phukolth to Chau forest,Dalhousie,32.672304,75.844974,activity,hiking_route,Activity,0,0,6,,,,0
-w1037915414,Sunal to Phukolth,Dalhousie,32.684879,75.864053,activity,hiking_route,Activity,0,0,4,,,,0
+r13899576,Sunal to Phukolth,Dalhousie,32.704211,75.847625,activity,hiking_route,Activity,0,0,4,,,,0
 n9498214022,Anor,Dalhousie,32.753529,75.729723,nature,peak,Nature,0,0,2,,,,0
 n8323288667,Banjili peak,Dalhousie,32.737761,75.677862,nature,peak,Nature,0,0,2,,,,0
 n9668571832,Bhangot,Dalhousie,32.7105,75.927432,nature,peak,Nature,0,0,2,,,,0
 n9655445232,Bhuja Topi,Dalhousie,32.891862,75.979418,nature,peak,Nature,0,0,2,,,,0
-n9655525829,Bikindra,Dalhousie,32.764521,75.753846,nature,peak,Nature,0,0,2,,,,0
 n9498214026,Bikindra,Dalhousie,32.770999,75.73719,nature,peak,Nature,0,0,2,,,,0
+n9655525829,Bikindra,Dalhousie,32.764521,75.753846,nature,peak,Nature,0,0,2,,,,0
 n9655525826,Chhatarjar,Dalhousie,32.67364,75.931337,nature,peak,Nature,0,0,2,,,,0
 n9655445224,Kalethu,Dalhousie,32.84518,75.829977,nature,peak,Nature,0,0,2,,,,0
 w83443946,Khajjiar,Dalhousie,32.546407,76.058004,nature,lake,Nature,0,0,3,,,,0
@@ -1349,12 +1339,12 @@ n13973906761,Shri Bhawani Shankar Gufa,Dehradun,30.357429,78.016854,nature,cave_
 n6946026388,14 R(S),Dehradun,30.261239,78.01137,sight,castle,Heritage,0,0,2,,,,0
 n9996907753,Aeroplane,Dehradun,30.271459,78.079698,sight,attraction,Heritage,0,0,2,,,,0
 n5003216721,Balaji dham ( Hanuman Mandir ),Dehradun,30.344286,77.919413,sight,attraction,Heritage,0,0,3,,,,0
-n4459979790,DOLCE VITA COMPLEX,Dehradun,30.288736,78.039787,sight,attraction,Heritage,0,0,3,,,,0
+n4459951389,DOLCE VITA COMPLEX,Dehradun,30.288576,78.039692,sight,attraction,Heritage,0,0,3,,,,0
 n6066288487,Lane No. 10 Shaheed Bhagat Singh Marg,Dehradun,30.27507,77.996309,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4254504793,Mamgain,Dehradun,30.275178,77.996285,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n7101251085,Nautiyal's,Dehradun,30.275333,77.992076,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n10008644615,PROPOSED SITE,Dehradun,30.286791,77.970297,sight,museum,Museum,0,0,2,,,,0
-w1533590496,Robber's Cave,Dehradun,30.377457,78.062822,sight,attraction,Heritage,0,0,5,,,,0
+w1533590495,Robber's Cave,Dehradun,30.378664,78.063179,sight,attraction,Heritage,0,0,5,,,,0
 n5003216722,Sai vihar colony,Dehradun,30.343276,77.928851,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n5094461427,Sehetrdhara,Dehradun,30.315345,78.037312,sight,attraction,Heritage,0,0,3,,,,0
 n3068361908,Timber Engineering Museum,Dehradun,30.340332,77.99539,sight,museum,Museum,0,0,2,,,,0
@@ -1429,8 +1419,8 @@ n266809614,Dandi March Statue (11 Murthi),Delhi,28.610088,77.191645,sight,monume
 w601727519,Dargah Hazrat Khwaja Qutbuddin Bakhtiyar Kaki,Delhi,28.519205,77.180325,sight,tomb,Heritage,1,0,14,,,,1
 w265831766,Dariya Khan Lohani's Tomb,Delhi,28.572249,77.216701,sight,monument,Heritage,0,0,2,,,,0
 n10872790305,Decorative colorful wood carving,Delhi,28.597336,77.24736,sight,attraction,Heritage,0,0,2,,,,0
-w44315454,Dilli Haat,Delhi,28.573193,77.207253,sight,attraction,Heritage,1,0,8,,Mo-Su 10:00-22:00,,1
 w221487001,Dilli Haat,Delhi,28.622103,77.09664,sight,attraction,Heritage,1,0,8,,,,1
+w44315454,Dilli Haat,Delhi,28.573193,77.207253,sight,attraction,Heritage,1,0,8,,Mo-Su 10:00-22:00,,1
 n1024317438,Dome,Delhi,28.540811,77.205604,sight,archaeological_site,Heritage,0,0,2,,,,0
 n7040083886,East Pavilion,Delhi,28.593308,77.25254,sight,attraction,Heritage,0,0,3,,,,0
 w88213599,Feroz Shah Tughlaq's Tomb,Delhi,28.55302,77.193445,sight,monument,Heritage,1,0,6,,,,1
@@ -1546,7 +1536,6 @@ w370543749,Sunder Burj,Delhi,28.596083,77.245343,sight,attraction,Heritage,0,0,3
 n13288958165,Teen Murti Bhavan,Delhi,28.602786,77.198769,sight,attraction,Heritage,1,0,5,,,,1
 n308887236,Teen Murti Haifa War Memorial,Delhi,28.604712,77.198888,sight,attraction,Heritage,0,0,6,,,,0
 w818074720,Tikona Park,Delhi,28.535987,77.21609,sight,attraction,Heritage,0,0,6,,,,0
-n1038392872,Tomb,Delhi,28.520519,77.182549,sight,monument,Heritage,0,0,2,,,,0
 w89583599,Tomb Of Balban,Delhi,28.519675,77.188786,sight,monument,Heritage,1,0,7,,,,1
 n12285090590,Tomb Of Haji Rozbith,Delhi,28.531181,77.180956,sight,tomb,Heritage,0,0,2,,,,0
 n1754574641,Tomb of Abdul Rahim Khan-i-Khanan,Delhi,28.588061,77.248022,sight,monument,Heritage,1,0,6,,,yes,1
@@ -1564,7 +1553,7 @@ n1186823729,Tughlakabad Mosque,Delhi,28.51184,77.263275,sight,archaeological_sit
 w102758314,Tughlaqabad Palace Ruins,Delhi,28.513152,77.261189,sight,ruins,Heritage,0,0,5,,24/7,,0
 n10872790405,Two old stone tombs each with multiple headstones,Delhi,28.59799,77.247751,sight,attraction,Heritage,0,0,2,,,,0
 n9443637634,Ultimate Warrior Site,Delhi,28.615016,77.231222,sight,monument,Heritage,1,0,6,,,,1
-n1024907476,Unidentified Tomb,Delhi,28.55283,77.193698,sight,archaeological_site,Heritage,0,0,2,,,,0
+n1024907331,Unidentified Tomb,Delhi,28.552852,77.193666,sight,archaeological_site,Heritage,0,0,2,,,,0
 w1218426672,Uprashtrapati Bhavan,Delhi,28.61625,77.203808,sight,castle,Heritage,1,0,6,,,,1
 w44186073,Vigyan Bhavan,Delhi,28.610944,77.220682,sight,museum,Museum,0,0,11,,,,0
 n1186823713,Vijaymandal,Delhi,28.511165,77.263795,sight,ruins,Heritage,0,0,5,,24/7,,0
@@ -1645,9 +1634,7 @@ r15523153,Thatri - Thutharan Fort,Dharamshala,32.234919,76.373797,activity,hikin
 n673872658,Trakdi,Dharamshala,32.262524,76.368232,activity,camp_site,Activity,0,0,2,,,,0
 n539994193,Trimund,Dharamshala,32.261712,76.354517,activity,camp_site,Activity,0,0,10,,,yes,0
 n5074567722,Triund camp,Dharamshala,32.254987,76.355194,activity,camp_site,Activity,0,0,3,,,,0
-n513003866,Bhagsu Waterfall,Dharamshala,32.247475,76.338349,nature,waterfall,Nature,0,0,6,,,,0
 w286533293,Chander Kup Dal,Dharamshala,32.331885,76.344386,nature,lake,Nature,0,0,6,,,,0
-w193660016,Dal Lake,Dharamshala,32.247099,76.310582,nature,lake,Nature,0,0,5,,,,0
 w286534683,Dham Ghori Dal,Dharamshala,32.33591,76.355136,nature,lake,Nature,0,0,6,,,,0
 w755367100,Dham Gori Dal,Dharamshala,32.345103,76.346409,nature,lake,Nature,0,0,6,,,,0
 n8987188854,Dhaula Trishul,Dharamshala,32.245817,76.48694,nature,peak,Nature,0,0,5,Part of the Dhaula Trishul tri Peaks. looks like a trident of Hindu Godess and has Religious history,,,0
@@ -1686,10 +1673,12 @@ w62067190,मणिमहेश डल,Dharamshala,32.394965,76.637321,nature,la
 w62047916,लम  डल,Dharamshala,32.335581,76.332276,nature,lake,Nature,0,0,8,,,,0
 n6946028086,9 Corps,Dharamshala,32.182768,76.380023,sight,castle,Heritage,0,0,2,,,,0
 w1485165181,Aghanjar Mahadev Mandir,Dharamshala,32.211415,76.372569,sight,attraction,Heritage,0,0,4,,,,0
+n513003866,Bhagsu Waterfall,Dharamshala,32.247475,76.338349,sight,attraction,Heritage,0,0,6,,,,0
 w227317844,Central Tibetan Administration,Dharamshala,32.225853,76.324881,sight,attraction,Heritage,0,0,6,,,,0
 w227467797,Chamunda Devi Mandir,Dharamshala,32.148354,76.418693,sight,attraction,Heritage,0,0,4,,,,0
 w43752491,Church of Saint John in the Wilderness,Dharamshala,32.242838,76.318092,sight,attraction,Heritage,1,0,11,,,,1
 w518805187,Clock Tower,Dharamshala,32.186453,76.362904,sight,monument,Heritage,0,0,4,,,,0
+w193660016,Dal Lake,Dharamshala,32.247099,76.310582,sight,attraction,Heritage,0,0,5,,,,0
 w229259676,Dalai Lama Temple,Dharamshala,32.232476,76.32444,sight,attraction,Heritage,1,0,11,,,,1
 n5129759522,Daramkot waterfall,Dharamshala,32.267206,76.295756,sight,attraction,Heritage,0,0,3,,,,0
 n11052218305,Dharamsala Tea Company,Dharamshala,32.20843,76.30899,sight,attraction,Heritage,0,0,4,,,,0
@@ -1710,10 +1699,8 @@ n2371546649,Sandeepany Himalayas,Dharamshala,32.176241,76.359829,sight,attractio
 n2386629020,Shiva Cafe,Dharamshala,32.248255,76.339371,sight,attraction,Heritage,0,0,3,,,,0
 n4903800936,Snow Lion Tattoo,Dharamshala,32.238719,76.323904,sight,attraction,Heritage,0,0,3,,,,0
 n12698230501,State War Memorial,Dharamshala,32.200302,76.320094,sight,museum,Museum,0,0,2,,,,0
-n11091188244,Temple,Dharamshala,32.245486,76.334053,sight,viewpoint,Viewpoint,0,0,4,,,,0
 n968464036,The Tibet Museum,Dharamshala,32.232603,76.32488,sight,museum,Museum,0,0,8,Photo Exhibtion on Tibetan freedom strugle,,no,0
 n1230096508,Tibetan Institute of Performing Arts (TIPA),Dharamshala,32.24052,76.33075,sight,attraction,Heritage,0,0,4,,,,0
-n4360019793,View Point,Dharamshala,32.246398,76.336064,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5076809125,White mountain viewdeck,Dharamshala,32.253202,76.30286,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n12413876245,Ak Camping,Dwarka,22.236165,68.976131,activity,camp_site,Activity,0,0,2,,,,0
 w1315914553,Amazing Fun World,Dwarka,22.286372,69.030776,activity,theme_park,Activity,0,0,2,,,,0
@@ -1722,7 +1709,7 @@ n13175976214,Mela,Dwarka,22.238165,68.963336,activity,theme_park,Activity,0,0,3,
 n13353958619,TRAVEL INSIDER TENT CITY,Dwarka,22.461024,69.096634,activity,camp_site,Activity,0,0,18,,,,0
 w1488708741,Ahirani Maharas,Dwarka,22.269554,68.9554,nature,lake,Nature,0,0,3,,,,0
 w1319983760,Bustard Lake,Dwarka,22.112891,69.167995,nature,lake,Nature,0,0,3,,,,0
-n7898523256,Dwarka Beach,Dwarka,22.237475,68.962562,nature,beach,Beach,0,0,2,,,,0
+n12413875829,Dwarka Beach,Dwarka,22.234636,68.966401,nature,beach,Beach,0,0,2,,,,0
 n14232475282,Gokeshwar Mount,Dwarka,22.129898,69.097357,nature,peak,Nature,0,0,3,,,,0
 w1161175444,Gopi Talav,Dwarka,22.369927,69.108228,nature,lake,Nature,0,0,3,,,,0
 n13963217528,Hade,Dwarka,22.242717,69.007694,nature,peak,Nature,0,0,2,,,,0
@@ -1742,7 +1729,7 @@ w1562094474,Surajkaradi Lake,Dwarka,22.417422,69.019324,nature,lake,Nature,0,0,3
 n12413875830,Beach Point,Dwarka,22.234882,68.966163,sight,attraction,Heritage,0,0,2,,,,0
 n12413875758,Dwarka Scenic Point,Dwarka,22.234986,68.965317,sight,viewpoint,Viewpoint,0,0,3,,,,0
 w1343177784,Dwarkadish Hight Temple,Dwarka,22.237866,68.967432,sight,monument,Heritage,0,0,2,,,,0
-w1345257028,Gandhi fortress & temple,Dwarka,22.208015,69.08013,sight,fort,Heritage,0,0,3,,,,0
+n5096789209,Gandhi fortress & temple,Dwarka,22.207808,69.080168,sight,monument,Heritage,0,0,3,Gandhi fortress & temple in Survey no.106. N-GJ-124,,,0
 n5096784969,Gokeshwara Mahadev temple,Dwarka,22.173873,69.092035,sight,monument,Heritage,0,0,4,N-GJ-123. ,,,0
 n12427736062,Gomti Ghat Dwarka,Dwarka,22.236815,68.967722,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n12413875709,Gomti River Viewpoint,Dwarka,22.23615,68.968241,sight,viewpoint,Viewpoint,0,0,3,,,,0
@@ -1772,14 +1759,15 @@ n3289620323,Barpipal Dara,Gangtok,27.213993,88.633564,nature,park,Nature,1,0,4,,
 n5031993173,Batang La,Gangtok,27.329071,88.918664,nature,peak,Nature,0,0,4,,,,0
 n5030618228,Batang La peak,Gangtok,27.327298,88.920795,nature,peak,Nature,0,0,6,,,,0
 n4925330231,Bhewma Falls,Gangtok,27.637692,88.703129,nature,waterfall,Nature,0,0,3,,,,0
-n5704934992,Big waterfall,Gangtok,27.443663,88.60835,nature,waterfall,Nature,0,0,2,,,,0
 n10852707507,Big waterfall,Gangtok,27.527064,88.606775,nature,waterfall,Nature,0,0,2,,,,0
+n5704934992,Big waterfall,Gangtok,27.443663,88.60835,nature,waterfall,Nature,0,0,2,,,,0
 w243754339,Bitang Cho,Gangtok,27.330181,88.846211,nature,lake,Nature,0,0,4,,,,0
 n6480244406,Chamju,Gangtok,27.197821,88.864847,nature,peak,Nature,0,0,5,,,,0
 n5045807791,Chaqu Longguo,Gangtok,27.360667,88.881256,nature,peak,Nature,0,0,4,,,,0
 n3020675421,Cherka,Gangtok,27.300634,88.939386,nature,peak,Nature,0,0,5,,,,0
 w1227136378,Cho-Dzo Lake,Gangtok,27.316503,88.362753,nature,lake,Nature,0,0,3,,,,0
-n10855968305,Creek,Gangtok,27.411239,88.581171,nature,waterfall,Nature,0,0,2,,,,0
+n10855968207,Creek,Gangtok,27.415974,88.584476,nature,waterfall,Nature,0,0,2,,,,0
+n10855968306,Creek,Gangtok,27.410016,88.575545,nature,waterfall,Nature,0,0,2,,,,0
 n10855968405,Creek,Gangtok,27.412494,88.561479,nature,waterfall,Nature,0,0,2,,,,0
 n5089487878,Dengchukla,Gangtok,27.297379,88.854879,nature,peak,Nature,0,0,3,,,,0
 n6594925597,Dona,Gangtok,27.343204,88.864102,nature,peak,Nature,0,0,4,,,,0
@@ -1859,11 +1847,10 @@ n2589482422,Aganashini,Gokarna,14.513238,74.366958,nature,peak,Nature,0,0,4,,,,0
 w398293579,Alvekodi Beach,Gokarna,14.408035,74.395985,nature,beach,Beach,0,0,3,,,,0
 w444348522,Apsara Konda Beach,Gokarna,14.231826,74.441888,nature,beach,Beach,0,0,5,,,,0
 n4418368082,Apsarakonda Falls,Gokarna,14.231199,74.446433,nature,waterfall,Nature,0,0,3,,,,0
-w623248768,Belambar beach,Gokarna,14.628411,74.282073,nature,beach,Beach,0,0,3,,,,0
 w401521429,Belambar beach,Gokarna,14.637923,74.284396,nature,beach,Beach,0,0,3,,,,0
+w623248768,Belambar beach,Gokarna,14.628411,74.282073,nature,beach,Beach,0,0,3,,,,0
 w266140083,Belekan Beach,Gokarna,14.520697,74.346101,nature,beach,Beach,0,0,3,,,,0
 n1888467656,Bhairaveshwara Shikhara,Gokarna,14.590269,74.567358,nature,peak,Nature,0,0,5,,,,0
-n3696894512,Cave,Gokarna,14.535265,74.311463,nature,cave_entrance,Nature,0,0,2,,,,0
 w414367889,Cave Beach,Gokarna,14.514145,74.358657,nature,beach,Beach,0,0,2,,,,0
 n5891899116,Cove Kagala,Gokarna,14.509947,74.358575,nature,beach,Beach,0,0,3,,,,0
 w250162048,Dhareshwar beach,Gokarna,14.384381,74.402145,nature,beach,Beach,0,0,3,,,,0
@@ -1985,7 +1972,7 @@ n2115400220,Chikkabenakallu,Hampi,15.417253,76.457569,sight,archaeological_site,
 n8431715018,Cliff Jumping Point,Hampi,15.35772,76.434269,sight,attraction,Heritage,0,0,2,,,,0
 n2419123916,Daroji Sloth Bear Sanctuary,Hampi,15.275226,76.563603,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n13390806366,Durga Temple,Hampi,15.335662,76.458738,sight,ruins,Heritage,0,0,3,,,,0
-w1364710670,East Sule Bazaar Arcade,Hampi,15.333694,76.469938,sight,ruins,Heritage,0,0,3,,,,0
+w1364710669,East Sule Bazaar Arcade,Hampi,15.334184,76.470279,sight,ruins,Heritage,0,0,3,,,,0
 w129323695,Elephant Stables,Hampi,15.321109,76.472781,sight,ruins,Heritage,0,0,5,,,,0
 w129325632,Ganagitti Jain Temple,Hampi,15.313455,76.478157,sight,ruins,Heritage,0,0,5,,,,0
 w129325633,Gejjala Mantapa,Hampi,15.339778,76.48494,sight,ruins,Heritage,0,0,3,,,,0
@@ -2061,7 +2048,6 @@ w1365951644,Sunken Pit,Hampi,15.315953,76.470426,sight,monument,Heritage,0,0,3,,
 n980400456,Sunset Point,Hampi,15.332676,76.459409,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n13386427121,Sunset point Hemakuta Hill,Hampi,15.332433,76.459598,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n6268174685,Sunset viewpoint with temple and the river valley (for climbers),Hampi,15.343185,76.479706,sight,viewpoint,Viewpoint,0,0,2,,,,0
-n2429395318,Temple,Hampi,15.282458,76.527083,sight,monument,Heritage,0,0,3,,,,0
 n1148814960,Temple Elephant Bathing,Hampi,15.336969,76.457964,sight,attraction,Heritage,0,0,3,,08:00-08:30,,0
 n12628402456,Tenali Rama Pavilion,Hampi,15.322477,76.469647,sight,ruins,Heritage,0,0,4,,,,0
 w129323699,Treasury Building,Hampi,15.321188,76.470292,sight,ruins,Heritage,0,0,3,,,,0
@@ -2082,7 +2068,6 @@ n9476383272,Chandi Devi Temple,Haridwar,29.93355,78.180127,sight,place_of_worshi
 n5984981985,Har ki Pauri,Haridwar,29.956638,78.170862,sight,attraction,Heritage,1,0,12,,,,1
 n1758916125,Lord Shiva Statue,Haridwar,29.958746,78.174811,sight,monument,Heritage,0,0,3,,,,0
 n567473869,Mansa Devi Temple,Haridwar,29.957927,78.16524,sight,place_of_worship,Temple,1,0,9,,,,1
-w227300585,Museum,Haridwar,29.921601,78.122743,sight,museum,Museum,0,0,3,,,,0
 w52097541,Acharya Jagadish Chandra Bose Indian Botanic Garden,Howrah,22.558448,88.291925,nature,park,Nature,1,0,8,,tu-su 06:00-17:00,,1
 w971981456,Bagnan Railway Lake 1,Howrah,22.462209,87.972563,nature,lake,Nature,0,0,3,,,,0
 w971981457,Bagnan Railway Lake 2,Howrah,22.46167,87.969938,nature,lake,Nature,0,0,3,,,,0
@@ -2130,6 +2115,7 @@ n1377639754,Nrupathunga Betta View Point,Hubli,15.377543,75.127875,sight,viewpoi
 w222450721,Nrupathunga Hill Park,Hubli,15.377451,75.12795,sight,attraction,Heritage,0,0,3,,,,0
 n1645493489,Sangolli Rayanna,Hubli,15.350239,75.13892,sight,attraction,Heritage,0,0,4,,,,0
 w835580268,Steam locomotive,Hubli,15.35288,75.166591,sight,monument,Heritage,0,0,3,,,,0
+w28131043,Durgam Cheruvu,Hyderabad,17.431054,78.389997,activity,nature_reserve,Activity,1,0,11,,,,1
 w558535323,Jalavihar Water Park,Hyderabad,17.432029,78.465313,activity,theme_park,Activity,0,0,3,,,,0
 w28268610,Kasu Brahmananda Reddy National Park,Hyderabad,17.420234,78.420104,activity,nature_reserve,Activity,1,0,13,,,,1
 n8386545885,Lakshmi Ganesh Aquarium,Hyderabad,17.518581,78.395739,activity,aquarium,Activity,0,0,2,,,,0
@@ -2262,7 +2248,6 @@ n321710524,Clock Tower,Hyderabad,17.440901,78.498555,sight,monument,Heritage,0,0
 n626901359,Dabeerpura darwaza,Hyderabad,17.367922,78.485169,sight,monument,Heritage,0,0,2,,,,0
 n3415666918,Dinosaurium,Hyderabad,17.403153,78.469892,sight,museum,Museum,0,0,5,,,,0
 n6690779939,Dr B R Ambedkar Statue,Hyderabad,17.442387,78.439358,sight,monument,Heritage,0,0,3,,,,0
-w28131043,Durgam Cheruvu,Hyderabad,17.431054,78.389997,sight,attraction,Heritage,1,0,11,,,,1
 n626940817,Exhibition Grounds,Hyderabad,17.38675,78.470471,sight,attraction,Heritage,0,0,3,,,,0
 w435588871,Falaknuma Palace,Hyderabad,17.331853,78.465856,sight,castle,Heritage,1,0,11,,,,1
 r9128913,Golconda Fort,Hyderabad,17.383404,78.400995,sight,fort,Heritage,1,0,16,,09:00-17:30,,1
@@ -2301,7 +2286,7 @@ n6634208969,New Hema Nagar Colony Arch,Hyderabad,17.417786,78.566206,sight,monum
 w267200642,Pahadi Shareef Dargah,Hyderabad,17.267692,78.471926,sight,place_of_worship,Temple,1,0,6,,,,1
 w971970307,Paigah Tombs,Hyderabad,17.344288,78.503859,sight,tomb,Heritage,1,0,9,,,,1
 n11278911369,Peddamma Temple,Hyderabad,17.430604,78.404906,sight,place_of_worship,Temple,1,0,4,,,,1
-w1492076035,Pooja store,Hyderabad,17.373596,78.468795,sight,monument,Heritage,0,0,3,,,,0
+w1492056631,Pooja store,Hyderabad,17.374604,78.465206,sight,monument,Heritage,0,0,3,,,,0
 w238192345,Purani Haveli,Hyderabad,17.365137,78.482687,sight,archaeological_site,Heritage,0,0,6,,,,0
 w253509394,Qutub Shahi Tombs,Hyderabad,17.395464,78.396511,sight,archaeological_site,Heritage,0,0,5,,,,0
 n4686864293,Railway Museum,Hyderabad,17.388699,78.4986,sight,museum,Museum,0,0,4,,Mo-Su 10:00-18:00,,0
@@ -2329,7 +2314,6 @@ w378458224,Telangana State Archaeology Museum,Hyderabad,17.399216,78.470288,sigh
 n8621042251,Telugu thali statue,Hyderabad,17.451511,78.484152,sight,monument,Heritage,0,0,2,,,,0
 n9923836904,The Heritage well,Hyderabad,17.424479,78.525509,sight,archaeological_site,Heritage,0,0,2,,,,0
 n626897250,The Nizam's Museum,Hyderabad,17.365044,78.48327,sight,museum,Museum,0,0,5,,Mo-Su 10:00-17:00,,0
-w332097820,Tomb,Hyderabad,17.403421,78.40005,sight,archaeological_site,Heritage,0,0,2,,,,0
 w933350845,Tomb of Abdul Hasan Tana Shah,Hyderabad,17.395769,78.397539,sight,tomb,Heritage,0,0,4,,,,0
 w253509403,Tomb of Abdullah Qutub Shah,Hyderabad,17.397059,78.398833,sight,tomb,Heritage,0,0,7,,,,0
 w253509400,Tomb of Begun Hayat Bakshi,Hyderabad,17.396654,78.397019,sight,tomb,Heritage,0,0,5,,,,0
@@ -2346,11 +2330,9 @@ n344619886,Yellamma Temple Balkampet;Balkampet Yellamma Temple Jn,Hyderabad,17.4
 n626897221,alawa bibi,Hyderabad,17.365647,78.485889,sight,attraction,Heritage,0,0,5,,,,0
 n626940819,gandhi bhavan,Hyderabad,17.388368,78.47104,sight,monument,Heritage,0,0,2,,,,0
 n4431024690,old admin bldg opp ladies hostel,Hyderabad,17.411778,78.521842,sight,attraction,Heritage,0,0,2,,,,0
-n4418622008,park,Hyderabad,17.40603,78.489823,sight,attraction,Heritage,0,0,3,,,,0
 n626896827,shaik faiz kaman,Hyderabad,17.36182,78.486427,sight,monument,Heritage,0,0,2,,,,0
 n3943151565,shilparamam,Hyderabad,17.452938,78.379494,sight,attraction,Heritage,0,0,3,,,,0
 n4142875991,subba ram reddy,Hyderabad,17.378071,78.548998,sight,viewpoint,Viewpoint,0,0,2,,,,0
-n4187311990,tank,Hyderabad,17.422403,78.485037,sight,monument,Heritage,0,0,2,,,,0
 n1409718843,ultimus,Hyderabad,17.42459,78.45217,sight,museum,Museum,0,0,4,,,,0
 n10262083169,Ānandavihāra,Hyderabad,17.448345,78.521754,sight,place_of_worship,Temple,1,0,37,,,,1
 n11690381804,Fish Aquarium Home,Indore,22.722704,75.858994,activity,aquarium,Activity,0,0,2,,,,0
@@ -2514,8 +2496,8 @@ r17849500,The Sandy Plot,Jodhpur,26.302063,73.018475,activity,hiking_route,Activ
 w1340315378,Banasagar Lake,Jodhpur,26.117081,73.090021,nature,lake,Nature,0,0,3,,,,0
 w31725304,Fateh Sagar,Jodhpur,26.296719,73.029183,nature,lake,Nature,0,0,3,,,,0
 w1339484068,Guda Lake,Jodhpur,26.13633,73.103033,nature,lake,Nature,0,0,3,,,,0
-w629441083,Kayalana Lake,Jodhpur,26.290323,72.968743,nature,lake,Nature,1,0,4,,,,1
 w31724418,Kayalana Lake,Jodhpur,26.310479,72.97329,nature,lake,Nature,1,0,4,,,,1
+w629441083,Kayalana Lake,Jodhpur,26.290323,72.968743,nature,lake,Nature,1,0,4,,,,1
 n8116671341,Batman shooting Location,Jodhpur,26.299991,73.018513,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n2008637312,City View,Jodhpur,26.299776,73.020646,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n355025171,City Wall,Jodhpur,26.288085,73.021999,sight,ruins,Heritage,0,0,2,,,,0
@@ -2612,32 +2594,32 @@ r11232368,Sar Pass,Kasol,31.977981,77.382648,activity,hiking_route,Activity,0,0,
 r11234799,Sara Umga,Kasol,32.146865,77.492092,activity,hiking_route,Activity,0,0,6,,,,0
 n8624671665,Saram,Kasol,32.084435,77.47961,activity,camp_site,Activity,0,0,2,,,,0
 r13468583,Shalang to Lohri via Lorhi Achhri Pass,Kasol,32.017647,77.072157,activity,hiking_route,Activity,0,0,4,,,,0
-w820186105,Shangarh to Neuli,Kasol,31.768108,77.380344,activity,hiking_route,Activity,0,0,3,,,,0
-n9117118531,Shepherd camp,Kasol,32.049683,77.293211,activity,camp_site,Activity,0,0,2,,,,0
-n9117102311,Shepherd camp,Kasol,32.084814,77.253515,activity,camp_site,Activity,0,0,2,,,,0
+w1005300131,Shangarh to Neuli,Kasol,31.764022,77.376668,activity,hiking_route,Activity,0,0,3,,,,0
 n12347237276,Shepherd camp,Kasol,32.098788,77.259145,activity,camp_site,Activity,0,0,2,,,,0
-n9117103494,Shepherd camp,Kasol,32.111796,77.346408,activity,camp_site,Activity,0,0,2,,,,0
+n9117096742,Shepherd camp,Kasol,32.124599,77.337159,activity,camp_site,Activity,0,0,2,,,,0
+n9117096743,Shepherd camp,Kasol,32.136579,77.379832,activity,camp_site,Activity,0,0,2,,,,0
 n9117100641,Shepherd camp,Kasol,32.112263,77.279875,activity,camp_site,Activity,0,0,2,,,,0
+n9117102311,Shepherd camp,Kasol,32.084814,77.253515,activity,camp_site,Activity,0,0,2,,,,0
+n9117103494,Shepherd camp,Kasol,32.111796,77.346408,activity,camp_site,Activity,0,0,2,,,,0
 n9117104714,Shepherd camp,Kasol,32.108303,77.262595,activity,camp_site,Activity,0,0,2,,,,0
 n9117110505,Shepherd camp,Kasol,32.12266,77.314336,activity,camp_site,Activity,0,0,2,,,,0
-n9117096742,Shepherd camp,Kasol,32.124599,77.337159,activity,camp_site,Activity,0,0,2,,,,0
-n9117099377,Shepherd camp,Kasol,32.132415,77.377189,activity,camp_site,Activity,0,0,2,,,,0
+n9117118531,Shepherd camp,Kasol,32.049683,77.293211,activity,camp_site,Activity,0,0,2,,,,0
 n9117119320,Shepherd camp,Kasol,31.894644,77.45277,activity,camp_site,Activity,0,0,2,,,,0
-n9220769470,Shepherd camp,Kasol,31.87686,77.043896,activity,camp_site,Activity,0,0,2,,,,0
 n9207778524,Shepherd camp,Kasol,31.929804,77.012989,activity,camp_site,Activity,0,0,2,,,,0
+n9220769470,Shepherd camp,Kasol,31.87686,77.043896,activity,camp_site,Activity,0,0,2,,,,0
 n9117118529,Shepherd shelter,Kasol,32.122779,77.32508,activity,camp_site,Activity,0,0,2,,,,0
-n9235542883,Shepherd's camp,Kasol,32.044951,77.301391,activity,camp_site,Activity,0,0,2,,,,0
 n10946816155,Shepherd's camp,Kasol,32.06863,77.259231,activity,camp_site,Activity,0,0,2,,,,0
-n9269881564,Shepherd's camp,Kasol,32.048356,77.208194,activity,camp_site,Activity,0,0,2,,,,0
-n9269880856,Shepherd's camp,Kasol,32.014438,77.190796,activity,camp_site,Activity,0,0,2,,,,0
-n9269903112,Shepherd's camp,Kasol,32.082924,77.200499,activity,camp_site,Activity,0,0,2,,,,0
-n9269901034,Shepherd's camp,Kasol,31.983234,77.171141,activity,camp_site,Activity,0,0,2,,,,0
-n9269903114,Shepherd's camp,Kasol,31.973104,77.165579,activity,camp_site,Activity,0,0,2,,,,0
 n12922381928,Shepherd's camp,Kasol,31.945552,77.460894,activity,camp_site,Activity,0,0,2,,,,0
-n9275012340,Shepherd's camp,Kasol,32.012875,77.090324,activity,camp_site,Activity,0,0,2,,,,0
-n9274996763,Shepherd's camp,Kasol,32.003242,77.048374,activity,camp_site,Activity,0,0,2,,,,0
+n9235542883,Shepherd's camp,Kasol,32.044951,77.301391,activity,camp_site,Activity,0,0,2,,,,0
 n9260950049,Shepherd's camp,Kasol,32.034977,77.043626,activity,camp_site,Activity,0,0,2,,,,0
+n9269871986,Shepherd's camp,Kasol,32.054277,77.208918,activity,camp_site,Activity,0,0,2,,,,0
+n9269880856,Shepherd's camp,Kasol,32.014438,77.190796,activity,camp_site,Activity,0,0,2,,,,0
+n9269898664,Shepherd's camp,Kasol,31.969202,77.163893,activity,camp_site,Activity,0,0,2,,,,0
+n9269901034,Shepherd's camp,Kasol,31.983234,77.171141,activity,camp_site,Activity,0,0,2,,,,0
+n9269903112,Shepherd's camp,Kasol,32.082924,77.200499,activity,camp_site,Activity,0,0,2,,,,0
 n9274955601,Shepherd's camp,Kasol,31.936559,77.05554,activity,camp_site,Activity,0,0,2,,,,0
+n9274996043,Shepherd's camp,Kasol,32.015116,77.088331,activity,camp_site,Activity,0,0,2,,,,0
+n9274996763,Shepherd's camp,Kasol,32.003242,77.048374,activity,camp_site,Activity,0,0,2,,,,0
 n13881892186,Shonda Dhar,Kasol,31.865104,77.223376,activity,camp_site,Activity,0,0,2,,,,0
 n11987087217,Stelling thach,Kasol,32.100989,77.189199,activity,camp_site,Activity,0,0,2,,,,0
 r13400522,Sujaini Jot,Kasol,32.046181,77.307952,activity,hiking_route,Activity,0,0,5,,,,0
@@ -2646,7 +2628,7 @@ n7690347503,Thakurkuan camp,Kasol,31.964428,77.623282,activity,camp_site,Activit
 n9773355036,The Alps Kasol,Kasol,32.009857,77.31084,activity,camp_site,Activity,0,0,13,,,,0
 n4383748791,Tunda Bhuj 3360m,Kasol,31.973465,77.581192,activity,camp_site,Activity,0,0,2,,,,0
 n7690347505,base camp,Kasol,32.195598,77.504665,activity,camp_site,Activity,0,0,2,,,,0
-w1510516497,bhutti to chhuchhal,Kasol,31.963452,77.047542,activity,hiking_route,Activity,0,0,5,,,,0
+w1510516494,bhutti to chhuchhal,Kasol,31.949429,77.035827,activity,hiking_route,Activity,0,0,5,,,,0
 n10003505167,Ali Ratni Tibba,Kasol,32.098259,77.406216,nature,peak,Nature,0,0,3,,,,0
 n5612193352,Angdu Ri,Kasol,32.187191,77.569291,nature,peak,Nature,0,0,4,,,,0
 w958337904,Animal Lake,Kasol,32.133816,77.45621,nature,lake,Nature,0,0,7,Beautiful lake where you may spot animals quenching their thirst.,,,0
@@ -2679,8 +2661,8 @@ n9789858080,Dharmi Chura,Kasol,32.073266,77.414432,nature,peak,Nature,0,0,2,,,,0
 n9789858081,Dharmi Chura,Kasol,32.068683,77.448635,nature,peak,Nature,0,0,2,,,,0
 n10779382210,Dhel,Kasol,31.751004,77.462698,nature,peak,Nature,0,0,2,,,,0
 n8480950638,Dudha Toli,Kasol,32.13681,77.570836,nature,peak,Nature,0,0,2,,,,0
-n9158327956,Falls,Kasol,31.958612,77.355896,nature,waterfall,Nature,0,0,2,,,,0
 n11912073994,Falls,Kasol,31.934293,77.352127,nature,waterfall,Nature,0,0,2,,,,0
+n9158327956,Falls,Kasol,31.958612,77.355896,nature,waterfall,Nature,0,0,2,,,,0
 n11912140579,Falls (20m),Kasol,31.741917,77.403098,nature,waterfall,Nature,0,0,2,,,,0
 w1066010180,Falls 100m,Kasol,32.020607,77.220776,nature,waterfall,Nature,0,0,2,,,,0
 w1066051908,Falls 100m,Kasol,31.974276,77.599536,nature,waterfall,Nature,0,0,2,,,,0
@@ -2719,11 +2701,10 @@ n9235540487,Natural cave,Kasol,32.030216,77.339135,nature,cave_entrance,Nature,0
 n5612192703,Norbu,Kasol,32.160065,77.3824,nature,peak,Nature,0,0,4,,,,0
 n9789858162,Ori Tibba,Kasol,32.084375,77.522385,nature,peak,Nature,0,0,2,,,,0
 n7687991978,PARBATI SOUTH,Kasol,31.842542,77.67316,nature,peak,Nature,0,0,2,,,,0
-n9789858079,Papi Chura,Kasol,32.066902,77.438893,nature,peak,Nature,0,0,2,,,,0
 n8480950024,Papi Chura,Kasol,32.128996,77.614095,nature,peak,Nature,0,0,2,,,,0
+n9789858079,Papi Chura,Kasol,32.066902,77.438893,nature,peak,Nature,0,0,2,,,,0
 n4094294648,Papsura,Kasol,32.212293,77.553723,nature,peak,Nature,0,0,4,,,,0
 n10918212125,Paptula,Kasol,32.103428,77.409238,nature,peak,Nature,0,0,2,,,,0
-n10680654085,Peak,Kasol,31.745139,77.059093,nature,peak,Nature,0,0,2,,,,0
 n8480950640,Phaikal,Kasol,32.14842,77.52584,nature,peak,Nature,0,0,2,,,,0
 w1066010211,Phuta Sar,Kasol,32.131075,77.278591,nature,lake,Nature,0,0,3,,,,0
 r2817778,Prashar Lake,Kasol,31.754471,77.101058,nature,lake,Nature,1,0,12,,,,1
@@ -2750,8 +2731,6 @@ n11235819719,"Tunda
 Bhuj (hot spring?!)",Kasol,31.971104,77.591667,nature,hot_spring,Nature,0,0,3,,,,0
 n11235380955,Tunnel into the mountain,Kasol,31.995803,77.448784,nature,cave_entrance,Nature,0,0,2,,,,0
 n8480991817,Ujla Tichu,Kasol,32.08821,77.554786,nature,peak,Nature,0,0,2,,,,0
-n2380563864,WaterFall,Kasol,31.997432,77.486136,nature,waterfall,Nature,0,0,2,,,,0
-n12888077315,Waterfall,Kasol,31.72773,77.357918,nature,waterfall,Nature,0,0,2,,,,0
 n5612192685,West Horn,Kasol,32.035009,77.62748,nature,peak,Nature,0,0,4,,,,0
 n5612192684,White Pk.,Kasol,32.081123,77.685411,nature,peak,Nature,0,0,4,,,,0
 n4094294649,White Sail,Kasol,32.198926,77.565565,nature,peak,Nature,0,0,7,"Also known as White Sail, the name Dharmsura in the local language of Lahaul means Peak of Good.",,,0
@@ -2938,6 +2917,7 @@ r8492955,Cheppanam-Panagad Kayal,Kochi,9.865625,76.356997,nature,lake,Nature,0,0
 w25977369,Cherai Beach,Kochi,10.144188,76.177342,nature,beach,Beach,1,0,7,,,,1
 r1811311,Chilavannur Lake,Kochi,9.954604,76.310568,nature,lake,Nature,0,0,5,,,,0
 w1288961685,Edavanakkadu Beach,Kochi,10.08132,76.194719,nature,beach,Beach,0,0,3,,,,0
+w1392872646,Elamkunnappuzha Beach,Kochi,10.023855,76.212158,nature,beach,Beach,0,0,4,,,,0
 w1134603081,Fort Kochi Beach,Kochi,9.967136,76.239822,nature,beach,Beach,1,0,9,,,,1
 w464030133,Indranchira,Kochi,9.995471,76.467627,nature,lake,Nature,0,0,4,,,,0
 w653416969,Kuzhupilly Beach,Kochi,10.109453,76.187276,nature,beach,Beach,0,0,2,,,,0
@@ -2975,7 +2955,6 @@ w800465056,Chottanikkara Devi temple,Kochi,9.933302,76.391741,sight,place_of_wor
 w1268563831,Dhakshina Udupi Dhanwanthari Temple,Kochi,9.941651,76.354487,sight,place_of_worship,Temple,1,0,6,,,,1
 n6357739885,Dhobi Khana,Kochi,9.951514,76.244073,sight,attraction,Heritage,0,0,2,,,,0
 w838495714,Elamana Palace,Kochi,9.949149,76.34261,sight,castle,Heritage,0,0,11,Currently Under NSS Higher Secondary School,,,0
-w1392872646,Elamkunnappuzha Beach,Kochi,10.023855,76.212158,sight,attraction,Heritage,0,0,4,,,,0
 r17669175,Elankunnapuzha Subrahmanya Temple,Kochi,10.030887,76.228867,sight,place_of_worship,Temple,1,0,7,,,,1
 n10946336212,Ernakulam District Heritage Museum,Kochi,9.967468,76.241067,sight,museum,Museum,0,0,5,,,,0
 n6342407547,Ernakulam Terminus,Kochi,9.988213,76.27427,sight,ruins,Heritage,1,0,10,,,,1
@@ -3044,6 +3023,7 @@ n1168848798,Bear Shola Falls,Kodaikanal,10.239617,77.478641,nature,waterfall,Nat
 n9919220012,Chakkillliyan Kombu,Kodaikanal,10.232031,77.346425,nature,peak,Nature,0,0,2,,,,0
 n9873944248,Chandana Parai,Kodaikanal,10.228722,77.392952,nature,peak,Nature,0,0,2,,,,0
 n9874021526,Chendanurkanal Malai,Kodaikanal,10.152746,77.358684,nature,peak,Nature,0,0,2,,,,0
+n4405908698,Devil's kitchen,Kodaikanal,10.210454,77.461609,nature,cave_entrance,Nature,0,0,6,,,,0
 n7326229180,Dolmen Peak,Kodaikanal,10.298477,77.513589,nature,peak,Nature,0,0,4,360 degree views,,,0
 n9920370348,Erumai Malai,Kodaikanal,10.375126,77.249451,nature,peak,Nature,0,0,2,,,,0
 n11181026341,Fairy Falls,Kodaikanal,10.223701,77.466806,nature,waterfall,Nature,0,0,2,,,,0
@@ -3055,8 +3035,8 @@ n9873972706,Falls 18m,Kodaikanal,10.268366,77.308903,nature,waterfall,Nature,0,0
 n9919253064,Falls 20m,Kodaikanal,10.286938,77.337448,nature,waterfall,Nature,0,0,2,,,,0
 n9920352167,Falls 20m,Kodaikanal,10.293461,77.267965,nature,waterfall,Nature,0,0,2,,,,0
 n9873984928,Falls 21m,Kodaikanal,10.145163,77.294998,nature,waterfall,Nature,0,0,2,,,,0
-n9919247918,Falls 25m,Kodaikanal,10.208364,77.345032,nature,waterfall,Nature,0,0,2,,,,0
 n9873984922,Falls 25m,Kodaikanal,10.148839,77.293716,nature,waterfall,Nature,0,0,2,,,,0
+n9919247918,Falls 25m,Kodaikanal,10.208364,77.345032,nature,waterfall,Nature,0,0,2,,,,0
 n9873972708,Falls 28m,Kodaikanal,10.175024,77.303674,nature,waterfall,Nature,0,0,2,,,,0
 n9920368734,Falls 31m,Kodaikanal,10.239344,77.408045,nature,waterfall,Nature,0,0,2,,,,0
 n9919217276,Falls 32m,Kodaikanal,10.298089,77.367823,nature,waterfall,Nature,0,0,2,,,,0
@@ -3090,6 +3070,7 @@ n9874021561,Periya Malai,Kodaikanal,10.166559,77.320147,nature,peak,Nature,0,0,2
 n9874019119,Pillisuli Nettu,Kodaikanal,10.156759,77.387738,nature,peak,Nature,0,0,2,,,,0
 n9874021530,Pinji Kanavai,Kodaikanal,10.173867,77.379713,nature,peak,Nature,0,0,2,,,,0
 w790650279,Second Waterfall,Kodaikanal,10.322158,77.523762,nature,waterfall,Nature,0,0,4,,,,0
+n9560774088,Silver Cascade Falls,Kodaikanal,10.241993,77.510299,nature,waterfall,Nature,0,0,4,,,,0
 w790650278,Skambha Waterfall,Kodaikanal,10.291293,77.523186,nature,waterfall,Nature,0,0,3,,,,0
 n9874021559,Soman Kanavai,Kodaikanal,10.176951,77.32255,nature,peak,Nature,0,0,2,,,,0
 n9874021524,Talai Malai,Kodaikanal,10.139566,77.314095,nature,peak,Nature,0,0,2,,,,0
@@ -3111,7 +3092,6 @@ n7648787699,Avocado Hill,Kodaikanal,10.315549,77.503815,sight,viewpoint,Viewpoin
 n1167079520,Boat House,Kodaikanal,10.232232,77.490917,sight,attraction,Heritage,0,0,3,,,,0
 n4405908784,Boathouse,Kodaikanal,10.238029,77.487773,sight,attraction,Heritage,0,0,3,,,,0
 n3514039593,Coaker's Walk,Kodaikanal,10.232375,77.493739,sight,attraction,Heritage,0,0,6,,,,0
-n4405908698,Devil's kitchen,Kodaikanal,10.210454,77.461609,sight,attraction,Heritage,0,0,6,,,,0
 n1167052391,Dolphin's Nose,Kodaikanal,10.209045,77.487211,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n11184171081,Green Valley View,Kodaikanal,10.209986,77.476106,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n8888374081,Greencrest,Kodaikanal,10.261579,77.479775,sight,attraction,Heritage,0,0,3,,,,0
@@ -3127,7 +3107,6 @@ n12845777731,Resting and Viewpoint,Kodaikanal,10.22627,77.461683,sight,viewpoint
 n7345589817,River Valley Viewpoint,Kodaikanal,10.321873,77.523761,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n7633164472,Seruppadi Mattam,Kodaikanal,10.320814,77.510573,sight,attraction,Heritage,0,0,3,,,,0
 w1357955070,Shenbaganur Museum of Natural History,Kodaikanal,10.231052,77.500975,sight,museum,Museum,0,0,5,,Mo-Su 09:00-18:00,INR30,0
-n9560774088,Silver Cascade Falls,Kodaikanal,10.241993,77.510299,sight,attraction,Heritage,0,0,4,,,,0
 n2152354426,Suicide Point,Kodaikanal,10.209937,77.457043,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n1167080197,TTDC Boat House,Kodaikanal,10.234632,77.487336,sight,attraction,Heritage,0,0,2,,,,0
 n4471154090,Temple poombari,Kodaikanal,10.249863,77.414647,sight,viewpoint,Viewpoint,0,0,3,,,,0
@@ -3142,7 +3121,7 @@ n12556755003,Chintamani Kar Bird Sanctuary,Kolkata,22.428784,88.401718,activity,
 w1067436598,"DVC Headquarters, Kolkata",Kolkata,22.587505,88.391584,activity,nature_reserve,Activity,1,0,19,,,,1
 w153948903,Green Verge,Kolkata,22.60089,88.411772,activity,nature_reserve,Activity,0,0,4,,,,0
 w1157886187,Harinalaya,Kolkata,22.608345,88.461584,activity,zoo,Activity,0,0,4,,,,0
-w134101437,Nicco Park,Kolkata,22.570867,88.421866,activity,water_park,Activity,0,0,2,,,,0
+n1474870092,Nicco Park,Kolkata,22.570995,88.421899,activity,theme_park,Activity,0,0,2,,,,0
 n12743648401,Promodnagar Jheel,Kolkata,22.646605,88.39802,activity,water_park,Activity,0,0,3,,,,0
 n1833426020,Sparkz,Kolkata,22.520673,88.323516,activity,theme_park,Activity,0,0,2,,,,0
 w52098113,Alipore Zoo,Kolkata,22.536839,88.331832,nature,park,Nature,1,0,13,,Fr-We 09:00-17:00,,1
@@ -3165,7 +3144,7 @@ w101966466,Millennium Park,Kolkata,22.573957,88.34462,nature,park,Nature,1,0,12,
 w331410985,Mirania Lake,Kolkata,22.534175,88.392458,nature,lake,Nature,0,0,3,,,,0
 w469883540,Mohor Kunja,Kolkata,22.543767,88.344432,nature,park,Nature,1,0,6,,"Mo-Su 05:00-09:00,15:00-20:00",,1
 w723309062,Moja Dighi,Kolkata,22.474959,88.369144,nature,lake,Nature,0,0,7,,,,0
-w325932155,Nandan Nagar Jheel,Kolkata,22.670152,88.396753,nature,lake,Nature,0,0,4,,,,0
+w325932154,Nandan Nagar Jheel,Kolkata,22.673599,88.397861,nature,lake,Nature,0,0,4,,,,0
 w420013468,New Garia Lake,Kolkata,22.475694,88.4038,nature,lake,Nature,0,0,3,,,,0
 w396125547,Paddapukur,Kolkata,22.505016,88.302961,nature,lake,Nature,0,0,3,,,,0
 w238964199,Panchasayar Lake No. 1,Kolkata,22.478825,88.396168,nature,lake,Nature,0,0,3,,,,0
@@ -3232,7 +3211,7 @@ w469678553,Lascar War Memorial,Kolkata,22.553012,88.328799,sight,monument,Herita
 n11755534869,METAMORFOSEOS GREEK CHURCH,Kolkata,22.520352,88.346886,sight,attraction,Heritage,0,0,2,,,,0
 n5295350166,Madan Mohan Tala (1761 CE),Kolkata,22.600656,88.363819,sight,attraction,Heritage,0,0,2,,,,0
 n4930665951,Maghen David Synagogue,Kolkata,22.57769,88.351874,sight,place_of_worship,Temple,1,0,4,,,,1
-w573336195,Marble Palace,Kolkata,22.582126,88.360212,sight,museum,Museum,0,0,3,,,,0
+n1171065436,Marble Palace,Kolkata,22.582123,88.360171,sight,museum,Museum,0,0,3,,,,0
 n10285627429,Michael Madhusudan Das Statue,Kolkata,22.559417,88.346176,sight,attraction,Heritage,0,0,2,,,,0
 n11127999741,Mother's Wax Museum,Kolkata,22.599456,88.472245,sight,museum,Museum,1,0,15,,Tu-Su 12:00-19:30,yes,1
 w1158240743,Musical Fountain,Kolkata,22.602332,88.468373,sight,attraction,Heritage,0,0,8,,,,0
@@ -3283,7 +3262,7 @@ w168244384,Konark Sun Temple,Konark,19.887564,86.094489,sight,archaeological_sit
 w168251719,Urban Hata,Konark,19.886249,86.098835,sight,attraction,Heritage,0,0,2,,,,0
 n9790730243,AQUA PET MALL,Kozhikode,11.263599,75.810383,activity,aquarium,Activity,0,0,2,,,,0
 n9487476986,Aathadikunh colony,Kozhikode,11.263241,76.005985,activity,camp_site,Activity,0,0,2,,,,0
-n8764335522,Alankar Aquarium,Kozhikode,11.449075,75.818988,activity,aquarium,Activity,0,0,3,,,,0
+n8762104217,Alankar Aquarium,Kozhikode,11.449085,75.818993,activity,aquarium,Activity,0,0,3,,,,0
 n8647168317,"Alfitrah, kids park ,Kizhakkoth",Kozhikode,11.36381,75.90377,activity,theme_park,Activity,0,0,3,,,,0
 n9484077177,Alungal colony,Kozhikode,11.273813,75.983734,activity,camp_site,Activity,0,0,3,,,,0
 n8853763648,CK Aquarium Store,Kozhikode,11.262588,75.904305,activity,aquarium,Activity,0,0,2,,,,0
@@ -3391,10 +3370,10 @@ r15531642,Shang Phu to Stok,Leh,33.940767,77.556218,activity,hiking_route,Activi
 r17911476,Shatichhose Tso,Leh,34.345033,77.481251,activity,hiking_route,Activity,0,0,5,,,,0
 n11195560058,Sheoherd's camp,Leh,33.965832,77.610508,activity,camp_site,Activity,0,0,2,,,,0
 n9781326603,Shepherd camp,Leh,34.066712,77.51322,activity,camp_site,Activity,0,0,2,,,,0
-n9781308155,Shepherd's camp,Leh,34.077451,77.516962,activity,camp_site,Activity,0,0,2,,,,0
+n11195477575,Shepherd's camp,Leh,33.92335,77.571156,activity,camp_site,Activity,0,0,2,,,,0
 n11195557252,Shepherd's camp,Leh,33.934549,77.565192,activity,camp_site,Activity,0,0,2,,,,0
 n12094568069,Shepherd's camp,Leh,34.042795,77.348108,activity,camp_site,Activity,0,0,2,,,,0
-n11195477575,Shepherd's camp,Leh,33.92335,77.571156,activity,camp_site,Activity,0,0,2,,,,0
+n9781308155,Shepherd's camp,Leh,34.077451,77.516962,activity,camp_site,Activity,0,0,2,,,,0
 r11567362,South Pullu,Leh,34.224809,77.61256,activity,hiking_route,Activity,0,0,5,,,,0
 r14333676,Stok Gompa hike,Leh,34.072857,77.53048,activity,hiking_route,Activity,0,0,5,,,,0
 r11232945,Stok Kangri,Leh,34.017568,77.489715,activity,hiking_route,Activity,0,0,6,,,,0
@@ -3405,7 +3384,6 @@ n9821359697,Yarle Pharwan,Leh,34.190202,77.820256,activity,camp_site,Activity,0,
 n9821359692,Yungle,Leh,34.159879,77.840921,activity,camp_site,Activity,0,0,2,,,,0
 n493490060,camp 4298 m,Leh,34.010151,77.499009,activity,camp_site,Activity,0,0,3,,,,0
 n7713554423,Alchi,Leh,34.158389,77.256525,nature,peak,Nature,0,0,2,,,,0
-n3773323469,Chham Kangri,Leh,34.18539,77.567228,nature,peak,Nature,0,0,5,,,,0
 w465021904,Chhochan Tso,Leh,34.386316,77.410985,nature,lake,Nature,0,0,3,,,,0
 n9911294576,Chogdo Ri,Leh,33.828501,77.603173,nature,peak,Nature,0,0,2,,,,0
 n7713554416,Choksti,Leh,33.990151,77.417467,nature,peak,Nature,0,0,2,,,,0
@@ -3446,6 +3424,7 @@ n5013716329,Arch & Buddhist writtings on stone,Leh,34.09643,77.601577,sight,attr
 n6031232191,Cemetery,Leh,34.168821,77.582198,sight,attraction,Heritage,0,0,2,,,,0
 n4390123390,Central Asian Museum,Leh,34.165237,77.584895,sight,museum,Museum,0,0,7,,,yes,0
 w168001251,Chandazik Gompa,Leh,34.165807,77.587902,sight,attraction,Heritage,0,0,6,,,,0
+n3773323469,Chham Kangri / Bakula Peak,Leh,34.18539,77.567228,sight,viewpoint,Viewpoint,0,0,5,,,,0
 n12082174269,Curved Buddha,Leh,34.087613,77.608279,sight,attraction,Heritage,0,0,2,,,,0
 n5013728227,Gompa and prayer wheel,Leh,34.161346,77.585979,sight,monument,Heritage,0,0,3,,,,0
 n5013790121,Gompas and prayer wheels,Leh,34.160602,77.58628,sight,monument,Heritage,0,0,3,,,,0
@@ -3482,25 +3461,25 @@ w168001905,Tsemo Castle,Leh,34.167424,77.590347,sight,castle,Heritage,1,0,10,,,,
 n9371054851,Zorawar Fort,Leh,34.158409,77.569736,sight,ruins,Heritage,0,0,5,,,,0
 n13371505181,Agro tourism Camping,Lonavala,18.688519,73.478691,activity,camp_site,Activity,0,0,4,Sector 04 Shindgaon,,,0
 r19893135,Ambenalichya jurra,Lonavala,18.974617,73.495932,activity,hiking_route,Activity,0,0,6,,,,0
-w860524194,Andharban Trail,Lonavala,18.506864,73.406066,activity,hiking_route,Activity,0,0,4,,,,0
+w1151100712,Andharban Trail,Lonavala,18.490605,73.38508,activity,hiking_route,Activity,0,0,4,,,,0
 r16864572,Anghai Fort to Tail Baila,Lonavala,18.598384,73.333949,activity,hiking_route,Activity,0,0,5,,,,0
 r11855333,Anghai fort,Lonavala,18.618884,73.329526,activity,hiking_route,Activity,0,0,5,,,,0
 r19893145,Barfachya Ohol,Lonavala,18.98396,73.510902,activity,hiking_route,Activity,0,0,6,,,,0
 r19892414,Behran Patthar Exploration,Lonavala,18.808252,73.366953,activity,hiking_route,Activity,0,0,6,,,,0
 r18560636,Behran Plateau,Lonavala,18.800447,73.360857,activity,hiking_route,Activity,0,0,6,,,,0
 r11855339,Bhatrashi Peak,Lonavala,18.72968,73.503768,activity,hiking_route,Activity,0,0,4,,,,0
-w866856889,Bhatrishi peak,Lonavala,18.730933,73.496346,activity,hiking_route,Activity,0,0,5,,,,0
+w1150981924,Bhatrishi peak,Lonavala,18.727391,73.507635,activity,hiking_route,Activity,0,0,5,,,,0
 w864212688,Buruj,Lonavala,18.963949,73.227375,activity,hiking_route,Activity,0,0,5,,,,0
-w866533540,Canyon valley,Lonavala,18.765974,73.380056,activity,hiking_route,Activity,0,0,5,,,,0
+w1150925231,Canyon valley,Lonavala,18.764485,73.377834,activity,hiking_route,Activity,0,0,5,,,,0
 r18497203,Choudharwadi to Methalwadi,Lonavala,18.972959,73.482686,activity,hiking_route,Activity,0,0,7,,,,0
-w1233610458,Dare ghat,Lonavala,18.535796,73.381856,activity,hiking_route,Activity,0,0,5,,,,0
+w1150983994,Dare ghat,Lonavala,18.506883,73.343466,activity,hiking_route,Activity,0,0,5,,,,0
 w194706373,Della Adventure,Lonavala,18.780311,73.389899,activity,theme_park,Activity,1,0,6,,,,1
 r19930339,Derya Ghat,Lonavala,18.538765,73.360993,activity,hiking_route,Activity,0,0,6,,,,0
-w860774930,Dhak Bahiri,Lonavala,18.87102,73.432727,activity,hiking_route,Activity,0,0,5,,,,0
-w863731354,Dhak Bahiri route,Lonavala,18.869135,73.413139,activity,hiking_route,Activity,0,0,5,,,,0
+w1348245379,Dhak Bahiri,Lonavala,18.873291,73.430309,activity,hiking_route,Activity,0,0,5,,,,0
+w1348245381,Dhak Bahiri route,Lonavala,18.873813,73.427058,activity,hiking_route,Activity,0,0,5,,,,0
 r15583898,Dhangarwada,Lonavala,18.970947,73.280374,activity,hiking_route,Activity,0,0,4,,,,0
 r11855340,Dongarwadi - Malewadi,Lonavala,18.732373,73.57824,activity,hiking_route,Activity,0,0,4,,,,0
-w866534584,Duke's nose,Lonavala,18.745666,73.366383,activity,hiking_route,Activity,0,0,5,,,,0
+w1233547083,Duke's nose,Lonavala,18.739854,73.359955,activity,hiking_route,Activity,0,0,5,,,,0
 r20980446,EST 21,Lonavala,18.954602,73.498308,activity,hiking_route,Activity,0,0,10,,,,0
 r20980485,EST 22,Lonavala,18.850438,73.47193,activity,hiking_route,Activity,0,0,10,,,,0
 r20989124,EST 23,Lonavala,18.879548,73.380683,activity,hiking_route,Activity,0,0,10,,,,0
@@ -3508,23 +3487,23 @@ r20989437,EST 24,Lonavala,18.967797,73.283799,activity,hiking_route,Activity,0,0
 r20990500,EST 25,Lonavala,18.867701,73.273812,activity,hiking_route,Activity,0,0,9,,,,0
 r20990621,EST 26,Lonavala,18.680403,73.361797,activity,hiking_route,Activity,0,0,9,,,,0
 r20990811,EST 27,Lonavala,18.565484,73.344522,activity,hiking_route,Activity,0,0,9,,,,0
-w1530104056,Ekole to Kevani trail,Lonavala,18.54866,73.361674,activity,hiking_route,Activity,0,0,5,,,,0
+w1150984269,Ekole to Kevani trail,Lonavala,18.539451,73.347924,activity,hiking_route,Activity,0,0,5,,,,0
 n12008907071,GAIA Ekole,Lonavala,18.546538,73.363631,activity,camp_site,Activity,0,0,7,,,,0
-w1454257246,Gaal Devi Ghaat,Lonavala,18.88533,73.423927,activity,hiking_route,Activity,0,0,5,,,,0
+w1347907454,Gaal Devi Ghaat,Lonavala,18.890129,73.416873,activity,hiking_route,Activity,0,0,5,,,,0
 r18497286,Gaaldevi Ghat,Lonavala,18.890326,73.405077,activity,hiking_route,Activity,0,0,6,,,,0
 r19893146,Ghalichi Waat,Lonavala,18.994391,73.504056,activity,hiking_route,Activity,0,0,6,,,,0
 r11855364,Ghangad Fort,Lonavala,18.530035,73.348517,activity,hiking_route,Activity,0,0,4,,,,0
-w866881126,Ghangad trail,Lonavala,18.55301,73.37099,activity,hiking_route,Activity,0,0,5,,,,0
+w1150983993,Ghangad trail,Lonavala,18.547058,73.361331,activity,hiking_route,Activity,0,0,5,,,,0
 r19829618,Ghodejin Ghat,Lonavala,18.557485,73.327491,activity,hiking_route,Activity,0,0,6,,,,0
 r19930338,Ghondaand,Lonavala,18.521746,73.351547,activity,hiking_route,Activity,0,0,6,,,,0
 w867005501,Ghutake to Hirdi,Lonavala,18.508193,73.384642,activity,hiking_route,Activity,0,0,5,,,,0
 r15623107,Hinjawadi to Tikona,Lonavala,18.605043,73.595784,activity,hiking_route,Activity,0,0,4,,,,0
 w332878716,Imagica,Lonavala,18.766781,73.281759,activity,theme_park,Activity,1,0,7,,,,1
 w645274736,Imagica Water Park,Lonavala,18.766273,73.277989,activity,water_park,Activity,0,0,2,,,,0
-w864212689,Irshalgad to prabalgad,Lonavala,18.944392,73.230739,activity,hiking_route,Activity,0,0,5,,,,0
+w1150974334,Irshalgad to prabalgad,Lonavala,18.957853,73.228855,activity,hiking_route,Activity,0,0,5,,,,0
 n9828927022,Jackiline School Of Thought,Lonavala,18.610372,73.581015,activity,camp_site,Activity,0,0,13,,,yes,0
 w860774931,Jambhavali,Lonavala,18.859322,73.43685,activity,hiking_route,Activity,0,0,5,,,,0
-w863733036,Jambhavali to Wadeshwar trail,Lonavala,18.867506,73.495952,activity,hiking_route,Activity,0,0,5,,,,0
+w1190765953,Jambhavali to Wadeshwar trail,Lonavala,18.854648,73.549545,activity,hiking_route,Activity,0,0,5,,,,0
 w866998461,Jambhulpada,Lonavala,18.572614,73.307221,activity,hiking_route,Activity,0,0,5,,,,0
 r19876539,Kadam Naal,Lonavala,18.958741,73.272314,activity,hiking_route,Activity,0,0,6,,,,0
 w867165285,Kailasgad trail,Lonavala,18.521133,73.482692,activity,hiking_route,Activity,0,0,5,,,,0
@@ -3535,18 +3514,18 @@ r19876544,Koltya Naal,Lonavala,18.971269,73.27463,activity,hiking_route,Activity
 r11846897,Kondhane Caves,Lonavala,18.842045,73.38003,activity,hiking_route,Activity,0,0,4,,,,0
 r15552814,Koraigad Trek Route,Lonavala,18.625228,73.385682,activity,hiking_route,Activity,0,0,4,,,,0
 r19894330,Kothaldara (Ambenali to Falyan),Lonavala,18.707162,73.354775,activity,hiking_route,Activity,0,0,6,,,,0
-w1529464124,Kothaligad,Lonavala,18.978992,73.524479,activity,hiking_route,Activity,0,0,6,,,,0
+w1058573370,Kothaligad,Lonavala,18.996976,73.510384,activity,hiking_route,Activity,0,0,6,,,,0
 r16863865,Kurwande to Vasonde via Duke's Nose,Lonavala,18.703946,73.351484,activity,hiking_route,Activity,0,0,8,,,,0
-w1530028415,LoBhi,Lonavala,18.832782,73.418207,activity,hiking_route,Activity,0,0,5,,,,0
+w1018315716,LoBhi,Lonavala,18.952384,73.523188,activity,hiking_route,Activity,0,0,5,,,,0
 r15552749,Loganwadi,Lonavala,18.710518,73.474283,activity,hiking_route,Activity,0,0,4,,,,0
-w1151421258,Mandavi Peak,Lonavala,18.63516,73.543779,activity,hiking_route,Activity,0,0,5,,,,0
+w1151421257,Mandavi Peak,Lonavala,18.629108,73.543233,activity,hiking_route,Activity,0,0,5,,,,0
 w1155833764,Mandavi top,Lonavala,18.632301,73.539004,activity,hiking_route,Activity,0,0,5,,,,0
 r11855343,Manikgad,Lonavala,18.833638,73.191744,activity,hiking_route,Activity,0,0,4,,,,0
 w867163440,Manikgad trail,Lonavala,18.84085,73.192129,activity,hiking_route,Activity,0,0,5,,,,0
 r19892612,Manjarsumbha,Lonavala,18.843668,73.414948,activity,hiking_route,Activity,0,0,6,,,,0
 w866536198,Morgiri fort,Lonavala,18.664941,73.414111,activity,hiking_route,Activity,0,0,5,,,,0
 r11855338,Mrugagad,Lonavala,18.686081,73.361942,activity,hiking_route,Activity,0,0,4,,,,0
-w866535677,Mrughagad trail,Lonavala,18.687019,73.363369,activity,hiking_route,Activity,0,0,5,,,,0
+w1449891473,Mrughagad trail,Lonavala,18.683801,73.359119,activity,hiking_route,Activity,0,0,5,,,,0
 r19829615,Naandand,Lonavala,18.52584,73.334473,activity,hiking_route,Activity,0,0,6,,,,0
 r16863868,Pasalwadi to Kalamb,Lonavala,18.641054,73.327251,activity,hiking_route,Activity,0,0,5,,,,0
 r19824459,Paymodi Trail,Lonavala,18.687108,73.372741,activity,hiking_route,Activity,0,0,6,,,,0
@@ -3566,7 +3545,7 @@ r15552721,Sondai Fort,Lonavala,18.943177,73.288212,activity,hiking_route,Activit
 w1314987842,Songiri fort-Gambhirnath caves,Lonavala,18.870873,73.324811,activity,hiking_route,Activity,0,0,7,,,,0
 r15587564,South Matheran,Lonavala,18.93151,73.301116,activity,hiking_route,Activity,0,0,4,,,,0
 w866881129,Sudhagad fort,Lonavala,18.531175,73.323314,activity,hiking_route,Activity,0,0,5,,,,0
-w1233596185,Sudhagad to tailbaila,Lonavala,18.569789,73.335909,activity,hiking_route,Activity,0,0,5,,,,0
+w1150983588,Sudhagad to tailbaila,Lonavala,18.562624,73.306122,activity,hiking_route,Activity,0,0,5,,,,0
 r15552813,Tail Baila 1,Lonavala,18.562376,73.320705,activity,hiking_route,Activity,0,0,4,,,,0
 r15556677,Tail Baila 2,Lonavala,18.570832,73.320288,activity,hiking_route,Activity,0,0,4,,,,0
 r15556676,Tail Baila 3,Lonavala,18.563263,73.351792,activity,hiking_route,Activity,0,0,4,,,,0
@@ -3577,7 +3556,7 @@ r15554602,Tamhini Valley 2,Lonavala,18.488109,73.402353,activity,hiking_route,Ac
 r16864740,Thakurwadi to Ghangad,Lonavala,18.526594,73.343143,activity,hiking_route,Activity,0,0,5,,,,0
 r11855335,Tikona Fort,Lonavala,18.632176,73.515534,activity,hiking_route,Activity,0,0,4,,,,0
 r11855336,Tung,Lonavala,18.659482,73.461464,activity,hiking_route,Activity,0,0,4,,,,0
-w866869052,Unghai fort,Lonavala,18.62155,73.325701,activity,hiking_route,Activity,0,0,5,,,,0
+w1233596184,Unghai fort,Lonavala,18.612374,73.333442,activity,hiking_route,Activity,0,0,5,,,,0
 w1184662768,Valley of adventure,Lonavala,18.582474,73.512945,activity,theme_park,Activity,0,0,5,,,,0
 w866857763,Visapur,Lonavala,18.726544,73.499822,activity,hiking_route,Activity,0,0,5,,,,0
 r15552768,Visapur Fort,Lonavala,18.720463,73.490323,activity,hiking_route,Activity,0,0,4,,,,0
@@ -3656,7 +3635,7 @@ n5839453488,The Residency,Lucknow,26.860904,80.925877,sight,attraction,Heritage,
 w45740531,Treasury Building,Lucknow,26.860961,80.926915,sight,ruins,Heritage,0,0,4,,,,0
 n243970258,Dreamland Fun Park,Ludhiana,30.832296,75.983602,activity,theme_park,Activity,0,0,2,,,,0
 w9205527,Hardy's World,Ludhiana,30.976884,75.800721,activity,theme_park,Activity,0,0,3,,,,0
-n690672714,Soil Test,Ludhiana,30.911762,75.726058,activity,camp_site,Activity,0,0,2,,,,0
+n690672713,Soil Test,Ludhiana,30.912457,75.725807,activity,camp_site,Activity,0,0,2,,,,0
 n4441531589,#4500,Ludhiana,30.866189,75.864525,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4226772619,"56,Singhpura colony, Ludhiana",Ludhiana,30.911749,75.776641,sight,viewpoint,Viewpoint,0,0,2,,,,0
 w135441338,Bachat Bhawan,Ludhiana,30.901275,75.837033,sight,attraction,Heritage,0,0,2,,,,0
@@ -3711,7 +3690,7 @@ w884208593,Samanar Hills,Madurai,9.924218,78.044474,sight,attraction,Heritage,1,
 w446674983,Sangham Period settlement,Madurai,9.85519,78.194677,sight,archaeological_site,Heritage,1,0,7,,,,1
 r21232993,Sri Meenakshi Amman Temple,Madurai,9.919522,78.119368,sight,place_of_worship,Temple,1,0,27,"Ancient, walled, Hindu place of worship with sacred
 water tank and colourful, sculpted gate towers",Mo-Su 09:00-19:00,,1
-n2152139503,Temple Holy Car Shelter,Madurai,9.920267,78.123238,sight,attraction,Heritage,0,0,2,,,,0
+n2152139500,Temple Holy Car Shelter,Madurai,9.919752,78.123299,sight,attraction,Heritage,0,0,2,,,,0
 w1308951980,Theerthangarar Sculptures,Madurai,9.970963,78.197298,sight,monument,Heritage,0,0,2,,,,0
 w49175978,Tirumalai Nayak Palace,Madurai,9.914874,78.123872,sight,castle,Heritage,1,0,11,,,,1
 w446674981,Udayagiriswararkoil,Madurai,9.903464,78.252852,sight,monument,Heritage,0,0,3,,,,0
@@ -3854,7 +3833,7 @@ r19107019,Lower Waterfall,Manali,32.276111,77.170787,activity,hiking_route,Activ
 n848344214,Lumba Padh,Manali,32.259481,76.921399,activity,camp_site,Activity,0,0,2,,,,0
 r15802531,Mahili Thach to Kasheri,Manali,32.180521,77.13322,activity,hiking_route,Activity,0,0,4,,,,0
 r14045789,Majach Meadows,Manali,32.296937,77.154265,activity,hiking_route,Activity,0,0,4,,,,0
-w1152784765,Majach to Burwa,Manali,32.280291,77.158841,activity,hiking_route,Activity,0,0,7,,,,0
+w1052447238,Majach to Burwa,Manali,32.280605,77.153649,activity,hiking_route,Activity,0,0,7,,,,0
 r15907009,Manali - Chiyal - Kanial,Manali,32.231038,77.18131,activity,hiking_route,Activity,0,0,4,,,,0
 r15505404,Manali - Mathiana,Manali,32.249371,77.193123,activity,hiking_route,Activity,0,0,4,,,,0
 r15504737,Manali - Old Manali,Manali,32.252272,77.182419,activity,hiking_route,Activity,0,0,4,,,,0
@@ -3912,25 +3891,25 @@ r15508304,Shangchar - Shegli,Manali,32.160436,77.142983,activity,hiking_route,Ac
 r17565234,Shegli to Thoti Campsite,Manali,32.168017,77.138662,activity,hiking_route,Activity,0,0,6,,,,0
 n10677686538,Shepheard campsite,Manali,32.332947,76.955189,activity,camp_site,Activity,0,0,6,,,no,0
 n10677686542,Shepheard shelter,Manali,32.338645,76.949878,activity,camp_site,Activity,0,0,6,,,no,0
-n10677686540,Shepher campsite,Manali,32.358277,76.994054,activity,camp_site,Activity,0,0,2,,,,0
 n10677686536,Shepher campsite,Manali,32.181066,76.948687,activity,camp_site,Activity,0,0,2,,,,0
+n10677686539,Shepher campsite,Manali,32.356799,76.986609,activity,camp_site,Activity,0,0,2,,,,0
 n9106441774,Shepherd camp,Manali,32.266993,77.201143,activity,camp_site,Activity,0,0,8,,,,0
-n10929170786,Shepherd camp,Manali,32.242468,77.143129,activity,camp_site,Activity,0,0,2,,,,0
 n10929143497,Shepherd camp,Manali,32.208902,77.162476,activity,camp_site,Activity,0,0,2,,,,0
+n10929170786,Shepherd camp,Manali,32.242468,77.143129,activity,camp_site,Activity,0,0,2,,,,0
 n10931465175,Shepherd camp,Manali,32.194595,77.154647,activity,camp_site,Activity,0,0,2,,,,0
-n9192749976,Shepherd camp,Manali,32.109198,77.017321,activity,camp_site,Activity,0,0,2,,,,0
 n9192745011,Shepherd camp,Manali,32.102834,76.991123,activity,camp_site,Activity,0,0,2,,,,0
+n9192749976,Shepherd camp,Manali,32.109198,77.017321,activity,camp_site,Activity,0,0,2,,,,0
 n9513782289,Shepherd hut,Manali,32.244973,77.20102,activity,camp_site,Activity,0,0,2,,,,0
 n9260943380,Shepherd's,Manali,32.051806,76.980881,activity,camp_site,Activity,0,0,2,,,,0
-n8903520386,Shepherd's camp,Manali,32.230992,77.157894,activity,camp_site,Activity,0,0,2,,,,0
 n10883143801,Shepherd's camp,Manali,32.200878,77.175556,activity,camp_site,Activity,0,0,2,,,,0
-n8903520387,Shepherd's camp,Manali,32.258915,77.135495,activity,camp_site,Activity,0,0,2,,,,0
-n9670314449,Shepherd's camp,Manali,32.288087,77.148177,activity,camp_site,Activity,0,0,2,,,,0
-n9682744270,Shepherd's camp,Manali,32.180752,77.224231,activity,camp_site,Activity,0,0,2,,,,0
-n11809527311,Shepherd's camp,Manali,32.155033,77.200405,activity,camp_site,Activity,0,0,2,,,,0
 n11226357113,Shepherd's camp,Manali,32.161369,77.278739,activity,camp_site,Activity,0,0,2,,,,0
-n9260950634,Shepherd's camp,Manali,32.051161,77.051065,activity,camp_site,Activity,0,0,2,,,,0
+n11809527311,Shepherd's camp,Manali,32.155033,77.200405,activity,camp_site,Activity,0,0,2,,,,0
+n8903520386,Shepherd's camp,Manali,32.230992,77.157894,activity,camp_site,Activity,0,0,2,,,,0
+n8903520387,Shepherd's camp,Manali,32.258915,77.135495,activity,camp_site,Activity,0,0,2,,,,0
 n9260950356,Shepherd's camp,Manali,32.055755,76.97747,activity,camp_site,Activity,0,0,2,,,,0
+n9260950634,Shepherd's camp,Manali,32.051161,77.051065,activity,camp_site,Activity,0,0,2,,,,0
+n9670273414,Shepherd's camp,Manali,32.289595,77.147169,activity,camp_site,Activity,0,0,2,,,,0
+n9682744270,Shepherd's camp,Manali,32.180752,77.224231,activity,camp_site,Activity,0,0,2,,,,0
 n9795007616,Shepherds camp,Manali,32.175807,77.240843,activity,camp_site,Activity,0,0,2,,,,0
 n10148851885,Shepherds' camp,Manali,32.2342,77.238707,activity,camp_site,Activity,0,0,2,,,,0
 n10148843939,Shepherds'camp,Manali,32.242946,77.271176,activity,camp_site,Activity,0,0,2,,,,0
@@ -3994,7 +3973,6 @@ n5612193343,CB-12,Manali,32.332517,77.54859,nature,peak,Nature,0,0,4,,,,0
 n5612193341,CB-14,Manali,32.371167,77.566918,nature,peak,Nature,0,0,4,,,,0
 n5612193337,CB-33 MINAR,Manali,32.471691,77.486602,nature,peak,Nature,0,0,4,,,,0
 n7688038988,CB18,Manali,32.327892,77.521068,nature,peak,Nature,0,0,2,,,,0
-n10148843938,Cave,Manali,32.233217,77.243393,nature,cave_entrance,Nature,0,0,2,,,,0
 n9774201476,Chachi Mug,Manali,32.533753,77.134323,nature,peak,Nature,0,0,4,,,,0
 n9658586199,Crystal waterfall,Manali,32.142113,77.204918,nature,waterfall,Nature,0,0,2,,,,0
 n806307629,Deo Tibba,Manali,32.195623,77.382522,nature,peak,Nature,1,0,6,,,,1
@@ -4004,8 +3982,8 @@ n10939757392,Falls,Manali,32.193238,77.185569,nature,waterfall,Nature,0,0,2,,,,0
 n10948655117,Falls,Manali,32.282473,77.151656,nature,waterfall,Nature,0,0,2,,,,0
 n10929155735,Falls 138m,Manali,32.206419,77.180932,nature,waterfall,Nature,0,0,2,,,,0
 w1066005478,Falls 150m,Manali,32.375721,77.172687,nature,waterfall,Nature,0,0,2,,,,0
-w1066005482,Falls 45m,Manali,32.370331,77.206081,nature,waterfall,Nature,0,0,2,,,,0
 w1066005480,Falls 45m,Manali,32.183759,77.342112,nature,waterfall,Nature,0,0,2,,,,0
+w1066005482,Falls 45m,Manali,32.370331,77.206081,nature,waterfall,Nature,0,0,2,,,,0
 w1066005486,Falls 56m,Manali,32.184424,77.244314,nature,waterfall,Nature,0,0,2,,,,0
 w1066005526,Falls 74m,Manali,32.363284,77.080182,nature,waterfall,Nature,0,0,2,,,,0
 w1066005488,Falls 75m,Manali,32.345252,77.234259,nature,waterfall,Nature,0,0,2,,,,0
@@ -4107,11 +4085,11 @@ n10931524429,Kullu valley view,Manali,32.1856,77.16604,sight,viewpoint,Viewpoint
 n9758050910,Kullu valley viewpoint,Manali,32.257447,77.219441,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5156228121,Lamadugh,Manali,32.236396,77.146982,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n10792589916,Mahili,Manali,32.185185,77.146029,sight,viewpoint,Viewpoint,0,0,3,Kullu Valley viewpoint,,,0
-n10925686827,Manali viewpoint,Manali,32.24767,77.194192,sight,viewpoint,Viewpoint,0,0,2,,,,0
+n10854923559,Manali viewpoint,Manali,32.244354,77.201106,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n11176429300,Manali viewpoint,Manali,32.240789,77.176742,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n12871539665,Manalsu Nala Viewpoint,Manali,32.253975,77.167016,sight,viewpoint,Viewpoint,0,0,2,,,,0
-n9658615323,Manalsu valley viewpoint,Manali,32.254806,77.196682,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n10678177631,Manalsu valley viewpoint,Manali,32.225173,77.053943,sight,viewpoint,Viewpoint,0,0,2,,,,0
+n9658615323,Manalsu valley viewpoint,Manali,32.254806,77.196682,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n6473296596,Meadow viewpoint,Manali,32.241429,77.144574,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n2221375398,Mt. Phatru,Manali,32.315502,77.146546,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4347327289,Museum of Himachal Culture & Folk Arts,Manali,32.246144,77.180771,sight,museum,Museum,0,0,3,,,,0
@@ -4129,7 +4107,6 @@ n6420467285,Valley viewpoint,Manali,32.262306,77.177595,sight,viewpoint,Viewpoin
 n9236908117,Vashisht View,Manali,32.26602,77.172478,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n12045944169,View of valley and waterfall across,Manali,32.266455,77.175422,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n6640051586,View to waterfall,Manali,32.266435,77.17633,sight,viewpoint,Viewpoint,0,0,2,,,,0
-n13242948876,Viewpoint,Manali,32.151563,77.185742,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5051326721,Wayland viewpoint,Manali,32.252354,77.156148,sight,viewpoint,Viewpoint,0,0,3,,,,0
 w199050473,Manasa Amusement Park,Mangalore,12.926613,74.896382,activity,theme_park,Activity,0,0,2,,,,0
 n6312913179,Pererira Aquarium,Mangalore,12.984736,74.801574,activity,aquarium,Activity,0,0,2,,,,0
@@ -4219,6 +4196,7 @@ n4323097073,Kesarvale Spring,Margao,15.38347,73.92904,nature,waterfall,Nature,0,
 w314569392,Little Canaguinim Beach,Margao,15.119279,73.940603,nature,beach,Beach,0,0,2,,,,0
 w1074176103,Macasana Lake,Margao,15.289217,74.052929,nature,lake,Nature,0,0,5,,,,0
 n10943523192,Mainapi Waterfall,Margao,15.069379,74.256892,nature,waterfall,Nature,0,0,3,,,,0
+n5866107232,Mannawaall Waterfall,Margao,15.361674,74.04297,nature,waterfall,Nature,0,0,5,,,,0
 w221469527,Marjoda Beach,Margao,15.320037,73.89831,nature,beach,Beach,0,0,3,,,,0
 n11881084713,Maruti Gad,Margao,15.256557,74.106723,nature,peak,Nature,0,0,2,,,,0
 n13232996670,Mitmati Maddi,Margao,15.131311,74.322188,nature,peak,Nature,0,0,2,,,,0
@@ -4264,7 +4242,6 @@ n4319289847,Kuskem Waterfall,Margao,15.299214,74.124047,sight,attraction,Heritag
 w1475176294,Laterite Ruins,Margao,15.259261,73.938434,sight,ruins,Heritage,0,0,3,,,,0
 n4713099789,Louisa by the sea,Margao,15.172806,73.946672,sight,attraction,Heritage,0,0,3,,,,0
 n4311034924,Maison Rodesa,Margao,15.350229,73.891961,sight,attraction,Heritage,0,0,2,,,,0
-n5866107232,Mannawaall Waterfall,Margao,15.361674,74.04297,sight,attraction,Heritage,0,0,5,,,,0
 n4307051289,Milsim Goa PaintBall,Margao,15.32193,73.939759,sight,attraction,Heritage,0,0,2,,,,0
 n4269324291,Monte Hill Viewpoint,Margao,15.279806,73.962531,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n4238756592,Nagesh Gardens,Margao,15.242618,74.03319,sight,attraction,Heritage,0,0,2,,,,0
@@ -4294,8 +4271,8 @@ w335568944,Aerovat Kunda,Mathura,27.469676,77.438225,nature,lake,Nature,0,0,5,,,
 w335565193,Govinda Kunda,Mathura,27.468633,77.440682,nature,lake,Nature,0,0,5,,,,0
 w335571300,Lalita Kunda,Mathura,27.526233,77.493095,nature,lake,Nature,0,0,3,,,,0
 w335565200,Manasi Ganga,Mathura,27.498953,77.463881,nature,lake,Nature,0,0,7,,,,0
-w335571302,Radha Kund,Mathura,27.525143,77.491346,nature,lake,Nature,0,0,3,,,,0
 w335565197,Radha Kund,Mathura,27.510169,77.475577,nature,lake,Nature,0,0,3,,,,0
+w335571302,Radha Kund,Mathura,27.525143,77.491346,nature,lake,Nature,0,0,3,,,,0
 w335565198,Shankarshan Kund,Mathura,27.470931,77.44504,nature,lake,Nature,0,0,3,,,,0
 w335571305,Shyama Kunda,Mathura,27.525201,77.49253,nature,lake,Nature,0,0,3,,,,0
 w335568947,Surabhi Kunda,Mathura,27.467132,77.436148,nature,lake,Nature,0,0,5,,,,0
@@ -4445,7 +4422,7 @@ w461278314,Khandeshwar lake,Mumbai,19.010608,73.108666,nature,lake,Nature,0,0,3,
 w964985070,Kharegaon Lake,Mumbai,19.202406,73.003959,nature,lake,Nature,0,0,6,,,,0
 w1153705943,Kharghar Lake,Mumbai,19.073237,73.069569,nature,lake,Nature,0,0,6,,,,0
 n10717919874,Kharghar Waterfalls,Mumbai,19.032954,73.053714,nature,waterfall,Nature,0,0,6,,,,0
-w520517862,Khidkali Lake,Mumbai,19.155477,73.064692,nature,lake,Nature,0,0,3,,,,0
+w520517670,Khidkali Lake,Mumbai,19.156043,73.064726,nature,lake,Nature,0,0,3,,,,0
 n11438437871,Kihim Beach,Mumbai,18.724227,72.864686,nature,beach,Beach,0,0,2,,,,0
 w1124686320,Kihim Talav,Mumbai,18.728784,72.870034,nature,lake,Nature,0,0,3,,,,0
 n13176779961,Koknipada Waterfall,Mumbai,19.240065,72.957148,nature,waterfall,Nature,0,0,5,,,,0
@@ -4454,7 +4431,6 @@ w54227837,Krishna Lake,Mumbai,18.986451,73.110109,nature,lake,Nature,0,0,3,,,,0
 w1472902875,Lake Mansarovar,Mumbai,19.302389,72.939238,nature,lake,Nature,0,0,6,,,,0
 w556482954,Lotus Lake,Mumbai,19.177339,72.965512,nature,lake,Nature,0,0,3,,,,0
 w682935903,Madadre Lake,Mumbai,19.205029,72.974747,nature,lake,Nature,0,0,3,,,,0
-w204704714,Madh Chowpatty,Mumbai,19.151039,72.786713,nature,beach,Beach,0,0,6,,,,0
 w53366367,Mahim Beach,Mumbai,19.044076,72.838153,nature,beach,Beach,0,0,2,,,,0
 w35358060,Makhamali Talaav,Mumbai,19.19847,72.971368,nature,lake,Nature,0,0,3,,,,0
 n8797252337,Malanggad,Mumbai,19.110181,73.178683,nature,peak,Nature,0,0,3,,,,0
@@ -4550,6 +4526,7 @@ n4230836350,Kwan Tai Shek Temple,Mumbai,18.96605,72.846772,sight,attraction,Heri
 n12811698532,Lagdu Pedru Chawl,Mumbai,19.047775,72.85464,sight,monument,Heritage,0,0,2,,,,0
 n4640203708,Legendary New India Monument,Mumbai,19.114788,72.838832,sight,monument,Heritage,0,0,2,,,,0
 n1579184280,Loop Gallery,Mumbai,19.103719,72.851007,sight,viewpoint,Viewpoint,0,0,2,,,,0
+w204704714,Madh Chowpatty,Mumbai,19.151039,72.786713,sight,attraction,Heritage,0,0,6,,,,0
 r6417294,Madh Fort,Mumbai,19.13234,72.794773,sight,fort,Heritage,1,0,6,,,,1
 w115064729,Magen David Synagogue,Mumbai,18.96695,72.832078,sight,place_of_worship,Temple,1,0,8,,,,1
 w496634583,Mahakali Caves,Mumbai,19.130467,72.873629,sight,archaeological_site,Heritage,1,0,7,,,,1
@@ -4694,8 +4671,8 @@ r15401924,KDHP Tea Museum,Munnar,10.094291,77.050498,sight,museum,Museum,1,0,14,
 n6429953786,Looking Stone,Munnar,10.180809,77.110864,sight,attraction,Heritage,0,0,2,,,,0
 n7474344479,Nadukani View Point,Munnar,9.962596,77.054153,sight,attraction,Heritage,0,0,2,,,,0
 n354073879,Periya Canal Waterfall,Munnar,10.037664,77.155439,sight,attraction,Heritage,0,0,3,,,,0
+n1668736807,Photo Point,Munnar,10.039943,77.11287,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n4621817191,Photo Point,Munnar,10.092355,77.089065,sight,viewpoint,Viewpoint,0,0,3,,,,0
-n4620707789,Photo Point,Munnar,10.04529,77.11248,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n4625636189,Point #10,Munnar,10.034681,77.116219,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n4625626491,Point #11,Munnar,10.034724,77.115789,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n4625626490,Point #9,Munnar,10.034604,77.116856,sight,viewpoint,Viewpoint,0,0,3,,,,0
@@ -4770,8 +4747,7 @@ w28950421,Sri Chamarajendra Zoological Garden,Mysore,12.300775,76.667576,activit
 n6075120822,Balamuri Waterfall,Mysore,12.413395,76.605961,nature,waterfall,Nature,0,0,3,,,,0
 n3898777628,Bebi Betta,Mysore,12.510235,76.57619,nature,peak,Nature,0,0,4,,,,0
 w361381691,Bogadi lake,Mysore,12.309561,76.60274,nature,lake,Nature,0,0,4,,,,0
-w151380456,Brindavan Gardens,Mysore,12.420934,76.57443,nature,garden,Nature,1,0,5,,,,1
-n1575083830,Chamundi Hill,Mysore,12.272402,76.670394,nature,peak,Nature,0,0,6,,,,0
+w151380454,Brindavan Gardens,Mysore,12.428114,76.573799,nature,garden,Nature,1,0,5,,,,1
 w963989370,Chikatte Kere,Mysore,12.575503,76.553093,nature,lake,Nature,0,0,7,,,,0
 w54626189,Devikere,Mysore,12.237667,76.333063,nature,lake,Nature,0,0,5,,,,0
 w963989371,Doddakere,Mysore,12.577988,76.546014,nature,lake,Nature,0,0,7,,,,0
@@ -4789,9 +4765,10 @@ n5725420321,Armoury House,Mysore,12.420348,76.688628,sight,monument,Heritage,0,0
 n5727601821,Armoury House,Mysore,12.424374,76.677117,sight,monument,Heritage,0,0,2,,,,0
 n7076853485,Bird Sanctuary,Mysore,12.28473,76.656378,sight,attraction,Heritage,0,0,4,,,,0
 n4585165992,Birds Watch Tower,Mysore,12.303731,76.676206,sight,attraction,Heritage,0,0,3,,,,0
+n1575083830,Chamundi Hill,Mysore,12.272402,76.670394,sight,viewpoint,Viewpoint,0,0,6,,,,0
 n4585237547,Funway,Mysore,12.295285,76.683099,sight,attraction,Heritage,0,0,3,,,,0
 n5235925922,House of R. K. Narayan,Mysore,12.327932,76.640705,sight,museum,Museum,0,0,6,,,,0
-w426391244,Indira Gandhi Rashtriya Manav Sangrahalaya,Mysore,12.314496,76.65752,sight,museum,Museum,0,0,4,,,,0
+n3300627908,Indira Gandhi Rashtriya Manav Sangrahalaya,Mysore,12.314503,76.657605,sight,museum,Museum,0,0,4,,,,0
 n3390746047,KPC Glass House,Mysore,12.310159,76.648064,sight,attraction,Heritage,0,0,2,,,,0
 n542404091,Kaveri Kala Kuteera,Mysore,12.291861,76.632179,sight,museum,Museum,0,0,3,,,,0
 n3224357583,Krishnaraja Wodeyar,Mysore,12.308784,76.653066,sight,monument,Heritage,0,0,3,,,,0
@@ -4845,7 +4822,7 @@ w629487561,Narrow Guage Rail Museum,Nagpur,21.165219,79.090426,sight,museum,Muse
 w262655781,Raman Science Centre,Nagpur,21.145866,79.09391,sight,museum,Museum,0,0,2,,,,0
 w246262219,Sitabuldi Fort,Nagpur,21.148407,79.08405,sight,castle,Heritage,1,0,6,,,,1
 w386910162,Stone Circles of Junapani,Nagpur,21.1961,78.999187,sight,archaeological_site,Heritage,1,0,4,,,,1
-w664967757,Swami Vivekanand Smarak,Nagpur,21.124664,79.043811,sight,attraction,Heritage,0,0,2,,,,0
+n4705180094,Swami Vivekanand Smarak,Nagpur,21.124592,79.043679,sight,attraction,Heritage,0,0,2,,,,0
 n2533218217,Zero Mile Stone,Nagpur,21.149788,79.080686,sight,monument,Heritage,1,0,6,,,,1
 n7394113691,book monument,Nagpur,21.14444,79.074113,sight,monument,Heritage,0,0,2,,,,0
 n7394129914,horticultre monument,Nagpur,21.140383,79.072584,sight,monument,Heritage,0,0,2,,,,0
@@ -4896,10 +4873,9 @@ n3908321628,Raj Bhavan,Nainital,29.374126,79.456935,sight,attraction,Heritage,0,
 n1804607577,Snow View,Nainital,29.395226,79.461999,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n11174976508,Sunset Point,Nainital,29.327525,79.478378,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n10206693777,Tea Garden,Nainital,29.389114,79.541619,sight,attraction,Heritage,0,0,2,,,,0
-n8509401685,Waterfall,Nainital,29.274125,79.464921,sight,attraction,Heritage,0,0,2,,,,0
-w1527595310,Anjaneri,Nashik,19.92961,73.576794,activity,hiking_route,Activity,0,0,5,,,,0
+w1527595309,Anjaneri,Nashik,19.894051,73.587982,activity,hiking_route,Activity,0,0,5,,,,0
 r15551633,Dubera Fort,Nashik,19.789001,73.970966,activity,hiking_route,Activity,0,0,4,,,,0
-w866159214,Durg bhandar,Nashik,19.918129,73.531188,activity,hiking_route,Activity,0,0,5,,,,0
+w1150865736,Durg bhandar,Nashik,19.923817,73.524663,activity,hiking_route,Activity,0,0,5,,,,0
 r20950777,EST 01,Nashik,19.901003,73.587031,activity,hiking_route,Activity,0,0,10,,,,0
 r15551601,Pandav Leni,Nashik,19.941714,73.748741,activity,hiking_route,Activity,0,0,4,,,,0
 w574967035,Pavanraj Aquarium,Nashik,20.032647,73.807037,activity,aquarium,Activity,0,0,3,,,,0
@@ -4947,7 +4923,6 @@ n11698612191,NCC Bhawan Rohini,New Delhi,28.731668,77.139459,activity,camp_site,
 n4984201651,Spider,New Delhi,28.674742,77.198707,activity,climbing,Activity,0,0,3,,,,0
 w625482881,Splash Water Park,New Delhi,28.802894,77.144569,activity,water_park,Activity,0,0,3,,,,0
 w528700911,Yamuna Biodiversity Park,New Delhi,28.739474,77.214118,activity,nature_reserve,Activity,0,0,2,,,,0
-n13622236726,265,New Delhi,28.624791,77.327746,nature,peak,Nature,0,0,2,,,,0
 w80936826,Ajmal Khan Park,New Delhi,28.653457,77.197031,nature,park,Nature,1,0,5,,,,1
 w290620874,Coronation Park,New Delhi,28.722474,77.197114,nature,park,Nature,1,0,4,,,,1
 w792065729,DTU Lake,New Delhi,28.749618,77.113002,nature,lake,Nature,0,0,5,Permanent Lake residing in the campus of Delhi Technological University. Depth of the lake is deeper than 6 feet.,,,0
@@ -4960,9 +4935,6 @@ w76849338,Sanjay Lake,New Delhi,28.615535,77.29975,nature,lake,Nature,1,0,5,,,,1
 w1479140394,Serpentine Lake,New Delhi,28.682565,77.217739,nature,lake,Nature,0,0,3,,,,0
 w480075080,Shahdara Lake,New Delhi,28.675464,77.277927,nature,lake,Nature,0,0,5,,,,0
 w78473710,Shalimar Bagh,New Delhi,28.718193,77.150268,nature,park,Nature,1,0,7,,sunrise-sunset,,1
-n4475201989,188,New Delhi,28.688753,77.124054,sight,attraction,Heritage,0,0,3,,,,0
-n4475127991,191,New Delhi,28.688866,77.124417,sight,attraction,Heritage,0,0,3,,,,0
-n4474634990,192,New Delhi,28.688865,77.124289,sight,attraction,Heritage,0,0,3,,,,0
 w500411689,Agrasen ki Baoli,New Delhi,28.626093,77.225012,sight,archaeological_site,Heritage,1,0,13,,,,1
 n2940449157,Ajitgarh,New Delhi,28.671362,77.210762,sight,monument,Heritage,1,0,7,,,,1
 w973086049,Ajmeri Gate,New Delhi,28.646253,77.224004,sight,attraction,Heritage,1,0,7,,,,1
@@ -5184,10 +5156,10 @@ w44130848,Bogmalo Beach,Panaji,15.369406,73.832672,nature,beach,Beach,0,0,3,,,,0
 w1326440843,CKF Beach,Panaji,15.42111,73.894437,nature,beach,Beach,0,0,3,,,,0
 w89923152,Cacra Beach,Panaji,15.450655,73.837425,nature,beach,Beach,0,0,2,,,,0
 w324649822,Caranzalem Beach,Panaji,15.464023,73.802629,nature,beach,Beach,0,0,2,,,,0
-n7550449986,Cave,Panaji,15.596111,73.936446,nature,cave_entrance,Nature,0,0,2,,,,0
 w152822719,Coco Beach,Panaji,15.499779,73.790182,nature,beach,Beach,0,0,2,,,,0
 w406007384,Dias Beach,Panaji,15.453385,73.801315,nature,beach,Beach,0,0,2,,,,0
 n13318454149,Goura Dongar,Panaji,15.627294,74.07978,nature,peak,Nature,0,0,3,,,,0
+w851274576,Grandmother's Hole Beach,Panaji,15.405988,73.786356,nature,beach,Beach,0,0,4,,,,0
 w313669180,Hansa Beach,Panaji,15.376059,73.813325,nature,beach,Beach,0,0,2,,,,0
 n4283836891,Harvalem Caves,Panaji,15.552561,74.023036,nature,cave_entrance,Nature,1,0,5,,,,1
 n4146369113,Harvalem Waterfall,Panaji,15.551011,74.026724,nature,waterfall,Nature,0,0,3,,,,0
@@ -5206,7 +5178,6 @@ n13318454147,Panji Dongar,Panaji,15.640105,74.092011,nature,peak,Nature,0,0,3,,,
 w1155270348,Quegdevelim Beach,Panaji,15.497449,73.798339,nature,beach,Beach,0,0,2,,,,0
 n13257096538,Shirent Waterfall,Panaji,15.485369,73.881551,nature,waterfall,Nature,0,0,2,,,,0
 n11222195737,Shivling Waterfalls,Panaji,15.598662,74.12115,nature,waterfall,Nature,0,0,3,,,,0
-w295971219,Siridao Beach,Panaji,15.438347,73.860465,nature,beach,Beach,0,0,3,,,,0
 w274202647,Vaddem Lake,Panaji,15.399662,73.827747,nature,lake,Nature,0,0,3,,,,0
 n13318454153,Vagheri,Panaji,15.593319,74.101238,nature,peak,Nature,0,0,2,,,,0
 n11302719140,Vajra Sakkal Falls,Panaji,15.658185,74.107225,nature,waterfall,Nature,0,0,2,,,,0
@@ -5244,7 +5215,6 @@ n13801701911,Gandaulim Fort Ruins,Panaji,15.513838,73.943943,sight,ruins,Heritag
 w1349157733,Gate of St. Paul's College,Panaji,15.4993,73.918252,sight,ruins,Heritage,1,0,10,,,,1
 w1349252643,Gate of the Palace of Adil Shah,Panaji,15.505569,73.91417,sight,ruins,Heritage,0,0,3,,,,0
 w405523397,Goa Museum,Panaji,15.500671,73.830033,sight,museum,Museum,0,0,5,,,,0
-w851274576,Grandmother's Hole Beach,Panaji,15.405988,73.786356,sight,attraction,Heritage,0,0,4,,,,0
 n1328544701,Hanuman temple,Panaji,15.489733,73.828496,sight,monument,Heritage,0,0,4,,,,0
 n7834475987,Henry the Navigator Marker,Panaji,15.493916,73.818442,sight,monument,Heritage,0,0,4,,,,0
 w430464484,Houses of Goa,Panaji,15.530321,73.840621,sight,museum,Museum,0,0,4,,,,0
@@ -5273,6 +5243,7 @@ r18159872,Santa Monica Boat Jetty,Panaji,15.499912,73.836469,sight,attraction,He
 w1445696271,Santana Church,Panaji,15.478163,73.891405,sight,place_of_worship,Temple,1,0,5,,,,1
 w1379887485,Science Center,Panaji,15.477817,73.808938,sight,attraction,Heritage,1,0,4,,,,1
 w201243945,Se Cathedral,Panaji,15.503761,73.912195,sight,place_of_worship,Temple,1,0,16,,,,1
+n5079152621,Siridao Beach,Panaji,15.430901,73.862042,sight,attraction,Heritage,0,0,3,,,,0
 n11805139762,Sluice Gate,Panaji,15.539301,73.903731,sight,ruins,Heritage,0,0,2,,,,0
 w1349153514,Solar Souto Maior,Panaji,15.499716,73.894088,sight,museum,Museum,0,0,2,,,,0
 w634162707,St Bartholomew's Church,Panaji,15.547565,73.879687,sight,place_of_worship,Temple,1,0,5,,,,1
@@ -5411,7 +5382,7 @@ n626906866,Solitude Farm,Puducherry,12.00641,79.797843,sight,viewpoint,Viewpoint
 n11687545428,Sri Aurobindo Ashram,Puducherry,11.936707,79.83424,sight,attraction,Heritage,0,0,2,,,,0
 w333937093,Sri Manakula Vinayagar Temple,Puducherry,11.935813,79.83359,sight,place_of_worship,Temple,1,0,10,,,,1
 w1317522732,St. Andrews Church,Puducherry,11.931354,79.793898,sight,place_of_worship,Temple,1,0,14,,,,1
-n10304747322,State Emblem of India,Puducherry,11.935671,79.836225,sight,monument,Heritage,0,0,5,,,,0
+n10304747321,State Emblem of India,Puducherry,11.936001,79.836292,sight,monument,Heritage,0,0,5,,,,0
 n3419126281,Statue of Doctor Bhimrao Ramji Ambedkar,Puducherry,11.929118,79.834828,sight,monument,Heritage,0,0,3,,,,0
 n626906874,Stonehenge,Puducherry,12.007053,79.80025,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5267713510,Temple Column,Puducherry,11.934168,79.833922,sight,monument,Heritage,0,0,2,,,,0
@@ -5436,7 +5407,7 @@ w246996059,Pimple Gurav Dinosaur Park,Pune,18.592192,73.817575,activity,theme_pa
 n7195554501,Raje Shivaji Climbing Wall,Pune,18.525388,73.851134,activity,climbing,Activity,0,0,3,,,,0
 w752309313,Sentosa Water Park,Pune,18.653535,73.730934,activity,water_park,Activity,0,0,2,,,,0
 r11855988,Sinhagad,Pune,18.362285,73.760495,activity,hiking_route,Activity,0,0,4,,,,0
-w856781949,Sinhagad Trail,Pune,18.375651,73.766646,activity,hiking_route,Activity,0,0,5,,,,0
+w856781948,Sinhagad Trail,Pune,18.369939,73.762511,activity,hiking_route,Activity,0,0,5,,,,0
 r15554674,Sinhagad to Rajgad,Pune,18.310966,73.734037,activity,hiking_route,Activity,0,0,4,,,,0
 n10316607574,Sujit Aquariums,Pune,18.50149,73.813757,activity,aquarium,Activity,0,0,8,,,,0
 n4327203990,cloud 9,Pune,18.47727,73.910724,activity,camp_site,Activity,0,0,2,,,,0
@@ -5574,8 +5545,8 @@ n11740072807,"Stay in Camp, Book A Camp 007",Rishikesh,30.140802,78.382101,activ
 r15720296,Tapovan to Barkot,Rishikesh,30.147143,78.317315,activity,hiking_route,Activity,0,0,4,,,,0
 n1413103952,elephant zone end point,Rishikesh,30.10209,78.311615,activity,zoo,Activity,0,0,2,,,,0
 n4984042431,Arundhati Guha Cave,Rishikesh,30.114325,78.430844,nature,cave_entrance,Nature,0,0,3,,Mo-Su 15:00-18:00,,0
-n3817274901,Baba cave,Rishikesh,30.110477,78.31119,nature,cave_entrance,Nature,0,0,2,,,,0
 n3152696123,Baba cave,Rishikesh,30.102064,78.321978,nature,cave_entrance,Nature,0,0,2,,,,0
+n3817274901,Baba cave,Rishikesh,30.110477,78.31119,nature,cave_entrance,Nature,0,0,2,,,,0
 w378691141,Bairaj lake,Rishikesh,30.08416,78.292269,nature,lake,Nature,0,0,3,,,,0
 n6422668994,Budi Banj,Rishikesh,30.153811,78.65623,nature,peak,Nature,0,0,3,,,,0
 n6422582364,Dhanota,Rishikesh,30.092675,78.559992,nature,peak,Nature,0,0,3,,,,0
@@ -5586,8 +5557,8 @@ n5050016221,Neer Gahr Waterfall,Rishikesh,30.143076,78.340577,nature,waterfall,N
 n4700827723,Patna Waterfalls,Rishikesh,30.11431,78.365186,nature,waterfall,Nature,0,0,3,,,,0
 n6433738831,Rataoli,Rishikesh,30.342834,78.541442,nature,peak,Nature,0,0,3,,,,0
 n6388582588,Secret Waterfall,Rishikesh,30.149418,78.315622,nature,waterfall,Nature,0,0,2,,,,0
-n5255145623,Aarti,Rishikesh,30.112407,78.308211,sight,attraction,Heritage,0,0,2,,,,0
 n11167006080,Aarti,Rishikesh,30.122728,78.311527,sight,attraction,Heritage,0,0,2,,,,0
+n5255145623,Aarti,Rishikesh,30.112407,78.308211,sight,attraction,Heritage,0,0,2,,,,0
 w102677527,Beatles Ashram,Rishikesh,30.112552,78.312231,sight,museum,Museum,0,0,5,,Mo-Su 08:00-18:00,,0
 n3152711632,Beatles room,Rishikesh,30.111398,78.312543,sight,attraction,Heritage,0,0,2,,,,0
 n1184535989,Blue Shiva,Rishikesh,30.121236,78.313166,sight,monument,Heritage,0,0,4,,,,0
@@ -5599,7 +5570,6 @@ n6346916493,Saptpuri Complex (Beatles Accommodation),Rishikesh,30.108715,78.3130
 n6388540190,Shiva Cave,Rishikesh,30.160723,78.318357,sight,monument,Heritage,0,0,2,,,,0
 n11846505069,Viewpoint over Rishikesh,Rishikesh,30.152856,78.295747,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5423911321,Vindhya Wasini Temple,Rishikesh,29.996228,78.318162,sight,monument,Heritage,0,0,3,,,,0
-n2657561835,Waterfall,Rishikesh,30.122901,78.35269,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n6009154286,yash’s farm,Rishikesh,30.135952,78.368098,sight,viewpoint,Viewpoint,0,0,2,,,,0
 w1229915760,Kurumbapatti Zoo-Park,Salem,11.745749,78.170774,activity,zoo,Activity,0,0,7,,,,0
 w842803265,Paravasa Ulagam,Salem,11.526863,78.150064,activity,theme_park,Activity,0,0,4,,,,0
@@ -5659,19 +5629,19 @@ n5353042095,Mawsawa,Shillong,25.305987,91.694229,nature,waterfall,Nature,0,0,3,,
 w1223701949,Mawtneng Lake,Shillong,25.722882,92.038728,nature,lake,Nature,0,0,6,,,,0
 n3933644720,Nohkalikai Falls,Shillong,25.275655,91.686585,nature,waterfall,Nature,1,0,5,,,,1
 n11752759012,Palong Syiem,Shillong,25.31264,91.760473,nature,cave_entrance,Nature,0,0,2,,,,0
-n5381302076,Pdem Falls,Shillong,25.34647,92.112194,nature,waterfall,Nature,0,0,3,,,,0
+n5381302073,Pdem Falls,Shillong,25.344518,92.112628,nature,waterfall,Nature,0,0,3,,,,0
 n6507587885,Phe Phe Falls,Shillong,25.350389,92.161451,nature,waterfall,Nature,0,0,2,,,,0
 n6382932087,Phe Phe Waterfall,Shillong,25.349944,92.16016,nature,waterfall,Nature,0,0,2,,,,0
-n5380914138,Rableng Hill,Shillong,25.472835,91.922751,nature,peak,Nature,0,0,4,,,,0
-n5381238925,Rengthiam,Shillong,25.508866,91.938019,nature,waterfall,Nature,0,0,3,,,,0
 n11768755745,Root Waterfall,Shillong,25.311917,91.759801,nature,waterfall,Nature,0,0,3,,,,0
 n5380914137,Shillong,Shillong,25.530765,91.849528,nature,peak,Nature,0,0,3,,,,0
 n5351785121,Sohpetbneng,Shillong,25.708638,91.923204,nature,peak,Nature,0,0,2,,,,0
 n11752771581,Stieh Maw,Shillong,25.31234,91.760536,nature,waterfall,Nature,0,0,2,,,,0
+n5381238657,Sweet Falls,Shillong,25.560687,91.958546,nature,waterfall,Nature,0,0,3,,,,0
 n9186674625,Symper Peak,Shillong,25.370452,91.587662,nature,peak,Nature,0,0,2,,,,0
+n5380913853,Thangsning,Shillong,25.481478,91.931109,nature,waterfall,Nature,0,0,3,,,,0
 r7323730,Umiam Lake,Shillong,25.65193,91.878724,nature,lake,Nature,1,0,5,,,,1
 n4905125028,Umtynghiang Falls,Shillong,25.298901,91.699261,nature,waterfall,Nature,0,0,4,,,,0
-n5381302824,Wahrashi Falls,Shillong,25.354541,92.061307,nature,waterfall,Nature,0,0,3,,,,0
+n5381302820,Wahrashi Falls,Shillong,25.353271,92.061355,nature,waterfall,Nature,0,0,3,,,,0
 n5352802396,Wei Sawdong,Shillong,25.291632,91.678213,nature,waterfall,Nature,0,0,3,,,,0
 n7025305787,Beadon Bishop Viewpoint,Shillong,25.601524,91.857321,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n10593583435,Brookside Bunglow Rabindranath Tagore Museum,Shillong,25.568907,91.872796,sight,museum,Museum,0,0,5,,,,0
@@ -5684,13 +5654,13 @@ n4411556890,Indira Gandhi National Open University,Shillong,25.605304,91.880324,
 n13076605633,Khyndai Lad,Shillong,25.576,91.882819,sight,monument,Heritage,0,0,2,,,,0
 n5380914438,Laitlum Grand Canyon,Shillong,25.448819,91.911437,sight,viewpoint,Viewpoint,0,0,5,,,,0
 n5380914650,Lumheh Laitkyrhong View Point,Shillong,25.444651,91.895926,sight,viewpoint,Viewpoint,0,0,2,,,,0
+n5380914138,Rableng Hill,Shillong,25.472835,91.922751,sight,attraction,Heritage,0,0,4,,,,0
+n5381238925,Rengthiam,Shillong,25.508866,91.938019,sight,attraction,Heritage,0,0,3,,,,0
 w344537988,Rhino Museum,Shillong,25.571384,91.871442,sight,attraction,Heritage,0,0,2,,,,0
 n245735780,Shillong,Shillong,25.575993,91.882787,sight,attraction,Heritage,1,0,31,,,,1
 n3448029577,Shillong Peak View Point,Shillong,25.547412,91.874989,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n5219524722,State Museum,Shillong,25.569539,91.883943,sight,museum,Museum,0,0,2,,,,0
-n5381238657,Sweet Falls,Shillong,25.560687,91.958546,sight,attraction,Heritage,0,0,3,,,,0
 n5381238666,Sweet Falls View Point,Shillong,25.564951,91.95623,sight,viewpoint,Viewpoint,0,0,2,,,,0
-n5380913853,Thangsning,Shillong,25.481478,91.931109,sight,attraction,Heritage,0,0,3,,,,0
 n11736313935,"Book A Camp 015, Hail Himalayas",Shimla,31.020779,77.155933,activity,camp_site,Activity,0,0,20,,,,0
 w667868257,Chail Wildlife Sanctuary,Shimla,30.968621,77.203068,activity,nature_reserve,Activity,1,0,6,,,,1
 n8557254117,Hail Himalayas Eco Tourism Camping,Shimla,31.020582,77.155781,activity,camp_site,Activity,0,0,8,,24/7,,0
@@ -5713,7 +5683,7 @@ n9817012181,Chul,Shimla,31.167334,77.475672,nature,peak,Nature,0,0,2,,,,0
 n4772286345,Churdhar,Shimla,30.870547,77.480397,nature,peak,Nature,0,0,3,,,,0
 n9441372226,Dhaaron ki Dhar Peak,Shimla,30.886753,77.160282,nature,peak,Nature,0,0,5,This peak has Gurkha Fort built by Jung Bahadur,,,0
 n8286400025,Dhamander,Shimla,31.009315,77.39508,nature,peak,Nature,0,0,2,,,,0
-n9780981201,Jakhoo,Shimla,31.100496,77.183569,nature,peak,Nature,0,0,4,,,,0
+n1010789429,Jakhoo,Shimla,31.101086,77.184273,nature,peak,Nature,0,0,4,,,,0
 n9908022973,Jankhat ka Tibba,Shimla,30.970489,77.527792,nature,peak,Nature,0,0,2,,,,0
 n9768481847,Kali Tibba,Shimla,30.933989,77.204763,nature,peak,Nature,0,0,4,,,,0
 n9441367747,Karol Tibba,Shimla,30.944285,77.101002,nature,peak,Nature,0,0,4,Highest Peak in Solan District.,,,0
@@ -5832,8 +5802,8 @@ w513072011,Handil Sar,Srinagar,34.201547,75.205438,nature,lake,Nature,0,0,3,,,,0
 n9651671435,Harawar,Srinagar,34.234591,74.853463,nature,peak,Nature,0,0,2,,,,0
 n7058555640,Hari Parbat,Srinagar,34.105964,74.81639,nature,peak,Nature,1,0,5,,,,1
 n4080378689,Harmukh,Srinagar,34.40392,74.902006,nature,peak,Nature,0,0,3,,,,0
-w842489587,Hoka Sar,Srinagar,34.158853,75.097319,nature,lake,Nature,0,0,3,,,,0
 w831857038,Hoka Sar,Srinagar,34.299557,75.018559,nature,lake,Nature,0,0,3,,,,0
+w842489586,Hoka Sar,Srinagar,34.161778,75.096504,nature,lake,Nature,0,0,3,,,,0
 n9650682463,Hokasar,Srinagar,34.181897,75.046921,nature,peak,Nature,0,0,2,,,,0
 w842489589,Hosarkar,Srinagar,34.082104,75.198635,nature,lake,Nature,0,0,3,,,,0
 w168100630,Indira Gandhi Memorial Tulip Garden,Srinagar,34.096688,74.880879,nature,garden,Nature,1,0,11,,,,1
@@ -5865,7 +5835,6 @@ n9656173904,Safapura,Srinagar,34.281875,74.713297,nature,peak,Nature,0,0,2,,,,0
 w964177712,Salma Sar,Srinagar,34.334094,75.050201,nature,lake,Nature,0,0,3,,,,0
 w1437105106,Sarbal Lake,Srinagar,34.013392,74.937094,nature,lake,Nature,0,0,3,,,,0
 n9785364286,Seribal (4042),Srinagar,34.178092,75.00914,nature,peak,Nature,0,0,2,,,,0
-w168097578,Shalimar Bagh,Srinagar,34.14958,74.872953,nature,garden,Nature,1,0,6,Mughal Garden founded 1619 A.D.,,,1
 n7059169267,Shankaracharya Hill,Srinagar,34.079043,74.843718,nature,peak,Nature,1,0,5,,,,1
 n6724620713,Shin Mahinu,Srinagar,33.905043,74.432931,nature,peak,Nature,0,0,2,,,,0
 n6724620712,Shup Nag,Srinagar,33.895105,74.444776,nature,peak,Nature,0,0,2,,,,0
@@ -5917,6 +5886,7 @@ n773642288,Parimahal,Srinagar,34.080948,74.876819,sight,viewpoint,Viewpoint,0,0,
 w460796437,Pathar masjid,Srinagar,34.091925,74.805779,sight,place_of_worship,Temple,1,0,9,,,,1
 w1528353163,Raghunath Mandir,Srinagar,34.085619,74.805492,sight,place_of_worship,Temple,1,0,7,,,,1
 w646315940,SPS Museum,Srinagar,34.066808,74.813159,sight,museum,Museum,1,0,8,,,yes,1
+w168097578,Shalimar Bagh,Srinagar,34.14958,74.872953,sight,attraction,Heritage,1,0,6,Mughal Garden founded 1619 A.D.,,,1
 n1794589160,Shankaracharya Reserved Forest,Srinagar,34.079531,74.843738,sight,viewpoint,Viewpoint,0,0,2,,,,0
 w168163596,Shankaracharya Temple,Srinagar,34.078904,74.843595,sight,place_of_worship,Temple,1,0,7,,,,1
 w648246592,Sheikh Abdullah's grave,Srinagar,34.137979,74.840428,sight,tomb,Heritage,0,0,4,,,,0
@@ -6014,13 +5984,13 @@ n7492001198,D-Pets aquarium &pets,Thiruvananthapuram,8.510344,76.929083,activity
 w1102632326,Deer Rehabilitation Centre Vlavetty,Thiruvananthapuram,8.549098,77.140809,activity,zoo,Activity,0,0,3,,,,0
 n11515603034,Fish world accurium,Thiruvananthapuram,8.761545,76.938201,activity,aquarium,Activity,0,0,6,,,,0
 n11056768905,FunTura,Thiruvananthapuram,8.514517,76.898613,activity,theme_park,Activity,0,0,4,,,,0
-w870811937,GROUND,Thiruvananthapuram,8.42807,77.053428,activity,nature_reserve,Activity,0,0,2,,,,0
 n13026946001,Game Zone,Thiruvananthapuram,8.479601,76.912648,activity,theme_park,Activity,0,0,2,,,,0
 n8007203218,Golden Aquarium,Thiruvananthapuram,8.507734,77.085047,activity,aquarium,Activity,0,0,2,,,,0
 w923045744,Golden Aquarium And Orchids,Thiruvananthapuram,8.386406,77.114555,activity,aquarium,Activity,0,0,8,,Mo-Sa 08:00-20:00,,0
+w801679184,Ground,Thiruvananthapuram,8.42807,77.053428,activity,nature_reserve,Activity,0,0,2,,,,0
 w870827390,Ground,Thiruvananthapuram,8.350128,77.123394,activity,nature_reserve,Activity,0,0,2,,,,0
 n11062785908,Happy Land,Thiruvananthapuram,8.654981,76.931996,activity,water_park,Activity,0,0,2,,,,0
-w801679161,Land,Thiruvananthapuram,8.431242,77.058065,activity,nature_reserve,Activity,0,0,2,,,,0
+w801679150,Land,Thiruvananthapuram,8.427124,77.06478,activity,nature_reserve,Activity,0,0,2,,,,0
 n11515603045,Live aquarium,Thiruvananthapuram,8.767801,76.958276,activity,aquarium,Activity,0,0,6,,,,0
 n7833586035,"Magic Planet, Thiruvananthapuram",Thiruvananthapuram,8.584427,76.879498,activity,theme_park,Activity,0,0,9,,Tu-Su 10:00-17:00,,0
 n5191155731,Marine Aquarium Vizhinjam,Thiruvananthapuram,8.383607,76.983543,activity,aquarium,Activity,0,0,2,,,,0
@@ -6039,10 +6009,10 @@ w1066629110,Valliyanaparambil Aquarium,Thiruvananthapuram,8.506784,77.190331,act
 r15101323,Veli Tourist village,Thiruvananthapuram,8.509348,76.889271,activity,theme_park,Activity,0,0,5,,,,0
 n7128019155,field,Thiruvananthapuram,8.342263,77.07965,activity,camp_site,Activity,0,0,2,,,,0
 n8533326707,fish and birds Aquarium,Thiruvananthapuram,8.388755,77.1017,activity,aquarium,Activity,0,0,2,,,,0
-w801660109,ground,Thiruvananthapuram,8.442564,76.991607,activity,nature_reserve,Activity,0,0,2,,,,0
-w799424862,ground,Thiruvananthapuram,8.390277,77.09098,activity,nature_reserve,Activity,0,0,2,,,,0
-w799424816,ground,Thiruvananthapuram,8.383718,77.09854,activity,nature_reserve,Activity,0,0,2,,,,0
 w799399275,ground,Thiruvananthapuram,8.385433,77.114628,activity,nature_reserve,Activity,0,0,2,,,,0
+w799424815,ground,Thiruvananthapuram,8.386181,77.101438,activity,nature_reserve,Activity,0,0,2,,,,0
+w799424862,ground,Thiruvananthapuram,8.390277,77.09098,activity,nature_reserve,Activity,0,0,2,,,,0
+w801660109,ground,Thiruvananthapuram,8.442564,76.991607,activity,nature_reserve,Activity,0,0,2,,,,0
 n7130280599,happy aquarium,Thiruvananthapuram,8.490833,77.03373,activity,aquarium,Activity,0,0,4,,,,0
 n7632555756,swiming pool,Thiruvananthapuram,8.561641,77.0576,activity,water_park,Activity,0,0,2,,,,0
 n7632555743,temple pond,Thiruvananthapuram,8.563161,77.053676,activity,water_park,Activity,0,0,2,,,,0
@@ -6274,7 +6244,6 @@ w928868851,"ems samskarikanilayam, chittilappilly",Thrissur,10.562159,76.156484,
 n7111661122,kayaloram boating,Thrissur,10.503702,76.096296,sight,attraction,Heritage,0,0,2,,,,0
 n7076852446,kollamkode palace,Thrissur,10.530504,76.224606,sight,castle,Heritage,0,0,3,,,,0
 n7076797522,kuttankulangara temple,Thrissur,10.535321,76.201786,sight,place_of_worship,Temple,1,0,5,,,,1
-n8327338541,museum,Thrissur,10.479222,76.240053,sight,museum,Museum,0,0,2,,,,0
 n7076852437,puravasthu museum,Thrissur,10.531064,76.216905,sight,museum,Museum,0,0,2,,,,0
 n7076799662,sakthan thampuran palace,Thrissur,10.531289,76.216145,sight,castle,Heritage,1,0,5,,,,1
 n6844010982,statue,Thrissur,10.580658,76.174851,sight,monument,Heritage,0,0,2,,,,0
@@ -6321,6 +6290,7 @@ w1539472129,Badi Lake,Udaipur,24.620248,73.643387,nature,lake,Nature,0,0,3,,,,0
 r1543697,Fateh Sagar,Udaipur,24.602049,73.671798,nature,lake,Nature,1,0,6,,,,1
 r1543661,Lake Pichola,Udaipur,24.569608,73.672291,nature,lake,Nature,1,0,6,,,,1
 w152640591,Purohito Ka Talab,Udaipur,24.668913,73.749312,nature,lake,Nature,0,0,3,,,,0
+w108781864,Saheliyon-Ki-Bari,Udaipur,24.60305,73.685486,nature,park,Nature,1,0,6,,,,1
 n11535054673,Akhada Ghat,Udaipur,24.576045,73.682654,sight,attraction,Heritage,0,0,2,,,,0
 n6687057486,Ambrai Ghat,Udaipur,24.577726,73.679932,sight,attraction,Heritage,1,0,4,,,,1
 n7332544542,Bagore-ki-Haveli,Udaipur,24.579736,73.682397,sight,castle,Heritage,0,0,2,,,,0
@@ -6344,13 +6314,12 @@ w1481315955,Pratap Gaurav Kendra Rashtriya Tirth,Udaipur,24.625281,73.671566,sig
 n10264335409,RK circle,Udaipur,24.607055,73.699747,sight,monument,Heritage,0,0,3,,,,0
 w519234909,Rajiv Gandhi Garden,Udaipur,24.59709,73.660979,sight,attraction,Heritage,1,0,13,,,yes,1
 n11561153365,Roop Ghat,Udaipur,24.57723,73.682395,sight,attraction,Heritage,0,0,2,,,,0
-w108781864,Saheliyon-Ki-Bari,Udaipur,24.60305,73.685486,sight,attraction,Heritage,1,0,6,,,,1
 w111334933,Sajjan Garh - Monsoon Palace,Udaipur,24.593197,73.639458,sight,attraction,Heritage,1,0,7,,,,1
 n1030664626,Sunset Point,Udaipur,24.566409,73.689148,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n7363359218,Sunset View,Udaipur,24.593158,73.639175,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n3269254388,Sunset viewpoint,Udaipur,24.577536,73.679558,sight,viewpoint,Viewpoint,0,0,3,,,,0
 n3898009271,Vintage and Classic Car Collection,Udaipur,24.576052,73.694532,sight,museum,Museum,1,0,6,,Mo-Su 09:00-21:00,yes,1
-n12422996905,ghat,Udaipur,24.58067,73.681828,sight,attraction,Heritage,0,0,2,,,,0
+n12422506902,ghat,Udaipur,24.580957,73.681701,sight,attraction,Heritage,0,0,2,,,,0
 w1360414109,jagmandir palace,Udaipur,24.567584,73.678068,sight,castle,Heritage,0,0,4,,,,0
 n12416831504,sunset viewpoint,Udaipur,24.63118,73.669937,sight,viewpoint,Viewpoint,0,0,2,,,,0
 n11097501705,Ghats,Ujjain,23.185093,75.763182,sight,attraction,Heritage,0,0,2,,,,0
@@ -6415,7 +6384,7 @@ n11690112169,Dashashvamedh Ghat,Varanasi,25.30693,83.010654,sight,attraction,Her
 n1539343144,Digipatiya Ghat,Varanasi,25.303696,83.008328,sight,attraction,Heritage,0,0,3,,,,0
 n988809661,Dr. Rajendra Prasad Ghat,Varanasi,25.307157,83.010686,sight,attraction,Heritage,0,0,3,,,,0
 n1538127090,Gaay Ghat,Varanasi,25.318352,83.022136,sight,attraction,Heritage,0,0,3,,,,0
-n988809657,Ganesh Ghat,Varanasi,25.30998,83.012071,sight,attraction,Heritage,0,0,2,,,,0
+n11787312456,Ganesh Ghat,Varanasi,25.313212,83.016225,sight,attraction,Heritage,0,0,2,,,,0
 n7291034867,Ganga Aarti,Varanasi,25.306863,83.010585,sight,attraction,Heritage,0,0,3,,,,0
 n988809606,Ganga Mahal Ghat,Varanasi,25.312617,83.01591,sight,attraction,Heritage,0,0,3,,,,0
 n11461546407,Ganga Mahal Ghat,Varanasi,25.289686,83.006258,sight,attraction,Heritage,0,0,2,,,,0
