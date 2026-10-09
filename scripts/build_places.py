@@ -183,10 +183,16 @@ CATEGORY = {
     "beach": "Beach",
 }
 
+# Names that are just a type or a number (e.g. "Temple", "Lake", "2620") tell a traveller nothing.
+GENERIC_NAMES = {"temple", "tomb", "tank", "lake", "peak", "waterfall", "fort", "park",
+                 "viewpoint", "view point", "museum", "ruins", "cave"}
 
 def is_valid(name):
     """Skip unnamed places and names written mostly in non-Latin, non-Devanagari scripts."""
     if not name or len(name.strip()) < 3:
+        return False
+    clean = name.strip().lower()
+    if clean in GENERIC_NAMES or re.sub(r"[\s.,\-]", "", clean).isdigit():
         return False
     foreign = re.sub(r"[\x20-\x7E\u0900-\u097F\d\s\-\'\.(),&/]", "", name)
     return len(foreign) / max(len(name), 1) < 0.35
