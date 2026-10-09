@@ -85,10 +85,10 @@ async function locateCity(){
   if(!q){toast('Enter a city name');return}
   showLoader()
   try{
-    const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&countrycodes=in&limit=1`)
+    const r=await fetch(`/api/geocode?q=${encodeURIComponent(q)}`)
     const d=await r.json()
-    if(!d.length){toast('City not found');hideLoader();return}
-    setLocation(parseFloat(d[0].lat),parseFloat(d[0].lon),d[0].display_name.split(',')[0])
+    if(!r.ok){toast(d.error||'City not found');hideLoader();return}
+    setLocation(d.lat,d.lon,d.name)
   }catch(e){toast('Search failed');hideLoader()}
 }
 function useGPS(){
