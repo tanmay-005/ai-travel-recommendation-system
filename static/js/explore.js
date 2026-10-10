@@ -47,6 +47,7 @@ function drawHere() {                       // the destination dot, and a dashed
 
 // ── LOADING DATA (one call, three lists) ──────────────────────────
 async function load() {
+  showLoading()
   try {
     const r = await fetch(`/api/discover?lat=${here.lat}&lon=${here.lon}&radius=${radius}`)
     const d = await r.json()
@@ -55,7 +56,7 @@ async function load() {
     for (const key in results) $(`n-${key}`).textContent = results[key].length
     showTab(tab)
   } catch (e) {
-    $('list').innerHTML = `<li class="state">Couldn't load places: ${esc(e.message)}</li>`
+    showError(e.message)
   }
 }
 
@@ -89,7 +90,7 @@ function feeText(fee) {
 function renderCards(places) {
   const list = $('list')
   list.className = tab
-  if (!places.length) { list.innerHTML = '<li class="state">Nothing found here.</li>'; return }
+  if (!places.length) { showEmpty(); return }
   list.innerHTML = places.map((p, i) => {
     const chips = [
       p.opening_hours && `<span class="chip">${esc(p.opening_hours.split(';')[0])}</span>`,
@@ -190,7 +191,50 @@ function showStart() {                      // opened /explore with no place in 
   openChange()
 }
 
-// STEP 7.4: loading, empty and error states go here
+let slowTimer = null
+function showLoading() {
+  clearTimeout(slowTimer)
+  pinLayer.clearLayers()
+  for (const key in results) $(`n-${key}`).textContent = ''
+  $('list').className = tab
+  $('list').innerHTML = Array(4).fill('<li class="skeleton"><span></span><div><i></i><i></i><i></i></div></li>').join('')
+  $('tabNote').textContent = `Looking within ${radius} km of ${here.name}…`
+  // Small towns trigger a live OpenStreetMap lookup, which takes a few seconds.
+  slowTimer = setTimeout(() => {
+    if ($('list').querySelector('.skeleton')) $('tabNote').textContent = 'Still looking. Small places take a few seconds to check live.'
+  }, 2500)
+}
+
+function showEmpty() {
+  clearTimeout(slowTimer)
+  const next = RADII.find(km => km > radius)
+  $('list').innerHTML = `<li class="state">
+    <p class="state-title">Nothing here within ${radius} km.</p>
+    ${next
+      ? `<p>Places may be a little further out.</p>
+         <button type="button" class="btn-go" data-action="widen" data-km="${next}">Search within ${next} km</button>`
+      : `<p>Try another tab, or a different destination.</p>
+         <button type="button" class="btn-go" data-action="change">Change destination</button>`}
+  </li>`
+}
+
+function showError(message) {
+  clearTimeout(slowTimer)
+  $('tabNote').textContent = ''
+  $('list').innerHTML = `<li class="state">
+    <p class="state-title">Couldn't load places.</p>
+    <p>${esc(message)}. Check your connection, then try again.</p>
+    <button type="button" class="btn-go" data-action="retry">Retry</button>
+  </li>`
+}
+
+$('list').addEventListener('click', e => {  // buttons inside the empty and error messages
+  const btn = e.target.closest('[data-action]')
+  if (!btn) return
+  if (btn.dataset.action === 'retry')  load()
+  if (btn.dataset.action === 'widen')  setRadius(+btn.dataset.km)
+  if (btn.dataset.action === 'change') openChange()
+})
 
 // ── TOP BAR: radius and change destination ────────────────────────
 function setRadius(km) {
