@@ -119,6 +119,7 @@ function plotMarkers(places) {
     })
     const m = L.marker([p.lat, p.lon], {icon, title: p.place})
       .bindPopup(`<b>${esc(p.place)}</b><br>${esc(subtypeName(p.subtype))} · ${p.distance} km`)
+      .on('click', () => focusCard(i))
     pinLayer.addLayer(m)
     return m
   })
@@ -127,7 +128,56 @@ function plotMarkers(places) {
   else map.setView([here.lat, here.lon], 12)
 }
 
-// STEP 7.3: linking the list and the map, and directions, go here
+// ── LINK LIST AND MAP ─────────────────────────────────────────────
+function pinEl(i) { return pins[i] && pins[i].getElement() && pins[i].getElement().querySelector('.pin') }
+function hot(i, on) {
+  const el = pinEl(i)
+  if (el) el.classList.toggle('hot', on)
+}
+function focusCard(i) {                     // clicked a pin: scroll to its card and flash it
+  const card = document.querySelector(`.place[data-i="${i}"]`)
+  if (!card) return
+  card.scrollIntoView({behavior: 'smooth', block: 'center'})
+  card.classList.add('flash')
+  setTimeout(() => card.classList.remove('flash'), 1200)
+}
+
+// One listener on the list handles every card (event delegation).
+$('list').addEventListener('mouseover', e => {
+  const card = e.target.closest('.place')
+  document.querySelectorAll('.pin.hot').forEach(p => p.classList.remove('hot'))
+  if (card) hot(+card.dataset.i, true)
+})
+$('list').addEventListener('mouseleave', () => {
+  document.querySelectorAll('.pin.hot').forEach(p => p.classList.remove('hot'))
+})
+$('list').addEventListener('click', e => {
+  const dir = e.target.closest('.dir-btn')
+  if (dir) { const p = results[tab][+dir.dataset.i]; showRoute(p.lat, p.lon); return }
+  const card = e.target.closest('.place')
+  if (card) {                               // clicked a card: centre its pin and open the popup
+    const m = pins[+card.dataset.i]
+    map.setView(m.getLatLng(), Math.max(map.getZoom(), 13))
+    m.openPopup()
+  }
+})
+
+// ── DIRECTIONS (from the destination centre to the place) ─────────
+function showRoute(lat, lon) {
+  clearRoute()
+  routeCtrl = L.Routing.control({
+    waypoints: [L.latLng(here.lat, here.lon), L.latLng(lat, lon)],
+    router: L.Routing.osrmv1({serviceUrl: 'https://routing.openstreetmap.de/routed-car/route/v1'}),
+    routeWhileDragging: false, addWaypoints: false, createMarker: () => null,
+    lineOptions: {styles: [{color: '#FF6B2B', weight: 5, opacity: 0.85}]},
+  }).addTo(map)
+  $('clearRouteBtn').hidden = false
+}
+function clearRoute() {
+  if (routeCtrl) { map.removeControl(routeCtrl); routeCtrl = null }
+  $('clearRouteBtn').hidden = true
+}
+$('clearRouteBtn').addEventListener('click', clearRoute)
 
 // ── START, LOADING, EMPTY AND ERROR STATES ─────────────────────────
 function showStart() {                      // opened /explore with no place in the URL

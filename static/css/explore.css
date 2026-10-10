@@ -94,7 +94,8 @@ html,body{height:100%;overflow:hidden}
 /* Each tab colours its numbers and pins */
 #list.top_spots,  .pin.top_spots  {--tab-colour:var(--saffron);--tab-on:var(--on-saffron)}
 #list.hidden_gems,.pin.hidden_gems{--tab-colour:var(--teal);--tab-on:var(--on-saffron)}
-#list.activities, .pin.activities {--tab-colour:var(--ink);--tab-on:var(--paper)}
+#list.activities {--tab-colour:var(--ink);--tab-on:var(--paper)}
+.pin.activities  {--tab-colour:#1A1208;--tab-on:#FFFFFF}   /* map tiles stay light, so this pin stays dark */
 
 /* ── MAP ───────────────────────────────────────────────────────── */
 #mapWrap{position:relative;min-height:0}
