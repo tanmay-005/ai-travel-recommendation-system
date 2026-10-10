@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
+{% block html_class %}dark-ready{% endblock %}
+
+{% block title %}Explore · Yatra-Go{% endblock %}
+
 {% block head %}
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -11,133 +16,56 @@
 {% block content %}
 <div id="shell">
 
-<!-- HEADER -->
-<header id="header">
-  <div>
-    <div class="logo">YatraGo</div>
-    <div class="logo-sub">AI Travel Recommender · India</div>
+  <!-- TOP BAR: where you are, change it, how far to look -->
+  <header id="topbar">
+    <a class="brand" href="{{ url_for('pages.home') }}">Yatra-Go</a>
+
+    <div id="where">
+      <span class="where-pin" aria-hidden="true"></span>
+      <span id="placeName">Pick a destination</span>
+      <button type="button" id="changeBtn" class="link-btn">Change</button>
+    </div>
+
+    <form id="changeForm" class="change-form" autocomplete="off" hidden>
+      <label for="changeInput" class="visually-hidden">Destination</label>
+      <input id="changeInput" type="text" placeholder="Where to? e.g. Hampi" required minlength="2" maxlength="100">
+      <button type="submit" class="btn-go">Go</button>
+      <button type="button" id="nearMeBtn" class="btn-plain">Near me</button>
+      <button type="button" id="cancelChange" class="btn-plain">Cancel</button>
+    </form>
+
+    <div id="radius" role="group" aria-label="Search radius">
+      <span class="radius-label">Within</span>
+      <button type="button" class="r-btn" data-km="10">10 km</button>
+      <button type="button" class="r-btn" data-km="25">25 km</button>
+      <button type="button" class="r-btn" data-km="50">50 km</button>
+    </div>
+  </header>
+
+  <!-- LIST: three tabs over one list -->
+  <aside id="panel">
+    <div id="tabs" role="tablist" aria-label="What to show">
+      <button type="button" role="tab" class="tab t-top" data-tab="top_spots" aria-selected="true">
+        <span aria-hidden="true">★</span> Top Spots <span class="count" id="n-top_spots"></span>
+      </button>
+      <button type="button" role="tab" class="tab t-gem" data-tab="hidden_gems" aria-selected="false">
+        <span aria-hidden="true">◆</span> Hidden Gems <span class="count" id="n-hidden_gems"></span>
+      </button>
+      <button type="button" role="tab" class="tab t-act" data-tab="activities" aria-selected="false">
+        <span aria-hidden="true">▲</span> Things to Do <span class="count" id="n-activities"></span>
+      </button>
+    </div>
+    <p id="tabNote" class="tab-note"></p>
+    <ol id="list" aria-live="polite"></ol>
+  </aside>
+
+  <!-- MAP -->
+  <div id="mapWrap">
+    <div id="map"></div>
+    <button type="button" id="clearRouteBtn" class="map-btn" hidden>Clear route</button>
   </div>
-  <div id="searchWrap">
-    <div class="search-inner">
-      <input id="globalSearch" type="text" placeholder="Search any place or city…" autocomplete="off">
-      <button class="search-go" onclick="doGlobalSearch()">Search</button>
-    </div>
-    <div id="searchDrop"></div>
-  </div>
-  <div id="statsRow">Loading…</div>
-  <button class="hbtn hbtn-ghost" onclick="toggleFavPanel()">♥ Saved</button>
-</header>
 
-<!-- SIDEBAR -->
-<aside id="sidebar">
-  <div id="modeTabs">
-    <div class="mtab on"  onclick="setMode('nearby',this)">📍 Nearby</div>
-    <div class="mtab"     onclick="setMode('city',this)">🏙 City</div>
-  </div>
-
-  <div id="sidebarScroll">
-  <div id="controls">
-
-    <!-- NEARBY -->
-    <div class="mpanel on" id="p-nearby">
-      <span class="flabel">Location</span>
-      <div class="frow" style="margin-bottom:5px">
-        <input class="finput" id="citySearch" type="text" placeholder="City or address…">
-        <button class="fbtn fbtn-primary" onclick="locateCity()">Go</button>
-        <button class="fbtn fbtn-ghost" onclick="useGPS()" title="Use GPS">⦿</button>
-      </div>
-      <div id="locBadge">📍 <span id="locText"></span></div>
-
-      <span class="flabel" style="margin-top:10px">Category</span>
-      <div class="src-legend">
-        <span class="src-badge src-live">⚡ Live OSM</span>
-        <span class="src-badge src-csv">📦 Dataset</span>
-        <span class="src-badge src-landmark">⭐ Landmark</span>
-      </div>
-      <div class="pills" id="catPills">
-        <div class="pill on" data-cat="" onclick="pickCat(this)">All</div>
-      </div>
-
-      <div class="slider-wrap">
-        <div class="slider-top">
-          <span class="flabel" style="margin:0">Search Radius</span>
-          <span class="slider-val" id="rv">50 km</span>
-        </div>
-        <input type="range" id="radiusSlider" min="5" max="300" value="50"
-               oninput="document.getElementById('rv').innerText=this.value+' km'">
-      </div>
-      <div class="slider-wrap">
-        <div class="slider-top">
-          <span class="flabel" style="margin:0">Max Results</span>
-          <span class="slider-val" id="tnv">12</span>
-        </div>
-        <input type="range" id="topNSlider" min="3" max="25" value="12"
-               oninput="document.getElementById('tnv').innerText=this.value">
-      </div>
-      <button class="sbtn sbtn-go" onclick="doNearby()">🔍 Find Recommendations</button>
-    </div>
-
-    <!-- CITY -->
-    <div class="mpanel" id="p-city">
-      <span class="flabel">City</span>
-      <div class="frow" style="margin-bottom:8px">
-        <select class="finput" id="citySelect"><option value="">— choose a city —</option></select>
-      </div>
-      <span class="flabel">Category</span>
-      <div class="frow">
-        <select class="finput" id="cityCatSelect"><option value="">All categories</option></select>
-        <button class="fbtn fbtn-primary" onclick="doCity()">Go</button>
-      </div>
-    </div>
-
-  <!-- RESULTS -->
-  <div id="resultsWrap">
-    <div id="liveBanner">
-      <span class="live-dot"></span>
-      <span id="liveBannerText">Fetching live local spots…</span>
-    </div>
-    <div class="res-topbar">
-      <span class="res-label" id="resLabel">Results</span>
-      <div class="res-actions">
-        <button class="act-btn" onclick="fitMarkers()">⊞ Fit</button>
-        <button class="act-btn" onclick="clearRoute()">╳ Route</button>
-        <button class="act-btn" onclick="exportCSV()">↓ CSV</button>
-      </div>
-    </div>
-    <div id="results">
-      <div class="empty">
-        <div class="empty-ico">🗺️</div>
-        <div class="empty-txt">Set a location and search<br>to discover places across India</div>
-      </div>
-    </div>
-  </div>
-  </div><!-- /sidebarScroll -->
-</aside>
-
-<!-- MAP -->
-<div id="mapWrap">
-  <div id="map"></div>
-  <div id="mapControls">
-    <button class="mbtn" onclick="fitMarkers()">⊞ Fit All</button>
-    <button class="mbtn" onclick="clearRoute()">╳ Clear Route</button>
-    <button class="mbtn" onclick="map.setView([22.5,78.5],5)">🇮🇳 Full India</button>
-  </div>
 </div>
-</div>
-
-<!-- FAV PANEL -->
-<div id="favPanel">
-  <div id="favHeader">
-    <h3>♥ Saved Places</h3>
-    <button class="act-btn" onclick="toggleFavPanel()">✕ Close</button>
-  </div>
-  <div id="favList"></div>
-  <div id="favFooter">
-    <button class="sbtn sbtn-go" style="margin:0" onclick="exportFavCSV()">↓ Export Saved</button>
-  </div>
-</div>
-
-<div id="toast"></div>
 {% endblock %}
 
 {% block scripts %}
