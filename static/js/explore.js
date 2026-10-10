@@ -47,7 +47,16 @@ function drawHere() {                       // the destination dot, and a dashed
 
 // ── LOADING DATA (one call, three lists) ──────────────────────────
 async function load() {
-  $('tabNote').textContent = 'Places arrive in Step 7.2.'   // STEP 7.2 replaces this function
+  try {
+    const r = await fetch(`/api/discover?lat=${here.lat}&lon=${here.lon}&radius=${radius}`)
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error || `Server error ${r.status}`)
+    results = {top_spots: d.top_spots, hidden_gems: d.hidden_gems, activities: d.activities}
+    for (const key in results) $(`n-${key}`).textContent = results[key].length
+    showTab(tab)
+  } catch (e) {
+    $('list').innerHTML = `<li class="state">Couldn't load places: ${esc(e.message)}</li>`
+  }
 }
 
 // Switching tabs never asks the server again: it re-renders from `results`.
@@ -59,10 +68,64 @@ function showTab(key) {
   plotMarkers(results[key])
 }
 
-// ── LIST AND MAP PINS ─────────────────────────────────────────────
-// STEP 7.2 replaces these two empty functions
-function renderCards(places) {}
-function plotMarkers(places) {}
+// ── LIST ──────────────────────────────────────────────────────────
+const SUBTYPE_NAMES = {
+  hiking_route: 'Trek', place_of_worship: 'Place of worship', cave_entrance: 'Cave',
+  camp_site: 'Campsite', archaeological_site: 'Archaeological site', canoe: 'Kayaking',
+  scuba_diving: 'Scuba diving', theme_park: 'Theme park', water_park: 'Water park',
+  nature_reserve: 'Nature reserve', national_park: 'National park', hot_spring: 'Hot spring',
+}
+function subtypeName(s) {
+  if (!s) return ''
+  return SUBTYPE_NAMES[s] || s.charAt(0).toUpperCase() + s.slice(1).replace(/_/g, ' ')
+}
+function feeText(fee) {
+  if (!fee) return ''
+  if (fee === 'yes') return 'Entry fee'
+  if (fee === 'no') return 'Free entry'
+  return `Fee: ${fee}`
+}
+
+function renderCards(places) {
+  const list = $('list')
+  list.className = tab
+  if (!places.length) { list.innerHTML = '<li class="state">Nothing found here.</li>'; return }
+  list.innerHTML = places.map((p, i) => {
+    const chips = [
+      p.opening_hours && `<span class="chip">${esc(p.opening_hours.split(';')[0])}</span>`,
+      feeText(p.fee) && `<span class="chip">${esc(feeText(p.fee))}</span>`,
+      p.source === 'live' && `<span class="chip" title="Fetched live from OpenStreetMap">live</span>`,
+    ].filter(Boolean).join('')
+    return `<li class="place" data-i="${i}">
+      <span class="num">${i + 1}</span>
+      <div>
+        <div class="p-name">${esc(p.place)}</div>
+        <div class="p-meta">${esc(subtypeName(p.subtype))} · ${p.distance} km away</div>
+        ${p.description ? `<div class="p-desc">${esc(p.description)}</div>` : ''}
+        ${chips ? `<div class="p-chips">${chips}</div>` : ''}
+        <div class="p-actions"><button type="button" class="dir-btn" data-i="${i}">Directions</button></div>
+      </div>
+    </li>`
+  }).join('')
+}
+
+// ── MAP PINS (numbered like the list) ─────────────────────────────
+function plotMarkers(places) {
+  pinLayer.clearLayers()
+  pins = places.map((p, i) => {
+    const icon = L.divIcon({
+      className: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -26],
+      html: `<div class="pin ${tab}"><b>${i + 1}</b></div>`,
+    })
+    const m = L.marker([p.lat, p.lon], {icon, title: p.place})
+      .bindPopup(`<b>${esc(p.place)}</b><br>${esc(subtypeName(p.subtype))} · ${p.distance} km`)
+    pinLayer.addLayer(m)
+    return m
+  })
+  const pts = places.map(p => [p.lat, p.lon]).concat([[here.lat, here.lon]])
+  if (pts.length > 1) map.fitBounds(pts, {padding: [40, 40], maxZoom: 14})
+  else map.setView([here.lat, here.lon], 12)
+}
 
 // STEP 7.3: linking the list and the map, and directions, go here
 
