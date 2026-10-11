@@ -1,0 +1,23 @@
+/* Motion toolkit: one set of timings and a few reusable animations for every page.
+   All movement lives inside "no-preference", so anyone who has asked their system
+   for reduced motion gets a still (but complete) page. */
+:root{
+  --fast:150ms;                        /* hovers, small feedback */
+  --med:250ms;                         /* pops, tab changes */
+  --slow:400ms;                        /* things arriving on screen */
+  --ease:cubic-bezier(.2,.8,.2,1);     /* quick start, soft landing */
+}
+
+@media (prefers-reduced-motion: no-preference){
+  /* translate and scale are separate from transform, so these never undo
+     an element's own transform (like the rotated map pins). */
+  @keyframes fade-up {from{opacity:0;translate:0 12px}  to{opacity:1;translate:0 0}}
+  @keyframes drop-in {from{opacity:0;translate:0 -16px} to{opacity:1;translate:0 0}}
+  @keyframes pop     {0%{scale:1} 40%{scale:1.25} 100%{scale:1}}
+  @keyframes shake   {0%,100%{translate:0} 20%,60%{translate:-8px 0} 40%,80%{translate:8px 0}}
+  @keyframes spin    {to{rotate:360deg}}
+
+  .anim-fade-up{animation:fade-up var(--slow) var(--ease) both}
+  .anim-pop    {animation:pop var(--med) var(--ease)}
+  .anim-shake  {animation:shake var(--slow) var(--ease)}
+}
