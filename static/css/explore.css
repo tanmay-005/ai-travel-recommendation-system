@@ -41,15 +41,20 @@ html,body{height:100%;overflow:hidden}
 
 /* ── TABS + LIST ───────────────────────────────────────────────── */
 #panel{display:flex;flex-direction:column;min-height:0;background:var(--sand);border-right:1px solid var(--mist)}
-#tabs{display:flex;border-bottom:1px solid var(--mist);background:var(--paper)}
+#tabs{display:flex;border-bottom:1px solid var(--mist);background:var(--paper);position:relative}
 .tab{flex:1;border:none;background:none;cursor:pointer;color:var(--muted);
   font-family:var(--font-head);font-weight:700;font-size:.85rem;
-  padding:var(--space-4) var(--space-2);border-bottom:3px solid transparent;margin-bottom:-1px}
+  padding:var(--space-4) var(--space-2)}
 .tab:hover{color:var(--ink)}
 .tab[aria-selected="true"]{color:var(--ink)}
-.t-top span[aria-hidden]{color:var(--saffron)} .t-top[aria-selected="true"]{border-color:var(--saffron)}
-.t-gem span[aria-hidden]{color:var(--teal)}    .t-gem[aria-selected="true"]{border-color:var(--teal)}
-.t-act span[aria-hidden]{color:var(--ink)}     .t-act[aria-selected="true"]{border-color:var(--ink)}
+.t-top span[aria-hidden]{color:var(--saffron)}
+.t-gem span[aria-hidden]{color:var(--teal)}
+.t-act span[aria-hidden]{color:var(--ink)}
+
+/* One underline that slides to the open tab (showTab moves it) */
+#tabLine{position:absolute;left:0;bottom:-1px;width:calc(100% / 3);height:3px;background:var(--saffron)}
+#tabs[data-tab="hidden_gems"] #tabLine{background:var(--teal)}
+#tabs[data-tab="activities"]  #tabLine{background:var(--ink)}
 .count{font-family:var(--font-body);font-weight:600;color:var(--muted);font-size:.8rem}
 
 .tab-note{padding:var(--space-3) var(--space-5) 0;color:var(--muted);font-size:.85rem;min-height:1.6em}
@@ -138,3 +143,11 @@ html,body{height:100%;overflow:hidden}
   #list{overflow:visible}
 }
 @media (prefers-reduced-motion:reduce){.pin{transition:none}}
+
+
+/* MOTION: explains what just happened. Results arrived, the tab moved, the place was saved. */
+@media (prefers-reduced-motion:no-preference){
+  #tabLine{transition:transform var(--slow) var(--ease),background-color var(--med)}
+  .place{animation:fade-up var(--slow) var(--ease) both}   /* each card's delay is set in renderCards */
+  .pin{animation:drop-in var(--slow) var(--ease) both}     /* each pin's delay is set in plotMarkers */
+}

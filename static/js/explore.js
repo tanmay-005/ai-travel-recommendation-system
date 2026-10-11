@@ -65,6 +65,9 @@ async function load() {
 function showTab(key) {
   tab = key
   document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === key))
+  const i = Object.keys(results).indexOf(key)           // 0, 1 or 2
+  $('tabLine').style.transform = `translateX(${i * 100}%)`
+  $('tabs').dataset.tab = key                           // CSS picks the underline colour from this
   $('tabNote').textContent = TAB_NOTES[key]
   renderCards(results[key])
   plotMarkers(results[key])
@@ -98,7 +101,7 @@ function renderCards(places) {
       feeText(p.fee) && `<span class="chip">${esc(feeText(p.fee))}</span>`,
       p.source === 'live' && `<span class="chip" title="Fetched live from OpenStreetMap">live</span>`,
     ].filter(Boolean).join('')
-    return `<li class="place" data-i="${i}">
+    return `<li class="place" data-i="${i}" style="animation-delay:${i * 40}ms">
       <span class="num">${i + 1}</span>
       <div>
         <div class="p-name">${esc(p.place)}</div>
@@ -120,7 +123,7 @@ function plotMarkers(places) {
   pins = places.map((p, i) => {
     const icon = L.divIcon({
       className: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -26],
-      html: `<div class="pin ${tab}"><b>${i + 1}</b></div>`,
+      html: `<div class="pin ${tab}" style="animation-delay:${i * 40}ms"><b>${i + 1}</b></div>`,
     })
     const m = L.marker([p.lat, p.lon], {icon, title: p.place})
       .bindPopup(`<b>${esc(p.place)}</b><br>${esc(subtypeName(p.subtype))} · ${p.distance} km`)
@@ -219,6 +222,8 @@ async function toggleSave(i, btn) {
     if (r.ok) {
       on ? savedIds.delete(p.osm_id) : savedIds.add(p.osm_id)
       btn.outerHTML = saveButton(p, i)
+      const fresh = document.querySelector(`.place[data-i="${i}"] .save-btn`)
+      if (!on) fresh.classList.add('anim-pop')         // the heart pops when it's saved
       return
     }
   } catch (e) { /* offline: leave the button as it was */ }
