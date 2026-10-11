@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block html_class %}dark-ready{% endblock %}
+
+{% block title %}My Bag · Yatra-Go{% endblock %}
+
+{% block head %}
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bag.css') }}">
+{% endblock %}
+
+{% block content %}
+<nav class="bag-nav">
+  <a class="brand" href="{{ url_for('pages.home') }}">Yatra-Go</a>
+  {% include "_account.html" %}
+</nav>
+
+<main class="bag">
+  <section class="bag-list">
+    <h1>My Bag</h1>
+    <p class="bag-sub" id="bagCount">Loading your places…</p>
+    <div id="groups"></div>
+  </section>
+  <div id="bagMap" aria-label="Map of saved places"></div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/bag.js') }}"></script>
+{% endblock %}

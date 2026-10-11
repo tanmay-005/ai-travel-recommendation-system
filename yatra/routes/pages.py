@@ -44,4 +44,4 @@ def logout():
 @bp.route("/bag")
 @page_login_required
 def bag():
-    return "My Bag - coming in Phase 8"
+    return render_template("bag.html")
