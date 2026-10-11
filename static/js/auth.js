@@ -16,6 +16,12 @@ function clearErrors() {
   form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid'))
 }
 
+function shake() {                          // replay the shake, even if it ran a moment ago
+  form.classList.remove('anim-shake')
+  void form.offsetWidth                     // makes the browser notice the class was removed
+  form.classList.add('anim-shake')
+}
+
 function showErrors(data) {
   const fields = data.errors || {}
   let shown = false
@@ -39,6 +45,7 @@ form.addEventListener('submit', async e => {
   const label = submit.textContent
   submit.disabled = true
   submit.textContent = submit.dataset.busy
+  submit.classList.add('busy')               // shows the spinner ring        
 
   try {
     const r = await fetch(form.dataset.endpoint, {
@@ -49,11 +56,13 @@ form.addEventListener('submit', async e => {
     const data = await r.json()
     if (r.ok) { location.href = nextUrl(); return }
     showErrors(data)                       // typed values stay in the inputs
+    shake()                                                                
   } catch (err) {
     formError.textContent = "Couldn't reach the server. Check your connection and try again."
   }
   submit.disabled = false
   submit.textContent = label
+  submit.classList.remove('busy')                                            
 })
 
 // Show / hide password
