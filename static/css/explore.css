@@ -69,10 +69,14 @@ html,body{height:100%;overflow:hidden}
 .p-chips{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-2)}
 .chip{font-size:.75rem;padding:2px var(--space-2);border-radius:var(--r-pill);
   background:var(--smoke);color:var(--ink2)}
-.p-actions{margin-top:var(--space-2)}
+.p-actions{display:flex;gap:var(--space-2);margin-top:var(--space-2)}
 .dir-btn{background:none;border:1px solid var(--mist);color:var(--ink);border-radius:var(--r-pill);
   padding:2px var(--space-3);font-size:.8rem;font-weight:700;cursor:pointer}
 .dir-btn:hover{background:var(--smoke)}
+.save-btn{background:none;border:1px solid var(--mist);color:var(--ink);border-radius:var(--r-pill);
+  padding:2px var(--space-3);font-size:.8rem;font-weight:700;cursor:pointer}
+.save-btn:hover{background:var(--smoke)}
+.save-btn[aria-pressed="true"]{background:var(--rose);border-color:var(--rose);color:#fff}
 
 /* Loading: grey placeholder rows shaped like the real ones */
 .skeleton{display:grid;grid-template-columns:32px 1fr;gap:var(--space-3);padding:var(--space-4) var(--space-3)}

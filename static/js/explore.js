@@ -13,6 +13,7 @@ let results = {top_spots: [], hidden_gems: [], activities: []}
 let tab     = 'top_spots'
 let pins    = []            // map markers for the open tab, same order as the list
 let routeCtrl = null
+let savedIds  = new Set()   // osm_ids already in the user's bag (empty when logged out)
 
 const TAB_NOTES = {
   top_spots:   'The best-known sights, ranked by fame, detail and distance.',
@@ -104,7 +105,10 @@ function renderCards(places) {
         <div class="p-meta">${esc(subtypeName(p.subtype))} · ${p.distance} km away</div>
         ${p.description ? `<div class="p-desc">${esc(p.description)}</div>` : ''}
         ${chips ? `<div class="p-chips">${chips}</div>` : ''}
-        <div class="p-actions"><button type="button" class="dir-btn" data-i="${i}">Directions</button></div>
+        <div class="p-actions">
+          <button type="button" class="dir-btn" data-i="${i}">Directions</button>
+          ${saveButton(p, i)}
+        </div>
       </div>
     </li>`
   }).join('')
@@ -153,6 +157,8 @@ $('list').addEventListener('mouseleave', () => {
   document.querySelectorAll('.pin.hot').forEach(p => p.classList.remove('hot'))
 })
 $('list').addEventListener('click', e => {
+  const save = e.target.closest('.save-btn')
+  if (save) { toggleSave(+save.dataset.i, save); return }
   const dir = e.target.closest('.dir-btn')
   if (dir) { const p = results[tab][+dir.dataset.i]; showRoute(p.lat, p.lon); return }
   const card = e.target.closest('.place')
@@ -179,6 +185,45 @@ function clearRoute() {
   $('clearRouteBtn').hidden = true
 }
 $('clearRouteBtn').addEventListener('click', clearRoute)
+
+// ── SAVE TO MY BAG ────────────────────────────────────────────────
+function saveButton(p, i) {
+  const on = savedIds.has(p.osm_id)
+  return `<button type="button" class="save-btn" data-i="${i}" aria-pressed="${on}">${on ? '♥ Saved' : '♡ Save'}</button>`
+}
+
+async function loadSaved() {                // which places are already in the bag?
+  try {
+    const r = await fetch('/api/saved')
+    if (r.ok) savedIds = new Set((await r.json()).map(s => s.osm_id))
+  } catch (e) { /* logged out or offline: every heart starts empty */ }
+}
+
+async function toggleSave(i, btn) {
+  const p = results[tab][i]
+  const on = savedIds.has(p.osm_id)
+  btn.disabled = true
+  try {
+    const r = on
+      ? await fetch(`/api/saved/${encodeURIComponent(p.osm_id)}`, {method: 'DELETE'})
+      : await fetch('/api/saved', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({osm_id: p.osm_id, place: p.place, destination: here.name,
+                                label: subtypeName(p.subtype), lat: p.lat, lon: p.lon}),
+        })
+    if (r.status === 401) {                 // not logged in: log in, then come straight back here
+      location.href = `/login?next=${encodeURIComponent(location.pathname + location.search)}`
+      return
+    }
+    if (r.ok) {
+      on ? savedIds.delete(p.osm_id) : savedIds.add(p.osm_id)
+      btn.outerHTML = saveButton(p, i)
+      return
+    }
+  } catch (e) { /* offline: leave the button as it was */ }
+  btn.disabled = false
+}
 
 // ── START, LOADING, EMPTY AND ERROR STATES ─────────────────────────
 function showStart() {                      // opened /explore with no place in the URL
@@ -297,7 +342,7 @@ if (hasPlace) {
   document.title = `${here.name} · Yatra-Go`
   map.setView([here.lat, here.lon], 12)
   drawHere()
-  load()
+  loadSaved().then(load) 
 } else {
   showStart()
 }

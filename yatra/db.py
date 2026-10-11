@@ -20,17 +20,19 @@ def init_db():
         last_login  TEXT
     );
 
-    CREATE TABLE IF NOT EXISTS saved_places (
+    -- My Bag: one row per place a user has saved. Replaces the old saved_places table.
+    DROP TABLE IF EXISTS saved_places;
+    CREATE TABLE IF NOT EXISTS bag_items (
         id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id     INTEGER NOT NULL,
+        user_id     INTEGER NOT NULL REFERENCES users(id),
+        osm_id      TEXT    NOT NULL,          -- e.g. "w175844355": the same id as in places.csv
         place       TEXT    NOT NULL,
-        city        TEXT,
-        category    TEXT,
-        lat         REAL,
-        lon         REAL,
-        icon        TEXT,
+        destination TEXT,                      -- what they were exploring, e.g. "Hampi"
+        label       TEXT,                      -- e.g. "Trek", "Waterfall"
+        lat         REAL    NOT NULL,
+        lon         REAL    NOT NULL,
         saved_at    TEXT,
-        UNIQUE(user_id, place)
+        UNIQUE(user_id, osm_id)                -- saving twice keeps one row
     );
     """)
     conn.commit()
