@@ -1,0 +1,36 @@
+/* Login and sign-up pages. Colours, fonts and gaps come from the tokens in base.css. */
+body{font-size:16px}
+
+.auth{max-width:420px;margin:0 auto;padding:var(--space-7) var(--space-5) var(--space-8)}
+.brand{font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--saffron);
+  text-decoration:none;letter-spacing:-.02em}
+.auth h1{font-family:var(--font-head);font-weight:800;font-size:2.2rem;line-height:1.1;
+  letter-spacing:-.03em;margin-top:var(--space-7)}
+.auth-sub{color:var(--ink2);margin-top:var(--space-2)}
+
+.auth-form{margin-top:var(--space-6);display:grid;gap:var(--space-5)}
+.field label{display:block;font-weight:700;margin-bottom:var(--space-2)}
+.field input{width:100%;padding:var(--space-3) var(--space-4);font-size:1rem;color:var(--ink);
+  background:var(--paper);border:2px solid var(--mist);border-radius:var(--r2);outline:none}
+.field input:focus{border-color:var(--saffron)}
+.field input[aria-invalid="true"]{border-color:var(--rose)}
+.field-hint{color:var(--muted);font-size:.85rem;margin-top:var(--space-1)}
+.field-error{color:var(--rose);font-size:.9rem;font-weight:600;margin-top:var(--space-1)}
+.field-error:empty,.form-error:empty{display:none}
+
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:72px}
+.pw-toggle{position:absolute;right:var(--space-2);top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--ink2);font-weight:700;font-size:.85rem;cursor:pointer;
+  padding:var(--space-1) var(--space-2);border-radius:var(--r2)}
+.pw-toggle:hover{background:var(--smoke)}
+
+.form-error{background:color-mix(in srgb,var(--rose) 12%,transparent);color:var(--rose);
+  font-weight:600;padding:var(--space-3) var(--space-4);border-radius:var(--r2)}
+.btn-submit{background:var(--saffron);color:var(--on-saffron);border:none;border-radius:var(--r-pill);
+  padding:var(--space-3) var(--space-5);font-size:1rem;font-weight:700;cursor:pointer}
+.btn-submit:hover{background:var(--saffron-dark)}
+.btn-submit:disabled{opacity:.6;cursor:wait}
+
+.auth-switch{margin-top:var(--space-6);color:var(--ink2)}
+.auth-switch a{color:var(--saffron);font-weight:700}

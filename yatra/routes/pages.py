@@ -1,7 +1,7 @@
 """HTML pages."""
-from flask import Blueprint, render_template
+from flask import Blueprint, redirect, render_template, request
 
-from yatra.routes.auth import page_login_required
+from yatra.routes.auth import current_user_id, page_login_required
 
 bp = Blueprint("pages", __name__)
 
@@ -16,13 +16,25 @@ def explore():
     return render_template("explore.html")
 
 
+def safe_next(target, default="/"):
+    """Only follow ?next= to a page on THIS site. Stops tricks like /login?next=https://evil.example."""
+    if target and target.startswith("/") and not target.startswith("//") and "\\" not in target:
+        return target
+    return default
+
+
 @bp.route("/login")
 def login_page():
-    return "Login page - coming in Phase 8"
+    if current_user_id():                       # already logged in: nothing to do here
+        return redirect(safe_next(request.args.get("next")))
+    return render_template("login.html")
+
 
 @bp.route("/signup")
 def signup_page():
-    return "Sign up page - coming in Phase 8"
+    if current_user_id():
+        return redirect(safe_next(request.args.get("next")))
+    return render_template("signup.html")
 
 
 @bp.route("/bag")

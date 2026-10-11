@@ -73,8 +73,9 @@ def register():
         session["username"] = row["username"]
         return jsonify({"message":"Registered successfully","user":{"id":row["id"],"username":row["username"],"email":row["email"]}})
     except sqlite3.IntegrityError as e:
-        msg = "Username already taken" if "username" in str(e) else "Email already registered"
-        return jsonify({"error": msg}), 409
+        field = "username" if "username" in str(e) else "email"
+        msg = "That username is taken. Try another." if field == "username" else "An account with this email already exists. Log in instead?"
+        return jsonify({"error": msg, "errors": {field: msg}}), 409
     finally:
         conn.close()
 
