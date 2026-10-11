@@ -1,5 +1,5 @@
 """HTML pages."""
-from flask import Blueprint, redirect, render_template, request
+from flask import Blueprint, redirect, render_template, request, session, url_for
 
 from yatra.routes.auth import current_user_id, page_login_required
 
@@ -36,6 +36,10 @@ def signup_page():
         return redirect(safe_next(request.args.get("next")))
     return render_template("signup.html")
 
+@bp.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return redirect(url_for("pages.home"))
 
 @bp.route("/bag")
 @page_login_required

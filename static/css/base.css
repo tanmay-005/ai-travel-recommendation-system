@@ -58,3 +58,13 @@ button,input,select{font-family:inherit}
 /* Shared helpers */
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 :focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+
+/* Account links in every page header (templates/_account.html) */
+.acct{display:flex;align-items:center;gap:var(--space-1)}
+.acct form{display:contents}
+.acct-name{font-weight:700;color:var(--ink2);margin-right:var(--space-2)}
+.acct-link,.acct-primary{font:inherit;font-weight:600;text-decoration:none;cursor:pointer;border:none;
+  padding:var(--space-2) var(--space-4);border-radius:var(--r-pill);background:none;color:var(--ink)}
+.acct-link:hover{background:var(--smoke)}
+.acct-primary{background:var(--ink);color:var(--paper)}
+.acct-primary:hover{background:var(--ink2)}

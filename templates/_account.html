@@ -1,0 +1,14 @@
+{# Account links for every page header: Log in / Sign up, or the username, My Bag and Log out. #}
+{% set here = request.full_path if request.query_string else request.path %}
+<div class="acct">
+  {% if current_user %}
+    <span class="acct-name">{{ current_user.username }}</span>
+    <a class="acct-link" href="{{ url_for('pages.bag') }}">My Bag</a>
+    <form method="post" action="{{ url_for('pages.logout') }}">
+      <button type="submit" class="acct-link">Log out</button>
+    </form>
+  {% else %}
+    <a class="acct-link" href="{{ url_for('pages.login_page', next=here) }}">Log in</a>
+    <a class="acct-primary" href="{{ url_for('pages.signup_page', next=here) }}">Sign up</a>
+  {% endif %}
+</div>

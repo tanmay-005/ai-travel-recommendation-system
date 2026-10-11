@@ -10,10 +10,7 @@
 {% block content %}
 <nav class="nav">
   <a class="brand" href="{{ url_for('pages.home') }}">Yatra-Go</a>
-  <div class="nav-links">
-    <a href="{{ url_for('pages.login_page') }}">Log in</a>
-    <a class="nav-signup" href="{{ url_for('pages.signup_page') }}">Sign up</a>
-  </div>
+  {% include "_account.html" %}
 </nav>
 
 <main>
