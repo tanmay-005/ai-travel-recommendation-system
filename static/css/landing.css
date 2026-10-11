@@ -11,6 +11,7 @@ a{color:inherit}
 /* HERO */
 main{max-width:1080px;margin:0 auto;padding:0 var(--space-5)}
 .hero{padding:var(--space-8) 0 var(--space-7)}
+.hero-body{position:relative}                     /* the route drawing is placed inside this box */
 .hero h1{font-family:var(--font-head);font-weight:800;line-height:1.02;letter-spacing:-.035em;
   font-size:clamp(2.6rem,7vw,5.2rem);max-width:14ch}
 .lead{margin-top:var(--space-5);font-size:1.15rem;color:var(--ink2);max-width:52ch}
@@ -48,7 +49,32 @@ main{max-width:1080px;margin:0 auto;padding:0 var(--space-5)}
 
 .foot{max-width:1080px;margin:0 auto;padding:var(--space-5);color:var(--muted);font-size:.85rem}
 
+/* HERO ROUTE: a dotted trip line in the empty space beside the description and search box */
+.hero-route{position:absolute;right:0;top:0;width:min(380px, calc(100% - 680px));pointer-events:none}
+.route-mask{fill:none;stroke:#fff;stroke-width:14;stroke-dasharray:1;stroke-dashoffset:0}
+.route-dots{fill:none;stroke:var(--saffron);stroke-width:5;stroke-linecap:round;stroke-dasharray:0 14}
+.stop{fill:var(--sand);stroke:var(--ink);stroke-width:3;transform-box:fill-box;transform-origin:center}
+.stop.s3{fill:var(--saffron);stroke:var(--saffron)}
+
+/* ONE MOMENT ON LOAD: text arrives in order, then the route draws itself to the last stop */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.lead,.search,.boards,.features{animation:fade-up var(--slow) var(--ease) both}
+  .lead    {animation-delay:80ms}
+  .search  {animation-delay:160ms}
+  .boards  {animation-delay:240ms}
+  .features{animation-delay:340ms}
+
+  .route-mask{animation:draw 1.6s var(--ease) 300ms both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  .stop{animation:stop-in var(--slow) var(--ease) both}
+  @keyframes stop-in{0%{scale:0}70%{scale:1.3}100%{scale:1}}
+  .s1{animation-delay:300ms}
+  .s2{animation-delay:900ms}
+  .s3{animation-delay:1800ms}
+}
+
 /* PHONES */
+@media (max-width:980px){.hero-route{display:none}}   /* no spare room beside the search box */
 @media (max-width:720px){
   .hero{padding:var(--space-7) 0}
   .search{flex-wrap:wrap}

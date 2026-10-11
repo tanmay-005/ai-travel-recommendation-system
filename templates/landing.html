@@ -16,15 +16,32 @@
 <main>
   <section class="hero">
     <h1>Pack your bag.<br>We'll show you the rest.</h1>
-    <p class="lead">Name a place in India. We'll find the famous sights, the quiet spots most guides skip, and things to do nearby.</p>
+    <div class="hero-body">
+      <p class="lead">Name a place in India. We'll find the famous sights, the quiet spots most guides skip, and things to do nearby.</p>
 
-    <form id="heroSearch" class="search" autocomplete="off">
-      <label for="heroInput" class="visually-hidden">Destination</label>
-      <input id="heroInput" type="text" placeholder="Where are you headed?" required minlength="2" maxlength="100">
-      <button type="submit" class="btn-go">Explore</button>
-      <button type="button" id="nearMe" class="btn-near">Near me</button>
-    </form>
-    <p id="heroMsg" class="hero-msg" role="status"></p>
+      <form id="heroSearch" class="search" autocomplete="off">
+        <label for="heroInput" class="visually-hidden">Destination</label>
+        <input id="heroInput" type="text" placeholder="Where are you headed?" required minlength="2" maxlength="100">
+        <button type="submit" class="btn-go">Explore</button>
+        <button type="button" id="nearMe" class="btn-near">Near me</button>
+      </form>
+      <p id="heroMsg" class="hero-msg" role="status"></p>
+
+      <!-- A dotted route between three stops, drawn once on page load (decoration only) -->
+      <svg class="hero-route" viewBox="0 0 400 200" aria-hidden="true">
+        <defs>
+          <mask id="routeReveal">
+            <path class="route-mask" pathLength="1"
+                  d="M20 170 C 80 170, 100 110, 170 110 S 280 120, 300 70 S 350 25, 380 30"/>
+          </mask>
+        </defs>
+        <path class="route-dots" mask="url(#routeReveal)"
+              d="M20 170 C 80 170, 100 110, 170 110 S 280 120, 300 70 S 350 25, 380 30"/>
+        <circle class="stop s1" cx="20"  cy="170" r="8"/>
+        <circle class="stop s2" cx="170" cy="110" r="8"/>
+        <circle class="stop s3" cx="380" cy="30"  r="11"/>
+      </svg>
+    </div>
 
     <div class="boards">
       <span class="boards-label">Not sure yet? Try one of these:</span>
