@@ -162,7 +162,7 @@ $('list').addEventListener('click', e => {
   const save = e.target.closest('.save-btn')
   if (save) { toggleSave(+save.dataset.i, save); return }
   const dir = e.target.closest('.dir-btn')
-  if (dir) { const p = results[tab][+dir.dataset.i]; showRoute(p.lat, p.lon); return }
+  if (dir) { const p = results[tab][+dir.dataset.i]; showRoute(p.lat, p.lon, p.place); return }
   const card = e.target.closest('.place')
   if (card) {                               // clicked a card: centre its pin and open the popup
     const m = pins[+card.dataset.i]
@@ -171,27 +171,43 @@ $('list').addEventListener('click', e => {
   }
 })
 
-/// ── DIRECTIONS: up to 3 routes, busy stretches coloured ──────────
+// ── DIRECTIONS: up to 3 routes, busy stretches coloured ──────────
 const ROUTE_COLOUR = '#FF6B2B', OTHER_COLOUR = '#8A8F98'
 const JAM_COLOURS  = {minor: '#F5C518', moderate: '#FF8A00', major: '#E8425A', closed: '#7A0019', unknown: '#FF8A00'}
 const routeLayer = L.layerGroup().addTo(map)
 let routeData = null                        // the last /api/route answer
 let chosen = 0                              // which of its routes is selected
+let routeTo = null                          // {lat, lon, name} of the place we're going to
+let routeFrom = 'centre'                    // start from 'centre' (the destination) or 'me' (GPS)
+let myPos = null                            // your GPS position, once the browser has shared it
 
-async function showRoute(lat, lon) {
-  clearRoute()
-  $('clearRouteBtn').hidden = false
+function startPoint() {
+  return routeFrom === 'me' ? myPos : {lat: here.lat, lon: here.lon}
+}
+
+function showRoute(lat, lon, name) {        // the Directions button on a card
+  routeTo = {lat, lon, name}
+  $('rpTitle').textContent = `Directions to ${name}`
+  $('routePanel').hidden = false
+  loadRoutes()
+}
+
+async function loadRoutes() {
+  routeLayer.clearLayers()
+  routeData = null
+  const from = startPoint()
   try {
-    const r = await fetch(`/api/route?from=${here.lat},${here.lon}&to=${lat},${lon}`)
+    const r = await fetch(`/api/route?from=${from.lat},${from.lon}&to=${routeTo.lat},${routeTo.lon}`)
     const d = await r.json()
     if (!r.ok) throw new Error(d.error || `Server error ${r.status}`)
     routeData = d
     chosen = 0                              // routes arrive fastest first
     drawRoutes()
+    renderRouteList()
     map.fitBounds(d.routes.flatMap(rt => rt.points), {padding: [40, 40]})
   } catch (e) {
-    console.warn('Directions failed:', e.message)   // step 11.4 shows this on the page
-    clearRoute()
+    console.warn('Directions failed:', e.message)   // step 11.4 shows this in the panel
+    $('rpList').innerHTML = ''
   }
 }
 
@@ -202,7 +218,7 @@ function drawRoutes() {
     if (i === chosen) return
     L.polyline(rt.points, {color: OTHER_COLOUR, weight: 5, opacity: 0.7})
       .bindTooltip(`${rt.minutes} min · ${rt.distance_km} km`, {sticky: true})
-      .on('click', () => { chosen = i; drawRoutes() })
+      .on('click', () => selectRoute(i))
       .addTo(routeLayer)
   })
   const rt = routeData.routes[chosen]
@@ -215,14 +231,65 @@ function drawRoutes() {
       .bindTooltip(`${j.kind.replace('_', ' ')} · ${j.level} · +${j.delay_min} min`, {sticky: true})
       .addTo(routeLayer)
   })
+  if (routeFrom === 'me') {                 // a blue dot where you are
+    L.circleMarker([myPos.lat, myPos.lon], {radius: 7, color: '#fff', weight: 3, fillColor: '#2B6CFF', fillOpacity: 1})
+      .bindTooltip('You are here').addTo(routeLayer)
+  }
+}
+
+// ── ROUTE PANEL: compare the routes, pick one, choose where to start ──
+function trafficText(rt) {
+  if (rt.delay_min === null) return 'no traffic data'
+  if (rt.delay_min === 0) return 'clear'
+  return `+${rt.delay_min} min traffic`
+}
+
+function renderRouteList() {
+  $('rpList').innerHTML = routeData.routes.map((rt, i) => `
+    <li><button type="button" class="rp-route${i === chosen ? ' on' : ''}" data-i="${i}" aria-pressed="${i === chosen}">
+      <span class="rp-time">${rt.minutes} min</span>
+      ${i === 0 ? '<span class="rp-tag">Fastest</span>' : '<span></span>'}
+      <span class="rp-meta">${rt.distance_km} km · <span class="${rt.delay_min > 0 ? 'rp-busy' : 'rp-clear'}">${trafficText(rt)}</span></span>
+    </button></li>`).join('')
+}
+
+function selectRoute(i) {
+  chosen = i
+  drawRoutes()
+  renderRouteList()
+}
+
+function setFrom(which) {
+  if (which === 'me' && !myPos) {           // ask the browser for GPS once, then remember it
+    if (!navigator.geolocation) { console.warn("This browser can't share your location."); return }
+    navigator.geolocation.getCurrentPosition(
+      pos => { myPos = {lat: +pos.coords.latitude.toFixed(5), lon: +pos.coords.longitude.toFixed(5)}; setFrom('me') },
+      () => console.warn('Location is blocked'),     // step 11.4 shows this in the panel
+      {timeout: 10000},
+    )
+    return
+  }
+  routeFrom = which
+  document.querySelectorAll('.rp-from-btn').forEach(b => {
+    b.classList.toggle('on', b.dataset.from === which)
+    b.setAttribute('aria-pressed', b.dataset.from === which)
+  })
+  if (routeTo) loadRoutes()
 }
 
 function clearRoute() {
   routeLayer.clearLayers()
   routeData = null
-  $('clearRouteBtn').hidden = true
+  routeTo = null
+  $('routePanel').hidden = true
 }
-$('clearRouteBtn').addEventListener('click', clearRoute)
+
+$('rpClose').addEventListener('click', clearRoute)
+document.querySelectorAll('.rp-from-btn').forEach(b => b.addEventListener('click', () => setFrom(b.dataset.from)))
+$('rpList').addEventListener('click', e => {
+  const b = e.target.closest('.rp-route')
+  if (b) selectRoute(+b.dataset.i)
+})
 
 // ── SAVE TO MY BAG ────────────────────────────────────────────────
 function saveButton(p, i) {
@@ -379,6 +446,7 @@ function esc(s) {
 document.querySelectorAll('.r-btn').forEach(b => b.classList.toggle('on', +b.dataset.km === radius))
 if (hasPlace) {
   $('placeName').textContent = here.name
+  $('fromCentre').textContent = `${here.name} centre`
   document.title = `${here.name} · Yatra-Go`
   map.setView([here.lat, here.lon], 12)
   drawHere()
