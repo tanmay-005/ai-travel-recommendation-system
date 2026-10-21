@@ -12,7 +12,6 @@ let radius  = RADII.includes(+params.get('radius')) ? +params.get('radius') : 25
 let results = {top_spots: [], hidden_gems: [], activities: []}
 let tab     = 'top_spots'
 let pins    = []            // map markers for the open tab, same order as the list
-let routeCtrl = null
 let savedIds  = new Set()   // osm_ids already in the user's bag (empty when logged out)
 
 const TAB_NOTES = {
@@ -172,19 +171,55 @@ $('list').addEventListener('click', e => {
   }
 })
 
-// ── DIRECTIONS (from the destination centre to the place) ─────────
-function showRoute(lat, lon) {
+/// ── DIRECTIONS: up to 3 routes, busy stretches coloured ──────────
+const ROUTE_COLOUR = '#FF6B2B', OTHER_COLOUR = '#8A8F98'
+const JAM_COLOURS  = {minor: '#F5C518', moderate: '#FF8A00', major: '#E8425A', closed: '#7A0019', unknown: '#FF8A00'}
+const routeLayer = L.layerGroup().addTo(map)
+let routeData = null                        // the last /api/route answer
+let chosen = 0                              // which of its routes is selected
+
+async function showRoute(lat, lon) {
   clearRoute()
-  routeCtrl = L.Routing.control({
-    waypoints: [L.latLng(here.lat, here.lon), L.latLng(lat, lon)],
-    router: L.Routing.osrmv1({serviceUrl: 'https://routing.openstreetmap.de/routed-car/route/v1'}),
-    routeWhileDragging: false, addWaypoints: false, createMarker: () => null,
-    lineOptions: {styles: [{color: '#FF6B2B', weight: 5, opacity: 0.85}]},
-  }).addTo(map)
   $('clearRouteBtn').hidden = false
+  try {
+    const r = await fetch(`/api/route?from=${here.lat},${here.lon}&to=${lat},${lon}`)
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error || `Server error ${r.status}`)
+    routeData = d
+    chosen = 0                              // routes arrive fastest first
+    drawRoutes()
+    map.fitBounds(d.routes.flatMap(rt => rt.points), {padding: [40, 40]})
+  } catch (e) {
+    console.warn('Directions failed:', e.message)   // step 11.4 shows this on the page
+    clearRoute()
+  }
 }
+
+function drawRoutes() {
+  routeLayer.clearLayers()
+  // The other routes first (grey), so the chosen one is drawn on top of them.
+  routeData.routes.forEach((rt, i) => {
+    if (i === chosen) return
+    L.polyline(rt.points, {color: OTHER_COLOUR, weight: 5, opacity: 0.7})
+      .bindTooltip(`${rt.minutes} min · ${rt.distance_km} km`, {sticky: true})
+      .on('click', () => { chosen = i; drawRoutes() })
+      .addTo(routeLayer)
+  })
+  const rt = routeData.routes[chosen]
+  L.polyline(rt.points, {color: ROUTE_COLOUR, weight: 6, opacity: 0.9})
+    .bindTooltip(`${rt.minutes} min · ${rt.distance_km} km`, {sticky: true})
+    .addTo(routeLayer)
+  // Busy stretches on top: points start..end of this route, coloured by how bad the delay is.
+  rt.jams.forEach(j => {
+    L.polyline(rt.points.slice(j.start, j.end + 1), {color: JAM_COLOURS[j.level] || JAM_COLOURS.unknown, weight: 8})
+      .bindTooltip(`${j.kind.replace('_', ' ')} · ${j.level} · +${j.delay_min} min`, {sticky: true})
+      .addTo(routeLayer)
+  })
+}
+
 function clearRoute() {
-  if (routeCtrl) { map.removeControl(routeCtrl); routeCtrl = null }
+  routeLayer.clearLayers()
+  routeData = null
   $('clearRouteBtn').hidden = true
 }
 $('clearRouteBtn').addEventListener('click', clearRoute)

@@ -127,8 +127,6 @@ html,body{height:100%;overflow:hidden}
 /* Leaflet's own boxes, in our colours (also in dark mode) */
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--paper);color:var(--ink)}
 .leaflet-popup-content{font-family:var(--font-body);margin:var(--space-3) var(--space-4)}
-.leaflet-routing-container{background:var(--paper);color:var(--ink);border-radius:var(--r2);
-  max-height:40vh;overflow-y:auto}
 
 /* ── PHONES: map on top, list below, the page scrolls ─────────── */
 @media (max-width:760px){
