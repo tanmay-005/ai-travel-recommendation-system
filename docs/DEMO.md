@@ -10,7 +10,8 @@
   1. `http://127.0.0.1:5000/`
   2. Backup: `http://127.0.0.1:5000/explore?lat=15.335&lon=76.46&name=Hampi`
   3. Backup: `http://127.0.0.1:5000/explore?lat=32.2396&lon=77.1887&name=Manali`
-- [ ] Run `python -m pytest -q` once; it should print `34 passed`
+- [ ] Run `python -m pytest -q` once; it should print `48 passed`
+- [ ] `TOMTOM_API_KEY` is in `.env` (without it, directions still work but show no traffic)
 - [ ] Phone hotspot ready in case the venue Wi-Fi is slow (the map tiles and place search need internet)
 
 ## The script
@@ -23,12 +24,13 @@
 | 0:50 | Hover a card, then click a pin | "Card 3 and pin 3 are the same place. Hover one and the other lights up; click a pin and the list scrolls to it." |
 | 1:05 | Click **Hidden Gems** | "Switching tabs doesn't call the server again; it re-draws from data already loaded. Hidden Gems are places with **no** Wikipedia page but lots of detail on the map: the ones guidebooks skip. Pushkarini, the Queen's Bath, is a good example." |
 | 1:25 | Click **Things to Do** | "Activities, closest first. Hampi is a famous bouldering spot, and the data picked that up on its own." |
+| 1:30 | Click **Directions** on a Top Spot, then the 2nd route in the panel | "Directions show up to three routes with live traffic from TomTom. Red and orange stretches are where it's slow, and you can switch routes here or on the map. If TomTom is down, it falls back to OSRM so it never just breaks." |
 | 1:35 | Click **♡ Save** on a gem | "Browsing never needs an account. The moment you want to save something, it asks you to log in…" |
 | 1:45 | Log in with the demo account | "…and brings you straight back to the same place, same tab. The `next` link is checked so it can only send you to pages on this site." |
 | 2:00 | Click **♡ Save** again (it pops red), then **My Bag** | "Saved. My Bag groups places by trip, with a map of all of them and directions that open in Google Maps on your phone." |
 | 2:20 | Point at the two groups (Hampi and Manali) | "The data is 6,624 places around 98 travel hubs, built from OpenStreetMap with a cleaning script. For small towns outside that, the server fills in live from OpenStreetMap, in parallel, and caches it." |
-| 2:40 | Switch to the terminal: `python -m pytest -q` | "And it's tested: 34 tests for the distance maths, the ranking rules, the login flow and security checks, each with its own empty database. They run in about 3 seconds." |
-| 2:55 | `34 passed` appears | "Thank you." |
+| 2:40 | Switch to the terminal: `python -m pytest -q` | "And it's tested: 48 tests for the distance maths, the ranking rules, the login flow, security checks and directions, each with its own empty database. They run in about 3 seconds." |
+| 2:55 | `48 passed` appears | "Thank you." |
 
 ## If something goes wrong
 

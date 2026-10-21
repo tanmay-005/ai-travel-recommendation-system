@@ -296,7 +296,8 @@ function clearRoute() {
 
 $('rpClose').addEventListener('click', clearRoute)
 document.querySelectorAll('.rp-from-btn').forEach(b => b.addEventListener('click', () => setFrom(b.dataset.from)))
-$('rpList').addEventListener('click', e => { if (e.target.closest('[data-action="route-retry"]')) { loadRoutes(); return }
+$('rpList').addEventListener('click', e => { 
+  if (e.target.closest('[data-action="route-retry"]')) { loadRoutes(); return }
   const b = e.target.closest('.rp-route')
   if (b) selectRoute(+b.dataset.i)
 })

@@ -10,7 +10,8 @@ destination but not a plan. Type a place (or tap *Near me*) and get three ranked
 - **▲ Things to Do**: treks, camps, rafting, climbing and other activities, closest first
 
 Browsing needs no account. Sign up only when you want to save places to **My Bag** for the trip.
-All data comes from OpenStreetMap, and the app uses no paid APIs.
+Place data comes from OpenStreetMap. Live traffic comes from TomTom's free tier, and the app still
+works without it.
 
 | Landing | Explore | My Bag |
 |---|---|---|
@@ -25,13 +26,14 @@ All data comes from OpenStreetMap, and the app uses no paid APIs.
 | **Search any destination** | Place names are turned into coordinates on the server (OpenStreetMap Nominatim), with caching and a 1 request/second limit |
 | **Three ranked lists from one request** | `/api/discover` filters by distance once and ranks the same places three ways |
 | **Small towns still work** | If a list has fewer than 5 places, the server asks OpenStreetMap (Overpass) live, in parallel, and caches the answer for 6 hours |
-| **List and map linked** | Numbered cards match numbered pins; hover a card to highlight its pin, click a pin to jump to its card; road directions from the destination |
+| **List and map linked** | Numbered cards match numbered pins; hover a card to highlight its pin, click a pin to jump to its card |
+| **Traffic-aware directions** | Up to 3 road routes with live traffic (TomTom). Busy stretches are coloured by how bad the delay is, and a panel compares time, distance and delay. Start from the town centre or your own location. If TomTom is unavailable it falls back to OSRM routes without traffic |
 | **Shareable URLs** | `/explore?lat=15.34&lon=76.46&name=Hampi&radius=25` can be bookmarked or sent to a friend |
 | **Accounts and My Bag** | Sign up, log in, save places from Explore (logged-out users are sent to log in and brought back), My Bag grouped by destination with a map |
 | **Careful states** | Loading skeletons, "nothing within 10 km, try 25 km?" with a one-click fix, error with Retry |
 | **Design system** | Colours, fonts and spacing as CSS variables in one file; dark mode; works on phones |
 | **Motion with a purpose** | Cards fade in, pins drop, the tab underline slides, the heart pops; all switched off for users who prefer reduced motion |
-| **Tested** | 34 automated tests for the ranking maths, the API, security checks and the login flow |
+| **Tested** | 48 automated tests for the ranking maths, the API, security checks, the login flow and directions |
 
 ---
 
@@ -69,11 +71,14 @@ pip install -r requirements.txt
 
 copy .env.example .env
 python -c "import secrets; print(secrets.token_hex(32))"   # paste the result into .env as SECRET_KEY
+# optional: for live traffic, paste a free key from developer.tomtom.com into .env as TOMTOM_API_KEY
 
 python run.py
 ```
 
 Open **http://127.0.0.1:5000**. The database (`yatra.db`) is created on first start.
+
+Without a TomTom key everything still works; directions just come from OSRM and show no traffic.
 
 The place data (`data/places.csv`, 6,624 places around 98 travel hubs) is already in the repository,
 so you don't need to build it to run the app.
@@ -99,15 +104,17 @@ fame and detail signals used by the ranking.
 python -m pytest -v
 ```
 
-34 tests run in about 3 seconds, with no internet needed:
+48 tests run in about 3 seconds, with no internet needed:
 
 - `tests/test_geo.py`: distance maths (Delhi to Agra is about 180 km in a straight line)
 - `tests/test_discover.py`: the ranking rules, on five hand-made places
 - `tests/test_api.py`: sign-up, login, save and list, 401 when logged out, users can't see each
   other's bags, passwords are stored hashed, open redirects are blocked, geocode caching
+- `tests/test_routing.py`: reading TomTom and OSRM answers, fastest route first, TomTom → OSRM fallback,
+  the cache, bad points and the 500 km limit
 
-Each test gets its own empty database in a temporary folder, and live OpenStreetMap calls are replaced
-with a fake, so the tests never touch your real data or the network.
+Each test gets its own empty database in a temporary folder, and live OpenStreetMap, TomTom and OSRM calls are
+replaced with fakes, so the tests never touch your real data or the network.
 
 ---
 
@@ -117,7 +124,7 @@ with a fake, so the tests never touch your real data or the network.
 ai-travel-recommendation-system/
 ├── run.py                   start the app:  python run.py
 ├── requirements.txt
-├── .env.example             copy to .env and set SECRET_KEY
+├── .env.example             copy to .env; set SECRET_KEY (and TOMTOM_API_KEY)
 ├── pytest.ini
 ├── data/
 │   └── places.csv           6,624 places, built by scripts/build_places.py
@@ -125,24 +132,26 @@ ai-travel-recommendation-system/
 │   └── build_places.py      fetches and cleans OpenStreetMap data
 ├── yatra/                   the Flask app
 │   ├── __init__.py          create_app(): the app factory
-│   ├── config.py            settings, SECRET_KEY from .env
+│   ├── config.py            settings: SECRET_KEY and TOMTOM_API_KEY from .env
 │   ├── db.py                SQLite tables: users, bag_items
 │   ├── data.py              loads places.csv
 │   ├── geo.py               haversine distance (vectorised with numpy)
 │   ├── kinds.py             which OSM tags count as sight / nature / activity
 │   ├── discover.py          the three ranking functions (no Flask, easy to test)
 │   ├── osm.py               live Overpass top-up with parallel requests and a cache
+│   ├── routing.py           turns TomTom / OSRM answers into one route format (no Flask, easy to test)
 │   └── routes/
 │       ├── pages.py         HTML pages: /, /explore, /login, /signup, /bag
 │       ├── places.py        /api/discover, /api/search
 │       ├── geocode.py       /api/geocode
 │       ├── auth.py          /api/auth/register, login, logout, me
-│       └── saved.py         /api/saved (My Bag)
+│       ├── saved.py         /api/saved (My Bag)
+│       └── directions.py    /api/route (TomTom live traffic, OSRM fallback, cached)
 ├── templates/               Jinja pages; base.html is shared, _account.html is the header links
 ├── static/
 │   ├── css/                 base.css (design tokens), motion.css, one file per page
 │   └── js/                  one file per page
-└── tests/                   pytest: conftest.py, test_geo.py, test_discover.py, test_api.py
+└── tests/                   pytest: conftest.py, test_geo.py, test_discover.py, test_api.py, test_routing.py
 ```
 
 ```
@@ -152,7 +161,8 @@ Browser ──► Flask (create_app)
              ├── places.py    → discover.py ranks rows from places.csv
              │                   └── osm.py tops up thin lists from Overpass (parallel, cached)
              ├── auth.py      → users table (hashed passwords, session cookie)
-             └── saved.py     → bag_items table
+             ├── saved.py     → bag_items table
+             └── directions.py → TomTom routes with traffic (falls back to OSRM), cached 5 minutes
 ```
 
 ---
@@ -164,6 +174,7 @@ Browser ──► Flask (create_app)
 | GET | `/api/discover?lat=&lon=&radius=25&limit=10` | Top Spots, Hidden Gems and Things to Do around a point (radius 1–100 km) |
 | GET | `/api/geocode?q=Hampi` | Place name → `{name, lat, lon}` (India only, cached) |
 | GET | `/api/search?q=` | Find places in the dataset by name or city |
+| GET | `/api/route?from=lat,lon&to=lat,lon` | Up to 3 road routes, fastest first, with time, distance, traffic delay and busy stretches (up to 500 km, cached 5 minutes) |
 | POST | `/api/auth/register` | `{username, email, password}` → creates the account and logs in |
 | POST | `/api/auth/login` | `{email, password}` → logs in |
 | POST | `/api/auth/logout` | Logs out |
@@ -179,7 +190,8 @@ Errors come back as JSON with an `error` message, and for forms an `errors` obje
 ## Security notes
 
 - Passwords are hashed with Werkzeug (`scrypt`); the plain password is never stored.
-- `SECRET_KEY` lives in `.env`, which is not committed.
+- `SECRET_KEY` and `TOMTOM_API_KEY` live in `.env`, which is not committed. The TomTom key is only used
+  by the server and is never sent to the browser.
 - Every SQL query uses `?` placeholders, never string formatting.
 - Every value from the data, the URL or the user is escaped before it is put into the page.
 - `?next=` redirects after login only go to paths on this site (no open redirects).
@@ -190,8 +202,8 @@ Errors come back as JSON with an `error` message, and for forms an `errors` obje
 
 ## Built with
 
-Flask · pandas · NumPy · SQLite · Leaflet · Leaflet Routing Machine · OpenStreetMap
-(map tiles, Nominatim, Overpass, OSRM routing) · pytest
+Flask · pandas · NumPy · SQLite · Leaflet · OpenStreetMap (map tiles, Nominatim, Overpass) ·
+TomTom Routing API (live traffic) · OSRM (fallback routing) · pytest
 
 Place data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), available under the ODbL.
 
