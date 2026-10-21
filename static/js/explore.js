@@ -196,6 +196,7 @@ async function loadRoutes() {
   routeLayer.clearLayers()
   routeData = null
   const from = startPoint()
+  showRouteMsg('Finding routes…')
   try {
     const r = await fetch(`/api/route?from=${from.lat},${from.lon}&to=${routeTo.lat},${routeTo.lon}`)
     const d = await r.json()
@@ -206,8 +207,7 @@ async function loadRoutes() {
     renderRouteList()
     map.fitBounds(d.routes.flatMap(rt => rt.points), {padding: [40, 40]})
   } catch (e) {
-    console.warn('Directions failed:', e.message)   // step 11.4 shows this in the panel
-    $('rpList').innerHTML = ''
+    showRouteMsg(e.message === 'Failed to fetch' ? "Couldn't reach the server." : e.message, true)
   }
 }
 
@@ -251,6 +251,9 @@ function renderRouteList() {
       ${i === 0 ? '<span class="rp-tag">Fastest</span>' : '<span></span>'}
       <span class="rp-meta">${rt.distance_km} km · <span class="${rt.delay_min > 0 ? 'rp-busy' : 'rp-clear'}">${trafficText(rt)}</span></span>
     </button></li>`).join('')
+    $('rpNote').textContent = routeData.traffic
+    ? 'Live traffic from TomTom. Click a route on the map or in this list to choose it.'
+    : 'Live traffic is unavailable right now, so these routes ignore traffic.'
 }
 
 function selectRoute(i) {
@@ -259,12 +262,19 @@ function selectRoute(i) {
   renderRouteList()
 }
 
+function showRouteMsg(text, retry = false) {   // loading and error messages inside the panel
+  $('rpList').innerHTML = `<li class="rp-msg">${esc(text)}
+    ${retry ? '<button type="button" class="link-btn" data-action="route-retry">Retry</button>' : ''}</li>`
+  $('rpNote').textContent = ''
+}
+
 function setFrom(which) {
   if (which === 'me' && !myPos) {           // ask the browser for GPS once, then remember it
-    if (!navigator.geolocation) { console.warn("This browser can't share your location."); return }
+    if (!navigator.geolocation) { $('rpNote').textContent = "This browser can't share your location."; return }
+    $('rpNote').textContent = 'Finding where you are…'
     navigator.geolocation.getCurrentPosition(
       pos => { myPos = {lat: +pos.coords.latitude.toFixed(5), lon: +pos.coords.longitude.toFixed(5)}; setFrom('me') },
-      () => console.warn('Location is blocked'),     // step 11.4 shows this in the panel
+      () => { $('rpNote').textContent = 'Location is blocked. Allow it in your browser, or start from the destination centre.' },
       {timeout: 10000},
     )
     return
@@ -286,7 +296,7 @@ function clearRoute() {
 
 $('rpClose').addEventListener('click', clearRoute)
 document.querySelectorAll('.rp-from-btn').forEach(b => b.addEventListener('click', () => setFrom(b.dataset.from)))
-$('rpList').addEventListener('click', e => {
+$('rpList').addEventListener('click', e => { if (e.target.closest('[data-action="route-retry"]')) { loadRoutes(); return }
   const b = e.target.closest('.rp-route')
   if (b) selectRoute(+b.dataset.i)
 })

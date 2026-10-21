@@ -136,6 +136,9 @@ html,body{height:100%;overflow:hidden}
 .rp-meta{grid-column:1/-1;color:var(--muted);font-size:.82rem}
 .rp-busy{color:var(--rose);font-weight:700}
 .rp-clear{color:var(--teal);font-weight:700}
+.rp-note{margin-top:var(--space-3);color:var(--muted);font-size:.78rem}
+.rp-note:empty{display:none}
+.rp-msg{color:var(--ink2);font-size:.9rem;padding:var(--space-2) 0}
 
 /* Numbered pins (Leaflet divIcon) */
 .pin{width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
