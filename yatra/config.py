@@ -23,3 +23,4 @@ class Config:
     SECRET_KEY = _secret_key()
     DB_PATH = BASE_DIR / "yatra.db"
     PLACES_CSV = BASE_DIR / "data" / "places.csv"
+    TOMTOM_API_KEY = os.environ.get("TOMTOM_API_KEY", "")   # live-traffic routes

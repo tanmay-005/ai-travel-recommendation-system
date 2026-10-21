@@ -18,12 +18,13 @@ def create_app(config=None) -> Flask:
     with app.app_context():
         init_db()
         
-    from yatra.routes import auth, geocode, pages, places, saved
+    from yatra.routes import auth, directions, geocode, pages, places, saved
     app.register_blueprint(pages.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(places.bp)
     app.register_blueprint(saved.bp)
     app.register_blueprint(geocode.bp)
+    app.register_blueprint(directions.bp)
     
     @app.context_processor
     def inject_user():
