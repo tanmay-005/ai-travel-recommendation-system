@@ -104,3 +104,42 @@ def test_bad_points_are_refused(client, query):
 def test_very_long_trips_are_refused(client):
     r = client.get("/api/route?from=8.08,77.55&to=34.08,74.80")   # Kanyakumari to Srinagar
     assert r.status_code == 400
+
+
+
+# ── walking ────────────────────────────────────────────────────────
+def test_walk_uses_the_foot_server_and_never_tomtom(app, client, monkeypatch):
+    app.config["TOMTOM_API_KEY"] = "test"
+    monkeypatch.setattr(directions, "tomtom_routes", lambda *a: pytest.fail("no traffic on foot"))
+    modes = []
+    monkeypatch.setattr(directions, "osrm_routes", lambda *a: modes.append(a[-1]) or parse_osrm(OSRM))
+    data = client.get(f"/api/route?from={FROM}&to={TO}&mode=walk").get_json()
+    assert modes == ["walk"] and data["mode"] == "walk" and data["traffic"] is False
+
+
+def test_osrm_asks_the_server_for_the_chosen_mode(monkeypatch):
+    urls = []
+    class Answer:
+        def raise_for_status(self): pass
+        def json(self): return OSRM
+    monkeypatch.setattr(directions.requests, "get", lambda url, **kw: urls.append(url) or Answer())
+    directions.osrm_routes(15.335, 76.46, 15.2689, 76.3909, "walk")
+    directions.osrm_routes(15.335, 76.46, 15.2689, 76.3909)
+    assert "routed-foot" in urls[0] and "routed-car" in urls[1]
+
+
+def test_cache_keeps_car_and_walk_apart(client, monkeypatch):
+    calls = []
+    monkeypatch.setattr(directions, "osrm_routes", lambda *a: calls.append(a[-1]) or parse_osrm(OSRM))
+    client.get(f"/api/route?from={FROM}&to={TO}&mode=car")
+    walk = client.get(f"/api/route?from={FROM}&to={TO}&mode=walk").get_json()
+    assert walk["cached"] is False and calls == ["car", "walk"]
+
+
+def test_unknown_mode_is_refused(client):
+    assert client.get(f"/api/route?from={FROM}&to={TO}&mode=fly").status_code == 400
+
+
+def test_long_walks_are_refused(client):
+    r = client.get("/api/route?from=15.335,76.46&to=15.15,76.92&mode=walk")   # Hampi to Ballari, ~50 km
+    assert r.status_code == 400 and "30 km" in r.get_json()["error"]
