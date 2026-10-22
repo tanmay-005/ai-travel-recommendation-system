@@ -129,6 +129,8 @@ html,body{height:100%;overflow:hidden}
 .rp-live::before{content:"";display:inline-block;width:10px;height:10px;margin-right:var(--space-2);
   border-radius:50%;background:#2B6CFF;box-shadow:0 0 0 3px color-mix(in srgb,#2B6CFF 30%,transparent)}
 .rp-live[hidden]{display:none}
+.rp-live.done{color:var(--teal)}
+.rp-live.done::before{background:var(--teal);box-shadow:none}
 .rp-list{list-style:none;margin-top:var(--space-3);display:grid;gap:var(--space-2)}
 .rp-route{width:100%;text-align:left;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px var(--space-2);
   padding:var(--space-2) var(--space-3);background:var(--sand);color:var(--ink);

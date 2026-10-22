@@ -183,6 +183,9 @@ let routeFrom = 'centre'                    // start from 'centre' (the destinat
 let myPos = null                            // your GPS position, once the browser has shared it
 let watchId = null                          // the browser's live GPS watch, while it follows you
 let meDot = null                            // the blue "You are here" dot on the map
+let arrived = false                         // set once you reach the place, so the countdown stops
+let lastReroute = 0                         // when we last fetched a new route because you left the old one
+const ARRIVE_KM = 0.03, OFF_ROUTE_KM = 0.05, REROUTE_MS = 60 * 1000   // 30 m, 50 m, once a minute
 
 function startPoint() {
   return routeFrom === 'me' ? myPos : {lat: here.lat, lon: here.lon}
@@ -313,6 +316,8 @@ function progress(pos, pts) {               // where you are on the route: {left
 }
 
 function showProgress() {                   // "2.3 km · 7 min left" at the top of the panel
+  if (arrived) return
+  $('rpLive').classList.remove('done')
   if (!routeData || routeFrom !== 'me' || !myPos) { $('rpLive').hidden = true; return }
   const rt = routeData.routes[chosen]
   const share = progress([myPos.lat, myPos.lon], rt.points).left / (routeKm(rt.points) || 1)   // 1 at the start, 0 at the end
@@ -328,7 +333,39 @@ function startFollowing() {                 // keep the blue dot and the countdo
     myPos = {lat: +pos.coords.latitude.toFixed(5), lon: +pos.coords.longitude.toFixed(5)}
     if (meDot) meDot.setLatLng([myPos.lat, myPos.lon])
     showProgress()
-  }, () => {}, {enableHighAccuracy: true, maximumAge: 5000})
+    checkRoute(pos.coords.accuracy)
+  }, err => {
+    if (err.code === err.PERMISSION_DENIED) {
+      stopFollowing()
+      $('rpNote').textContent = 'Location is blocked. Allow it in your browser, or start from the destination centre.'
+      return
+    }
+    $('rpLive').textContent = 'Waiting for GPS signal…'   // in a tunnel, indoors: try again on the next update
+    $('rpLive').hidden = false
+  }, {enableHighAccuracy: true, maximumAge: 5000})
+  arrived = false
+}
+
+function checkRoute(accuracy) {             // have you arrived? have you left the route?
+  if (!routeData || !routeTo) return        // still loading
+  const me = [myPos.lat, myPos.lon], rt = routeData.routes[chosen]
+  const end = rt.points[rt.points.length - 1]
+  // The route ends on the nearest road, which can be some way from the pin of a big place (a park),
+  // so reaching either the end of the route or the pin counts as arriving.
+  if (kmBetween(me, end) < ARRIVE_KM || kmBetween(me, [routeTo.lat, routeTo.lon]) < ARRIVE_KM) {
+    stopFollowing()
+    arrived = true
+    $('rpLive').textContent = `You've arrived at ${routeTo.name}`
+    $('rpLive').classList.add('done')
+    $('rpLive').hidden = false
+    return
+  }
+  // Off the route? Only trust it when GPS is accurate to 50 m, and fetch at most once a minute.
+  const {off} = progress(me, rt.points)
+  if (off > OFF_ROUTE_KM && accuracy <= 50 && Date.now() - lastReroute > REROUTE_MS) {
+    lastReroute = Date.now()
+    loadRoutes()                             // new routes from where you are now
+  }
 }
 
 function stopFollowing() {                  // save battery: stop GPS when it isn't needed
@@ -349,6 +386,7 @@ function setFrom(which) {
     return
   }
   routeFrom = which
+  which === 'me' ? startFollowing() : stopFollowing()
   document.querySelectorAll('.rp-from-btn').forEach(b => {
     b.classList.toggle('on', b.dataset.from === which)
     b.setAttribute('aria-pressed', b.dataset.from === which)
@@ -366,6 +404,7 @@ function setMode(which) {
 }
 
 function clearRoute() {
+  stopFollowing()
   routeLayer.clearLayers()
   routeData = null
   routeTo = null
