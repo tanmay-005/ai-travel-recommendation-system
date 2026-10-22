@@ -181,6 +181,8 @@ let chosen = 0                              // which of its routes is selected
 let routeTo = null                          // {lat, lon, name} of the place we're going to
 let routeFrom = 'centre'                    // start from 'centre' (the destination) or 'me' (GPS)
 let myPos = null                            // your GPS position, once the browser has shared it
+let watchId = null                          // the browser's live GPS watch, while it follows you
+let meDot = null                            // the blue "You are here" dot on the map
 
 function startPoint() {
   return routeFrom === 'me' ? myPos : {lat: here.lat, lon: here.lon}
@@ -190,6 +192,7 @@ function showRoute(lat, lon, name) {        // the Directions button on a card
   routeTo = {lat, lon, name}
   $('rpTitle').textContent = `Directions to ${name}`
   $('routePanel').hidden = false
+  if (routeFrom === 'me') startFollowing()
   loadRoutes()
 }
 
@@ -233,8 +236,9 @@ function drawRoutes() {
       .bindTooltip(`${j.kind.replace('_', ' ')} · ${j.level} · +${j.delay_min} min`, {sticky: true})
       .addTo(routeLayer)
   })
+  meDot = null
   if (routeFrom === 'me') {                 // a blue dot where you are
-    L.circleMarker([myPos.lat, myPos.lon], {radius: 7, color: '#fff', weight: 3, fillColor: '#2B6CFF', fillOpacity: 1})
+    meDot = L.circleMarker([myPos.lat, myPos.lon], {radius: 7, color: '#fff', weight: 3, fillColor: '#2B6CFF', fillOpacity: 1})
       .bindTooltip('You are here').addTo(routeLayer)
   }
 }
@@ -259,6 +263,7 @@ function renderRouteList() {
     : routeData.traffic
       ? 'Live traffic from TomTom. Click a route on the map or in this list to choose it.'
       : 'Live traffic is unavailable right now, so these routes ignore traffic.'
+      showProgress()
 }
 
 function selectRoute(i) {
@@ -271,6 +276,65 @@ function showRouteMsg(text, retry = false) {   // loading and error messages ins
   $('rpList').innerHTML = `<li class="rp-msg">${esc(text)}
     ${retry ? '<button type="button" class="link-btn" data-action="route-retry">Retry</button>' : ''}</li>`
   $('rpNote').textContent = ''
+  $('rpLive').hidden = true
+}
+
+// ── LIVE PROGRESS: follow your GPS and count down the distance left ──
+function kmBetween(a, b) {                  // straight-line km between two [lat, lon] points (haversine)
+  const rad = Math.PI / 180
+  const dLat = (b[0] - a[0]) * rad, dLon = (b[1] - a[1]) * rad
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dLon / 2) ** 2
+  return 2 * 6371 * Math.asin(Math.sqrt(h))
+}
+
+function routeKm(pts, from = 0) {           // length of the route from point number `from` to the end
+  let km = 0
+  for (let i = from; i < pts.length - 1; i++) km += kmBetween(pts[i], pts[i + 1])
+  return km
+}
+
+function progress(pos, pts) {               // where you are on the route: {left: km to go, off: km away from it}
+  let best = {off: Infinity, i: 0, at: pts[0]}
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i], b = pts[i + 1]
+    // Closest point on the piece a→b. Over a few hundred metres the Earth is flat enough to
+    // treat lat/lon as x/y, once longitude is shrunk by cos(latitude).
+    const k = Math.cos(a[0] * Math.PI / 180)
+    const dx = (b[1] - a[1]) * k, dy = b[0] - a[0]
+    const px = (pos[1] - a[1]) * k, py = pos[0] - a[0]
+    const len2 = dx * dx + dy * dy
+    const t = len2 ? Math.min(1, Math.max(0, (px * dx + py * dy) / len2)) : 0
+    const at = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
+    const off = kmBetween(pos, at)
+    if (off < best.off) best = {off, i, at}
+  }
+  const next = pts[best.i + 1] || best.at
+  return {left: kmBetween(best.at, next) + routeKm(pts, best.i + 1), off: best.off}
+}
+
+function showProgress() {                   // "2.3 km · 7 min left" at the top of the panel
+  if (!routeData || routeFrom !== 'me' || !myPos) { $('rpLive').hidden = true; return }
+  const rt = routeData.routes[chosen]
+  const share = progress([myPos.lat, myPos.lon], rt.points).left / (routeKm(rt.points) || 1)   // 1 at the start, 0 at the end
+  const km = rt.distance_km * share, mins = Math.max(1, Math.round(rt.minutes * share))
+  const dist = km < 1 ? `${Math.round(km * 100) * 10} m` : `${km.toFixed(1)} km`
+  $('rpLive').textContent = `${dist} · ${mins} min left`
+  $('rpLive').hidden = false
+}
+
+function startFollowing() {                 // keep the blue dot and the countdown up to date
+  if (watchId !== null || !navigator.geolocation) return
+  watchId = navigator.geolocation.watchPosition(pos => {
+    myPos = {lat: +pos.coords.latitude.toFixed(5), lon: +pos.coords.longitude.toFixed(5)}
+    if (meDot) meDot.setLatLng([myPos.lat, myPos.lon])
+    showProgress()
+  }, () => {}, {enableHighAccuracy: true, maximumAge: 5000})
+}
+
+function stopFollowing() {                  // save battery: stop GPS when it isn't needed
+  if (watchId !== null) navigator.geolocation.clearWatch(watchId)
+  watchId = null
+  $('rpLive').hidden = true
 }
 
 function setFrom(which) {
