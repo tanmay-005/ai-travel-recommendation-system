@@ -110,7 +110,7 @@ html,body{height:100%;overflow:hidden}
 #mapWrap{position:relative;min-height:0}
 #map{position:absolute;inset:0}
 /* Directions panel, floating over the map */
-.route-panel{position:absolute;top:var(--space-3);right:var(--space-3);z-index:500;width:300px;
+.route-panel{position:absolute;top:var(--space-3);right:var(--space-3);z-index:500;width:330px;
   max-width:calc(100% - 24px);max-height:calc(100% - 24px);overflow-y:auto;padding:var(--space-4);
   background:var(--paper);color:var(--ink);border:1px solid var(--mist);border-radius:var(--r);box-shadow:var(--sh2)}
 .route-panel[hidden]{display:none}
@@ -120,10 +120,11 @@ html,body{height:100%;overflow:hidden}
   padding:2px var(--space-2);border-radius:var(--r2)}
 .rp-close:hover{background:var(--smoke);color:var(--ink)}
 .rp-from{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-1);margin-top:var(--space-3);font-size:.85rem}
-.rp-from span{color:var(--muted);margin-right:var(--space-1)}
-.rp-from-btn{border:1px solid var(--mist);background:none;color:var(--ink);border-radius:var(--r-pill);
+.rp-from + .rp-from{margin-top:var(--space-2)}
+.rp-from span{color:var(--muted);margin-right:var(--space-1);min-width:2.6em}
+.rp-from-btn,.rp-mode-btn{border:1px solid var(--mist);background:none;color:var(--ink);border-radius:var(--r-pill);
   padding:2px var(--space-3);font-size:.8rem;font-weight:600;cursor:pointer}
-.rp-from-btn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rp-from-btn.on,.rp-mode-btn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .rp-list{list-style:none;margin-top:var(--space-3);display:grid;gap:var(--space-2)}
 .rp-route{width:100%;text-align:left;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px var(--space-2);
   padding:var(--space-2) var(--space-3);background:var(--sand);color:var(--ink);

@@ -176,6 +176,7 @@ const ROUTE_COLOUR = '#FF6B2B', OTHER_COLOUR = '#8A8F98'
 const JAM_COLOURS  = {minor: '#F5C518', moderate: '#FF8A00', major: '#E8425A', closed: '#7A0019', unknown: '#FF8A00'}
 const routeLayer = L.layerGroup().addTo(map)
 let routeData = null                        // the last /api/route answer
+let travelMode = 'car'                      // 'car' (with traffic) or 'walk' (footpaths)
 let chosen = 0                              // which of its routes is selected
 let routeTo = null                          // {lat, lon, name} of the place we're going to
 let routeFrom = 'centre'                    // start from 'centre' (the destination) or 'me' (GPS)
@@ -198,7 +199,7 @@ async function loadRoutes() {
   const from = startPoint()
   showRouteMsg('Finding routes…')
   try {
-    const r = await fetch(`/api/route?from=${from.lat},${from.lon}&to=${routeTo.lat},${routeTo.lon}`)
+    const r = await fetch(`/api/route?from=${from.lat},${from.lon}&to=${routeTo.lat},${routeTo.lon}&mode=${travelMode}`)
     const d = await r.json()
     if (!r.ok) throw new Error(d.error || `Server error ${r.status}`)
     routeData = d
@@ -213,16 +214,17 @@ async function loadRoutes() {
 
 function drawRoutes() {
   routeLayer.clearLayers()
+  const dash = routeData.mode === 'walk' ? '1 10' : null   // walking routes are drawn as dots
   // The other routes first (grey), so the chosen one is drawn on top of them.
   routeData.routes.forEach((rt, i) => {
     if (i === chosen) return
-    L.polyline(rt.points, {color: OTHER_COLOUR, weight: 5, opacity: 0.7})
+      L.polyline(rt.points, {color: OTHER_COLOUR, weight: 5, opacity: 0.7, dashArray: dash})
       .bindTooltip(`${rt.minutes} min · ${rt.distance_km} km`, {sticky: true})
       .on('click', () => selectRoute(i))
       .addTo(routeLayer)
   })
   const rt = routeData.routes[chosen]
-  L.polyline(rt.points, {color: ROUTE_COLOUR, weight: 6, opacity: 0.9})
+  L.polyline(rt.points, {color: ROUTE_COLOUR, weight: 6, opacity: 0.9, dashArray: dash})
     .bindTooltip(`${rt.minutes} min · ${rt.distance_km} km`, {sticky: true})
     .addTo(routeLayer)
   // Busy stretches on top: points start..end of this route, coloured by how bad the delay is.
@@ -239,6 +241,7 @@ function drawRoutes() {
 
 // ── ROUTE PANEL: compare the routes, pick one, choose where to start ──
 function trafficText(rt) {
+  if (routeData.mode === 'walk') return 'on foot'
   if (rt.delay_min === null) return 'no traffic data'
   if (rt.delay_min === 0) return 'clear'
   return `+${rt.delay_min} min traffic`
@@ -251,9 +254,11 @@ function renderRouteList() {
       ${i === 0 ? '<span class="rp-tag">Fastest</span>' : '<span></span>'}
       <span class="rp-meta">${rt.distance_km} km · <span class="${rt.delay_min > 0 ? 'rp-busy' : 'rp-clear'}">${trafficText(rt)}</span></span>
     </button></li>`).join('')
-    $('rpNote').textContent = routeData.traffic
-    ? 'Live traffic from TomTom. Click a route on the map or in this list to choose it.'
-    : 'Live traffic is unavailable right now, so these routes ignore traffic.'
+    $('rpNote').textContent = routeData.mode === 'walk'
+    ? 'Walking routes follow footpaths, and traffic doesn\'t matter on foot. Click a route to choose it.'
+    : routeData.traffic
+      ? 'Live traffic from TomTom. Click a route on the map or in this list to choose it.'
+      : 'Live traffic is unavailable right now, so these routes ignore traffic.'
 }
 
 function selectRoute(i) {
@@ -287,6 +292,15 @@ function setFrom(which) {
   if (routeTo) loadRoutes()
 }
 
+function setMode(which) {
+  travelMode = which
+  document.querySelectorAll('.rp-mode-btn').forEach(b => {
+    b.classList.toggle('on', b.dataset.mode === which)
+    b.setAttribute('aria-pressed', b.dataset.mode === which)
+  })
+  if (routeTo) loadRoutes()
+}
+
 function clearRoute() {
   routeLayer.clearLayers()
   routeData = null
@@ -296,6 +310,7 @@ function clearRoute() {
 
 $('rpClose').addEventListener('click', clearRoute)
 document.querySelectorAll('.rp-from-btn').forEach(b => b.addEventListener('click', () => setFrom(b.dataset.from)))
+document.querySelectorAll('.rp-mode-btn').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)))
 $('rpList').addEventListener('click', e => { 
   if (e.target.closest('[data-action="route-retry"]')) { loadRoutes(); return }
   const b = e.target.closest('.rp-route')

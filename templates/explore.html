@@ -62,7 +62,7 @@
   <!-- MAP -->
   <div id="mapWrap">
     <div id="map"></div>
-     <!-- Directions panel: appears over the map when you click Directions on a place -->
+    <!-- Directions panel: appears over the map when you click Directions on a place -->
     <section id="routePanel" class="route-panel" hidden aria-live="polite">
       <div class="rp-head">
         <h2 id="rpTitle">Directions</h2>
@@ -72,6 +72,11 @@
         <span>From</span>
         <button type="button" class="rp-from-btn on" data-from="centre" id="fromCentre" aria-pressed="true">Destination centre</button>
         <button type="button" class="rp-from-btn" data-from="me" aria-pressed="false">My location</button>
+      </div>
+      <div class="rp-from" role="group" aria-label="Travel by">
+        <span>By</span>
+        <button type="button" class="rp-mode-btn on" data-mode="car" aria-pressed="true">🚗 Car</button>
+        <button type="button" class="rp-mode-btn" data-mode="walk" aria-pressed="false">🚶 Walk</button>
       </div>
       <ol id="rpList" class="rp-list"></ol>
       <p id="rpNote" class="rp-note"></p>
