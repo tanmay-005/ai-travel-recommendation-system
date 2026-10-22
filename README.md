@@ -28,12 +28,13 @@ works without it.
 | **Small towns still work** | If a list has fewer than 5 places, the server asks OpenStreetMap (Overpass) live, in parallel, and caches the answer for 6 hours |
 | **List and map linked** | Numbered cards match numbered pins; hover a card to highlight its pin, click a pin to jump to its card |
 | **Traffic-aware directions** | Up to 3 road routes with live traffic (TomTom). Busy stretches are coloured by how bad the delay is, and a panel compares time, distance and delay. Start from the town centre or your own location. If TomTom is unavailable it falls back to OSRM routes without traffic |
+| **Live directions and walking** | A Car / Walk switch: walking routes follow footpaths (OSRM foot server). Starting from your location, the blue dot follows you and the distance and minutes left count down; leaving the route fetches a new one (at most once a minute) and reaching the place shows "You've arrived" |
 | **Shareable URLs** | `/explore?lat=15.34&lon=76.46&name=Hampi&radius=25` can be bookmarked or sent to a friend |
 | **Accounts and My Bag** | Sign up, log in, save places from Explore (logged-out users are sent to log in and brought back), My Bag grouped by destination with a map |
 | **Careful states** | Loading skeletons, "nothing within 10 km, try 25 km?" with a one-click fix, error with Retry |
 | **Design system** | Colours, fonts and spacing as CSS variables in one file; dark mode; works on phones |
 | **Motion with a purpose** | Cards fade in, pins drop, the tab underline slides, the heart pops; all switched off for users who prefer reduced motion |
-| **Tested** | 48 automated tests for the ranking maths, the API, security checks, the login flow and directions |
+| **Tested** | 53 automated tests for the ranking maths, the API, security checks, the login flow and directions |
 
 ---
 
@@ -104,14 +105,14 @@ fame and detail signals used by the ranking.
 python -m pytest -v
 ```
 
-48 tests run in about 3 seconds, with no internet needed:
+53 tests run in about 3 seconds, with no internet needed:
 
 - `tests/test_geo.py`: distance maths (Delhi to Agra is about 180 km in a straight line)
 - `tests/test_discover.py`: the ranking rules, on five hand-made places
 - `tests/test_api.py`: sign-up, login, save and list, 401 when logged out, users can't see each
   other's bags, passwords are stored hashed, open redirects are blocked, geocode caching
 - `tests/test_routing.py`: reading TomTom and OSRM answers, fastest route first, TomTom → OSRM fallback,
-  the cache, bad points and the 500 km limit
+  the cache, bad points and the 500 km limit, walking mode (foot server, never TomTom, separate cache, 30 km limit)
 
 Each test gets its own empty database in a temporary folder, and live OpenStreetMap, TomTom and OSRM calls are
 replaced with fakes, so the tests never touch your real data or the network.
@@ -146,7 +147,7 @@ ai-travel-recommendation-system/
 │       ├── geocode.py       /api/geocode
 │       ├── auth.py          /api/auth/register, login, logout, me
 │       ├── saved.py         /api/saved (My Bag)
-│       └── directions.py    /api/route (TomTom live traffic, OSRM fallback, cached)
+│       └── directions.py    /api/route (car: TomTom traffic + OSRM fallback; walk: OSRM foot)
 ├── templates/               Jinja pages; base.html is shared, _account.html is the header links
 ├── static/
 │   ├── css/                 base.css (design tokens), motion.css, one file per page
@@ -162,7 +163,7 @@ Browser ──► Flask (create_app)
              │                   └── osm.py tops up thin lists from Overpass (parallel, cached)
              ├── auth.py      → users table (hashed passwords, session cookie)
              ├── saved.py     → bag_items table
-             └── directions.py → TomTom routes with traffic (falls back to OSRM), cached 5 minutes
+             └── directions.py → car: TomTom with traffic (falls back to OSRM); walk: OSRM foot; cached 5 minutes
 ```
 
 ---
@@ -174,7 +175,7 @@ Browser ──► Flask (create_app)
 | GET | `/api/discover?lat=&lon=&radius=25&limit=10` | Top Spots, Hidden Gems and Things to Do around a point (radius 1–100 km) |
 | GET | `/api/geocode?q=Hampi` | Place name → `{name, lat, lon}` (India only, cached) |
 | GET | `/api/search?q=` | Find places in the dataset by name or city |
-| GET | `/api/route?from=lat,lon&to=lat,lon` | Up to 3 road routes, fastest first, with time, distance, traffic delay and busy stretches (up to 500 km, cached 5 minutes) |
+| GET | `/api/route?from=lat,lon&to=lat,lon&mode=car` | Up to 3 routes, fastest first, with time, distance, traffic delay and busy stretches. `mode=walk` gives footpath routes without traffic (car up to 500 km, walk up to 30 km, cached 5 minutes) |
 | POST | `/api/auth/register` | `{username, email, password}` → creates the account and logs in |
 | POST | `/api/auth/login` | `{email, password}` → logs in |
 | POST | `/api/auth/logout` | Logs out |
@@ -203,7 +204,7 @@ Errors come back as JSON with an `error` message, and for forms an `errors` obje
 ## Built with
 
 Flask · pandas · NumPy · SQLite · Leaflet · OpenStreetMap (map tiles, Nominatim, Overpass) ·
-TomTom Routing API (live traffic) · OSRM (fallback routing) · pytest
+TomTom Routing API (live traffic) · OSRM (fallback and walking routes) · pytest
 
 Place data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), available under the ODbL.
 
